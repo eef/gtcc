@@ -1,0 +1,8 @@
+- if current_user.is_owner?
+  %p
+    = link_to "Site Details", site_edit_path
+    = note("View and edit your site details")
+- if current_user.is_admin?
+  %p
+    = link_to "Members"
+    = note("Use this to manage your members")

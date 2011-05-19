@@ -1,0 +1,31 @@
+#navigation {
+  float: left;
+  font-size: 0.8em;
+  margin-left: 25px;
+}
+
+#navigation ul {
+  list-style: none;
+}
+
+#navigation ul li {
+  float: left;
+  padding: 5px;
+  color: #ccc;
+  border: 1px solid #232323;
+  -webkit-border-radius: 2px;
+  -moz-border-radius: 2px;
+  border-radius: 2px;
+  background: #232323;
+  background: -webkit-gradient(linear, 0 0, 0 bottom, from(#232323), to(#0C0C0C));
+  background: -moz-linear-gradient(#232323, #0C0C0C);
+  background: linear-gradient(#232323, #0C0C0C);
+  -pie-background: linear-gradient(#232323, #0C0C0C);
+  behavior: url(/stylesheets/pie.htc);
+  margin-right: 15px;
+}
+
+#navigation li a {
+  text-decoration: none;
+  color: #ccc;
+}

@@ -1,0 +1,16 @@
+= form_for(@user, :url => account_update_path,:html => { :method => :put }) do |f|
+  %p
+    = f.label :email
+    = f.text_field :email, :class => "text-input"
+  %p
+    = f.label :password
+    = f.password_field :password, :class => "text-input"
+    = note("Leave blank if you don't want to change it")
+  %p
+    = f.label :password_confirmation
+    = f.password_field :password_confirmation, :class => "text-input"
+    = note("Re-enter your password")
+  %p
+    = f.submit "Update", :class => "submit"
+%p
+= link_to "Back", :back

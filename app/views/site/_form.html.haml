@@ -1,0 +1,13 @@
+= form_for(@site, :url => site_update_path,:html => { :method => :put }) do |f|
+  %p
+    = f.label :site_name
+    = f.text_field :name, :class => "text-input"
+    = note("The name of your site")
+  %p
+    = f.label :url
+    = f.text_field :url, :class => "text-input"
+    = note("Where your website lives")
+  %p
+    = f.submit "Update", :class => "submit"
+%p
+= link_to "Back", :back

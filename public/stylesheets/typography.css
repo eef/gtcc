@@ -1,0 +1,67 @@
+/* CSS for text and links */
+
+body {
+  color: #ccc;
+}
+
+h1, h2, h3, h4, h5 {
+  color: #38B0DE;
+}
+
+h1 {
+  font-size: 2em;
+}
+
+h2 {
+  font-size: 1.8em;
+}
+
+h3 {
+  font-size: 1.6em;
+}
+
+h4 {
+  font-size: 1.4em;
+}
+
+h5 {
+  font-size: 1.2em;
+}
+
+a {
+  color: #38B0DE;
+}
+
+a:hover {
+  text-decoration: none;
+}
+
+#logo a {
+  text-decoration: none;
+  color: #ADDFFF;
+}
+
+.form-sep {
+  margin: 10px;
+}
+
+p {
+  margin: 10px 0px 10px 0px;
+}
+
+label {
+  color: #ADDFFF;
+}
+
+.form-note {
+  display:block;
+  color: #666;
+}
+
+.notice {
+  color: Gold;
+}
+
+.alert {
+  color: rgb(247, 93, 89);
+}

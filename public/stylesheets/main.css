@@ -1,0 +1,121 @@
+/*
+* All CSS for layout
+*/
+
+
+* {
+  padding: 0; margin: 0;
+}
+
+body {
+ font-family: Monaco, Helvetica, sans-serif;
+ font-size: 1em;
+ background: #000;
+}
+
+#wrapper { 
+ margin: 0 auto;
+ width: 922px;
+}
+
+#header {
+  width: 900px;
+  padding: 10px;
+  margin: 10px 0px 5px 0px;
+  border: 1px solid #232323;
+  -webkit-border-radius: 2px;
+  -moz-border-radius: 2px;
+  border-radius: 2px;
+  background: #232323;
+  background: -webkit-gradient(linear, 0 0, 0 bottom, from(#232323), to(#0C0C0C));
+  background: -moz-linear-gradient(#232323, #0C0C0C);
+  background: linear-gradient(#232323, #0C0C0C);
+  -pie-background: linear-gradient(#232323, #0C0C0C);
+  behavior: url(/stylesheets/pie.htc);
+}
+
+#flash {
+  width: 900px;
+  border: 1px solid #232323;
+  padding: 10px;
+  font-size: .7em;
+  margin: 0px 0px 5px 0px;
+  -webkit-border-radius: 2px;
+  -moz-border-radius: 2px;
+  border-radius: 2px;
+  background: #232323;
+  text-align: center;
+  background: -webkit-gradient(linear, 0 0, 0 bottom, from(#232323), to(#0C0C0C));
+  background: -moz-linear-gradient(#232323, #0C0C0C);
+  background: linear-gradient(#232323, #0C0C0C);
+  -pie-background: linear-gradient(#232323, #0C0C0C);
+  behavior: url(/stylesheets/pie.htc);
+}
+
+#content { 
+  width: 900px;
+  border: 1px solid #232323;
+  background: #000;
+  margin: 0px 0px 5px 0px;
+  padding: 10px;
+  font-size: .7em;
+  -webkit-border-radius: 2px;
+  -moz-border-radius: 2px;
+  border-radius: 2px;
+  background: #232323;
+  background: -webkit-gradient(linear, 0 0, 0 bottom, from(#232323), to(#0C0C0C));
+  background: -moz-linear-gradient(#232323, #0C0C0C);
+  background: linear-gradient(#232323, #0C0C0C);
+  -pie-background: linear-gradient(#232323, #0C0C0C);
+  behavior: url(/stylesheets/pie.htc);
+}
+
+.fieldset {
+  border: 1px solid #232323;
+  padding: 10px;
+  -webkit-border-radius: 2px;
+  -moz-border-radius: 2px;
+  border-radius: 2px;
+  background: #232323;
+  background: -webkit-gradient(linear, 0 0, 0 bottom, from(#232323), to(#0C0C0C));
+  background: -moz-linear-gradient(#232323, #0C0C0C);
+  background: linear-gradient(#232323, #0C0C0C);
+  -pie-background: linear-gradient(#232323, #0C0C0C);
+  behavior: url(/stylesheets/pie.htc);
+}
+
+.legend {
+  border: 1px solid #232323;
+  padding: 5px;
+  -webkit-border-radius: 2px;
+  -moz-border-radius: 2px;
+  border-radius: 2px;
+  background: #232323;
+  background: -webkit-gradient(linear, 0 0, 0 bottom, from(#232323), to(#0C0C0C));
+  background: -moz-linear-gradient(#232323, #0C0C0C);
+  background: linear-gradient(#232323, #0C0C0C);
+  -pie-background: linear-gradient(#232323, #0C0C0C);
+  behavior: url(/stylesheets/pie.htc);
+}
+
+#login-details {
+  float: right;
+}
+
+#logo {
+  float: left;
+  padding: 5px;
+  font-weight: bold;
+}
+
+.clear {
+  clear: both;
+}
+
+.half {
+  width: 50%;
+}
+
+.required {
+  border-left: 2px solid red !important;
+}

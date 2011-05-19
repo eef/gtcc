@@ -1,0 +1,13 @@
+= form_for(resource, :as => resource_name, :url => session_path(resource_name)) do |f|
+  %p.form-sep
+    = f.label :username
+    = f.text_field :username, :class => "text-input"
+  %p.form-sep
+    = f.label :password
+    = f.password_field :password, :class => "text-input"
+  - if devise_mapping.rememberable?
+    %p.form-sep
+      = f.check_box :remember_me, :class => "checkbox"
+      = f.label :remember_me, :class => "checkbox-label"
+  %p.form-sep
+    = f.submit "Sign in", :class => "submit"

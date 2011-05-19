@@ -1,0 +1,45 @@
+label {
+  display: block;
+  margin: 10px 0 5px;
+  color: #ccc;
+}
+
+input, textarea, select {
+  font-family: inherit;
+  padding: 5px;
+  font-size: 1em;
+}
+
+input.submit {
+  padding: 5px;
+  color: #ccc;
+  border: 1px solid #232323;
+  -webkit-border-radius: 2px;
+  -moz-border-radius: 2px;
+  border-radius: 2px;
+  background: #232323;
+  background: -webkit-gradient(linear, 0 0, 0 bottom, from(#232323), to(#0C0C0C));
+  background: -moz-linear-gradient(#232323, #0C0C0C);
+  background: linear-gradient(#232323, #0C0C0C);
+  -pie-background: linear-gradient(#232323, #0C0C0C);
+  behavior: url(/stylesheets/pie.htc);
+}
+
+input.checkbox {
+  background: #232323;
+}
+
+.sign-out {
+  font-size: .7em;
+}
+
+input.text-input, textarea.text-input, option, select {
+  background-color: #141414;
+  border: 1px solid #282828;
+  color: #ccc;
+}
+
+.checkbox-label {
+  display: inline;
+  margin: 10px 0 5px;
+}
