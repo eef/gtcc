@@ -1,0 +1,9 @@
+%p#notice= notice
+
+%p
+  %b Name:
+  = @track_type.name
+
+= link_to 'Edit', edit_track_type_path(@track_type)
+\|
+= link_to 'Back', track_types_path

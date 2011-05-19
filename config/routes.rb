@@ -1,5 +1,11 @@
 Rcorp::Application.routes.draw do
   
+  resources :track_types
+
+  resources :locations
+
+  resources :tracks
+
   devise_for :users
 
   root :to => "home#index"

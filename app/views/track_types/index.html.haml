@@ -1,0 +1,19 @@
+%h1 Listing track_types
+
+%table
+  %tr
+    %th Name
+    %th
+    %th
+    %th
+
+  - @track_types.each do |track_type|
+    %tr
+      %td= track_type.name
+      %td= link_to 'Show', track_type
+      %td= link_to 'Edit', edit_track_type_path(track_type)
+      %td= link_to 'Destroy', track_type, :confirm => 'Are you sure?', :method => :delete
+
+%br
+
+= link_to 'New Track type', new_track_type_path

@@ -1,0 +1,25 @@
+%h1 Listing tracks
+
+%table
+  %tr
+    %th Name
+    %th Description
+    %th Location
+    %th Track type
+    %th
+    %th
+    %th
+
+  - @tracks.each do |track|
+    %tr
+      %td= track.name
+      %td= track.description
+      %td= track.location
+      %td= track.track_type
+      %td= link_to 'Show', track
+      %td= link_to 'Edit', edit_track_path(track)
+      %td= link_to 'Destroy', track, :confirm => 'Are you sure?', :method => :delete
+
+%br
+
+= link_to 'New Track', new_track_path

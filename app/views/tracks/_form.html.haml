@@ -1,0 +1,22 @@
+= form_for @track do |f|
+  -if @track.errors.any?
+    #error_explanation
+      %h2= "#{pluralize(@track.errors.count, "error")} prohibited this track from being saved:"
+      %ul
+        - @track.errors.full_messages.each do |msg|
+          %li= msg
+
+  .field
+    = f.label :name
+    = f.text_field :name
+  .field
+    = f.label :description
+    = f.text_area :description
+  .field
+    = f.label :location
+    = f.text_field :location
+  .field
+    = f.label :track_type
+    = f.text_field :track_type
+  .actions
+    = f.submit 'Save'
