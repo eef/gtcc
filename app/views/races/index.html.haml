@@ -1,0 +1,23 @@
+%h1 Listing races
+
+%table
+  %tr
+    %th Name
+    %th Location
+    %th Track
+    %th
+    %th
+    %th
+
+  - @races.each do |race|
+    %tr
+      %td= race.name
+      %td= race.location
+      %td= race.track
+      %td= link_to 'Show', race
+      %td= link_to 'Edit', edit_race_path(race)
+      %td= link_to 'Destroy', race, :confirm => 'Are you sure?', :method => :delete
+
+%br
+
+= link_to 'New Race', new_race_path

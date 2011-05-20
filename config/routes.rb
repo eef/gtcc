@@ -1,5 +1,11 @@
 Rcorp::Application.routes.draw do
   
+  resources :races
+
+  resources :cars
+
+  resources :manufacturers
+
   resources :track_types
 
   resources :locations
