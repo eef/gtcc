@@ -143,7 +143,7 @@ CREATE TABLE `schema_migrations` (
 
 LOCK TABLES `schema_migrations` WRITE;
 /*!40000 ALTER TABLE `schema_migrations` DISABLE KEYS */;
-INSERT INTO `schema_migrations` VALUES ('20110125102714'),('20110125142122'),('20110125160402'),('20110125161124'),('20110125161125'),('20110125161126'),('20110125161127'),('20110125161128'),('20110125161129'),('20110125161130'),('20110125161131');
+INSERT INTO `schema_migrations` VALUES ('20110125102714'),('20110125142122'),('20110125160402'),('20110125161124'),('20110125161125'),('20110125161126'),('20110125161127'),('20110125161128'),('20110125161129'),('20110125161130'),('20110125161131'),('20110125161132'),('20110125161133');
 /*!40000 ALTER TABLE `schema_migrations` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -231,6 +231,63 @@ INSERT INTO `tracks` VALUES (2,'Fuji Speedway　F',NULL,1,1,NULL,NULL),(3,'Fuji 
 UNLOCK TABLES;
 
 --
+-- Table structure for table `upgrade_groups`
+--
+
+DROP TABLE IF EXISTS `upgrade_groups`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `upgrade_groups` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `parent_id` int(11) DEFAULT NULL,
+  `lft` int(11) DEFAULT NULL,
+  `rgt` int(11) DEFAULT NULL,
+  `created_at` datetime DEFAULT NULL,
+  `updated_at` datetime DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `upgrade_groups`
+--
+
+LOCK TABLES `upgrade_groups` WRITE;
+/*!40000 ALTER TABLE `upgrade_groups` DISABLE KEYS */;
+INSERT INTO `upgrade_groups` VALUES (4,'Body/Chassis',NULL,1,4,'2011-05-26 01:36:10','2011-05-26 01:36:10'),(5,'Engine',NULL,5,8,'2011-05-26 01:36:22','2011-05-26 01:36:22'),(6,'Intake System',NULL,9,10,'2011-05-26 01:36:44','2011-05-26 01:36:44'),(7,'Exhaust',NULL,11,12,'2011-05-26 01:36:59','2011-05-26 01:36:59'),(8,'Turbo Kits and Super Chargers',NULL,13,18,'2011-05-26 01:37:15','2011-05-26 01:37:15'),(9,'Transmission',NULL,19,20,'2011-05-26 01:37:38','2011-05-26 01:37:38'),(10,'Drivetrain',NULL,21,26,'2011-05-26 01:37:55','2011-05-26 01:37:55'),(11,'Suspension',NULL,27,28,'2011-05-26 01:38:08','2011-05-26 01:38:08'),(12,'Tyres',NULL,29,30,'2011-05-26 01:39:33','2011-05-26 01:39:33'),(13,'Clutch',10,22,23,'2011-05-26 01:40:33','2011-05-26 01:40:33'),(14,'Flywheel',10,24,25,'2011-05-26 01:40:53','2011-05-26 01:40:53'),(15,'Chassis Weight Reduction',4,2,3,'2011-05-26 02:07:47','2011-05-26 02:07:47'),(16,'Engine Tune',5,6,7,'2011-05-26 02:08:12','2011-05-26 02:08:12'),(17,'RPM Range Turbo Kit',8,14,15,'2011-05-26 02:10:58','2011-05-26 02:10:58'),(18,'Super Chargers',8,16,17,'2011-05-26 02:25:29','2011-05-26 02:25:29'),(19,'Aerodynamics',NULL,31,32,'2011-05-26 02:39:16','2011-05-26 02:39:16');
+/*!40000 ALTER TABLE `upgrade_groups` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `upgrades`
+--
+
+DROP TABLE IF EXISTS `upgrades`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `upgrades` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `upgrade_group_id` int(11) DEFAULT NULL,
+  `description` text COLLATE utf8_unicode_ci,
+  `created_at` datetime DEFAULT NULL,
+  `updated_at` datetime DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=37 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `upgrades`
+--
+
+LOCK TABLES `upgrades` WRITE;
+/*!40000 ALTER TABLE `upgrades` DISABLE KEYS */;
+INSERT INTO `upgrades` VALUES (1,'Stage 1',15,'','2011-05-26 02:13:38','2011-05-26 02:13:38'),(2,'Stage 2',15,'','2011-05-26 02:17:13','2011-05-26 02:17:13'),(3,'Stage 3',15,'','2011-05-26 02:17:30','2011-05-26 02:17:30'),(4,'Rigidity Improvement',4,'','2011-05-26 02:17:52','2011-05-26 02:17:52'),(5,'Window Weight Reduction',4,'','2011-05-26 02:19:41','2011-05-26 02:19:41'),(6,'Carbon Bonnet',4,'','2011-05-26 02:19:54','2011-05-26 02:19:54'),(7,'Carbon Bonnet (Body Colour)',4,'','2011-05-26 02:20:06','2011-05-26 02:20:06'),(8,'Stage 1',16,'','2011-05-26 02:20:20','2011-05-26 02:20:20'),(9,'Stage 2',16,'','2011-05-26 02:20:28','2011-05-26 02:20:28'),(10,'Stage 3',16,'','2011-05-26 02:20:32','2011-05-26 02:20:32'),(11,'ECU',5,'','2011-05-26 02:20:53','2011-05-26 02:20:53'),(12,'Sports Intake Manifold',6,'','2011-05-26 02:21:12','2011-05-26 02:21:12'),(13,'Sports Filter',6,'','2011-05-26 02:21:25','2011-05-26 02:21:25'),(14,'Racing Filter',6,'','2011-05-26 02:21:34','2011-05-26 02:21:34'),(15,'Sports Exhaust',7,'','2011-05-26 02:23:09','2011-05-26 02:23:09'),(16,'Titanium Semi-Racing Exhaust',7,'','2011-05-26 02:23:25','2011-05-26 02:23:25'),(17,'Titanium Racing Exhaust',7,'','2011-05-26 02:23:32','2011-05-26 02:23:32'),(18,'Sports Exhaust Manifold',7,'','2011-05-26 02:23:59','2011-05-26 02:23:59'),(19,'Catalytic Converter: Sports',7,'','2011-05-26 02:24:20','2011-05-26 02:24:20'),(20,'Super Charger',18,'','2011-05-26 02:29:11','2011-05-26 02:29:11'),(21,'Low',17,'','2011-05-26 02:29:22','2011-05-26 02:29:22'),(22,'Mid',17,'','2011-05-26 02:29:27','2011-05-26 02:29:27'),(23,'High',17,'','2011-05-26 02:29:34','2011-05-26 02:29:34'),(24,'5 Speed Close-Ratio Transmission',9,'','2011-05-26 02:30:03','2011-05-26 02:30:03'),(25,'6 Speed Close-Ratio Transmission',9,'','2011-05-26 02:30:10','2011-05-26 02:30:10'),(26,'Fully Customisable  Transmission',9,'','2011-05-26 02:30:40','2011-05-26 02:30:40'),(27,'Single Plate',13,'','2011-05-26 02:35:08','2011-05-26 02:35:08'),(28,'Twin Plate',13,'','2011-05-26 02:35:16','2011-05-26 02:35:16'),(29,'Sports',14,'','2011-05-26 02:35:36','2011-05-26 02:35:36'),(30,'Semi-Racing',14,'','2011-05-26 02:35:45','2011-05-26 02:35:45'),(31,'Carbon Propeller Shaft',10,'','2011-05-26 02:36:00','2011-05-26 02:36:00'),(32,'Torque Distributing Centre Differential',10,'','2011-05-26 02:36:21','2011-05-26 02:36:21'),(33,'Fully Customisable LSD',10,'','2011-05-26 02:36:40','2011-05-26 02:36:40'),(34,'Fixed Sports Kit',11,'','2011-05-26 02:37:04','2011-05-26 02:37:04'),(35,'Height-Adjusted Kit',11,'','2011-05-26 02:37:23','2011-05-26 02:37:23'),(36,'Fully Customisable Kit',11,'','2011-05-26 02:37:34','2011-05-26 02:37:34');
+/*!40000 ALTER TABLE `upgrades` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `users`
 --
 
@@ -266,7 +323,7 @@ CREATE TABLE `users` (
 
 LOCK TABLES `users` WRITE;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
-INSERT INTO `users` VALUES (1,'admin@local.com','$2a$10$SbX0H3TlcXfyKmBS5b6TO.nRf/5NUR12FW0BSjzKchlAyMOnnUkGW','$2a$10$SbX0H3TlcXfyKmBS5b6TO.',NULL,NULL,NULL,1,'2011-05-19 20:36:42','2011-05-19 20:36:42','127.0.0.1','127.0.0.1','2011-05-19 20:29:31','2011-05-19 20:36:42','admin','--- \n- admin\n- owner\n');
+INSERT INTO `users` VALUES (1,'admin@local.com','$2a$10$SbX0H3TlcXfyKmBS5b6TO.nRf/5NUR12FW0BSjzKchlAyMOnnUkGW','$2a$10$SbX0H3TlcXfyKmBS5b6TO.',NULL,NULL,NULL,2,'2011-05-26 01:13:01','2011-05-19 20:36:42','127.0.0.1','127.0.0.1','2011-05-19 20:29:31','2011-05-26 01:13:01','admin','--- \n- admin\n- owner\n');
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -279,4 +336,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2011-05-20 10:46:05
+-- Dump completed on 2011-05-26  4:01:29
