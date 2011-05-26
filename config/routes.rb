@@ -1,8 +1,12 @@
 Rcorp::Application.routes.draw do
   
+  get "garage/index"
+
   resources :owned_cars
 
   resources :upgrades
+  
+  resources :garage
 
   resources :upgrade_groups
 

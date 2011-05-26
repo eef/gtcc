@@ -25,7 +25,7 @@ class OwnedCarsController < ApplicationController
   # GET /owned_cars/new.xml
   def new
     @owned_car = OwnedCar.new
-
+    @cars = Car.all
     respond_to do |format|
       format.html # new.html.erb
       format.xml  { render :xml => @owned_car }
@@ -41,7 +41,7 @@ class OwnedCarsController < ApplicationController
   # POST /owned_cars.xml
   def create
     @owned_car = OwnedCar.new(params[:owned_car])
-
+    @owned_car.user = current_user
     respond_to do |format|
       if @owned_car.save
         format.html { redirect_to(@owned_car, :notice => 'Owned car was successfully created.') }
