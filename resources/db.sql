@@ -98,6 +98,34 @@ INSERT INTO `manufacturers` VALUES (1,'AC Cars',NULL,'2011-05-19 12:34:24','2011
 UNLOCK TABLES;
 
 --
+-- Table structure for table `owned_cars`
+--
+
+DROP TABLE IF EXISTS `owned_cars`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `owned_cars` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `nickname` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `car_id` int(11) DEFAULT NULL,
+  `user_id` int(11) DEFAULT NULL,
+  `created_at` datetime DEFAULT NULL,
+  `updated_at` datetime DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `owned_cars`
+--
+
+LOCK TABLES `owned_cars` WRITE;
+/*!40000 ALTER TABLE `owned_cars` DISABLE KEYS */;
+INSERT INTO `owned_cars` VALUES (1,'My Shit',31,1,'2011-05-26 03:06:54','2011-05-26 03:06:54');
+/*!40000 ALTER TABLE `owned_cars` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `races`
 --
 
@@ -143,7 +171,7 @@ CREATE TABLE `schema_migrations` (
 
 LOCK TABLES `schema_migrations` WRITE;
 /*!40000 ALTER TABLE `schema_migrations` DISABLE KEYS */;
-INSERT INTO `schema_migrations` VALUES ('20110125102714'),('20110125142122'),('20110125160402'),('20110125161124'),('20110125161125'),('20110125161126'),('20110125161127'),('20110125161128'),('20110125161129'),('20110125161130'),('20110125161131'),('20110125161132'),('20110125161133');
+INSERT INTO `schema_migrations` VALUES ('20110125102714'),('20110125142122'),('20110125160402'),('20110125161124'),('20110125161125'),('20110125161126'),('20110125161127'),('20110125161128'),('20110125161129'),('20110125161130'),('20110125161131'),('20110125161132'),('20110125161133'),('20110125161134'),('20110125161135'),('20110125161136');
 /*!40000 ALTER TABLE `schema_migrations` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -228,6 +256,60 @@ LOCK TABLES `tracks` WRITE;
 /*!40000 ALTER TABLE `tracks` DISABLE KEYS */;
 INSERT INTO `tracks` VALUES (2,'Fuji Speedway　F',NULL,1,1,NULL,NULL),(3,'Fuji Speedway GT',NULL,1,1,NULL,NULL),(4,'Suzuka Circuit',NULL,1,2,NULL,NULL),(5,'Suzuka Circuit East Course',NULL,1,2,NULL,NULL),(6,'Superspeedway - Daytona',NULL,1,3,NULL,NULL),(7,'Road Course - Daytona',NULL,1,3,NULL,NULL),(8,'Tsukuba Circuit',NULL,1,4,NULL,NULL),(9,'Circuit de la Sarthe 2009',NULL,1,5,NULL,NULL),(10,'Circuit de la Sarthe 2009 No Chicane',NULL,1,5,NULL,NULL),(11,'Circuit de la Sarthe 2005',NULL,1,5,NULL,NULL),(12,'Circuit de la Sarthe 2005 No Chicane',NULL,1,5,NULL,NULL),(13,'Nürburgring Nordschleife',NULL,1,6,NULL,NULL),(14,'Nürburgring GP/F',NULL,1,6,NULL,NULL),(15,'Nürburgring 24h',NULL,1,6,NULL,NULL),(16,'Nürburgring GP/D',NULL,1,6,NULL,NULL),(17,'Nürburgring typeV',NULL,1,6,NULL,NULL),(18,'Superspeedway - Indy',NULL,1,7,NULL,NULL),(19,'Road Course - Indy',NULL,1,7,NULL,NULL),(20,'Autodromo Nazionale Monza',NULL,1,8,NULL,NULL),(21,'Autodromo Nazionale Monza No Chicane',NULL,1,8,NULL,NULL),(22,'The Top Gear Test Track',NULL,1,9,NULL,NULL),(23,'Laguna Seca Raceway',NULL,1,10,NULL,NULL),(24,'High Speed Ring',NULL,2,11,NULL,NULL),(25,'High Speed Ring Reverse',NULL,2,11,NULL,NULL),(26,'Cape Ring',NULL,2,12,NULL,NULL),(27,'Cape Ring Inside',NULL,2,12,NULL,NULL),(28,'Cape Ring North',NULL,2,12,NULL,NULL),(29,'Cape Ring Outside',NULL,2,12,NULL,NULL),(30,'Cape Ring South',NULL,2,12,NULL,NULL),(31,'Autumn Ring',NULL,2,13,NULL,NULL),(32,'Autumn Ring / Reverse',NULL,2,13,NULL,NULL),(33,'Autumn Ring Mini',NULL,2,13,NULL,NULL),(34,'Autumn Ring Mini / Reverse',NULL,2,13,NULL,NULL),(35,'Deep Forest Raceway',NULL,2,14,NULL,NULL),(36,'Deep Forest Raceway / Reverse',NULL,2,14,NULL,NULL),(37,'Grand Valley Speedway',NULL,2,15,NULL,NULL),(38,'Grand Valley Speedway / Reverse',NULL,2,15,NULL,NULL),(39,'Grand Valley East Section',NULL,2,15,NULL,NULL),(40,'Grand Valley East Section / Reverse',NULL,2,15,NULL,NULL),(41,'Eiger Nordwand Track Short Track',NULL,2,16,NULL,NULL),(42,'Eiger Nordwand Track Short Track / Reverse',NULL,2,16,NULL,NULL),(43,'Trial Mountain Circuit',NULL,2,17,NULL,NULL),(44,'Trial Mountain Circuit / Reverse',NULL,2,17,NULL,NULL),(45,'London',NULL,3,18,NULL,NULL),(46,'London / Reverse',NULL,3,18,NULL,NULL),(47,'Rome',NULL,3,19,NULL,NULL),(48,'Rome / Reverse',NULL,3,19,NULL,NULL),(49,'Circuito de Madrid',NULL,3,20,NULL,NULL),(50,'Circuito de Madrid / Reverse',NULL,3,20,NULL,NULL),(51,'Circuito de Madrid Mini',NULL,3,20,NULL,NULL),(52,'Circuito de Madrid Mini/ Reverse',NULL,3,20,NULL,NULL),(53,'Tokyo R246',NULL,3,21,NULL,NULL),(54,'Tokyo R246 / Reverse',NULL,3,21,NULL,NULL),(55,'Côte d\'Azur',NULL,3,22,NULL,NULL),(56,'Special Stage Route 5 / Night',NULL,3,23,NULL,NULL),(57,'Special Stage Route 5 / Reverse / Night',NULL,3,23,NULL,NULL),(58,'Clubman Stage Route 5 / Night',NULL,3,23,NULL,NULL),(59,'Clubman Stage Route 5 / Reverse/ Night',NULL,3,23,NULL,NULL),(60,'Special Stage Route 7 / Night',NULL,3,24,NULL,NULL),(61,'Eiger Nordwand Track K Trail',NULL,4,25,NULL,NULL),(62,'Eiger Nordwand Track K Trail / Reverse',NULL,4,25,NULL,NULL),(63,'Eiger Nordwand Track G Trail',NULL,4,25,NULL,NULL),(64,'Eiger Nordwand Track G Trail / Reverse',NULL,4,25,NULL,NULL),(65,'Eiger Nordwand Track W Trail',NULL,4,25,NULL,NULL),(66,'Eiger Nordwand Track W Trail / Reverse',NULL,4,25,NULL,NULL),(67,'Toscana',NULL,4,26,NULL,NULL),(68,'Toscana / Reverse',NULL,4,26,NULL,NULL),(69,'Chamonix Main',NULL,4,27,NULL,NULL),(70,'Chamonix East',NULL,4,27,NULL,NULL),(71,'Chamonix West',NULL,4,27,NULL,NULL),(72,'Chamonix Mini',NULL,4,27,NULL,NULL);
 /*!40000 ALTER TABLE `tracks` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `tunings`
+--
+
+DROP TABLE IF EXISTS `tunings`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `tunings` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `car_id` int(11) DEFAULT NULL,
+  `user_id` int(11) DEFAULT NULL,
+  `description` text COLLATE utf8_unicode_ci,
+  `created_at` datetime DEFAULT NULL,
+  `updated_at` datetime DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `tunings`
+--
+
+LOCK TABLES `tunings` WRITE;
+/*!40000 ALTER TABLE `tunings` DISABLE KEYS */;
+INSERT INTO `tunings` VALUES (1,'Test Tuning',31,1,'','2011-05-26 03:32:22','2011-05-26 03:32:22'),(2,'Fuck',31,1,'','2011-05-26 03:36:44','2011-05-26 03:36:44'),(3,'',31,1,'','2011-05-26 04:06:21','2011-05-26 04:06:21');
+/*!40000 ALTER TABLE `tunings` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `tunings_upgrades`
+--
+
+DROP TABLE IF EXISTS `tunings_upgrades`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `tunings_upgrades` (
+  `tuning_id` int(11) DEFAULT NULL,
+  `upgrade_id` int(11) DEFAULT NULL,
+  `created_at` datetime DEFAULT NULL,
+  `updated_at` datetime DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `tunings_upgrades`
+--
+
+LOCK TABLES `tunings_upgrades` WRITE;
+/*!40000 ALTER TABLE `tunings_upgrades` DISABLE KEYS */;
+INSERT INTO `tunings_upgrades` VALUES (3,31,'2011-05-26 04:06:21','2011-05-26 04:06:21'),(3,4,'2011-05-26 04:14:19','2011-05-26 04:14:19'),(3,5,'2011-05-26 04:14:19','2011-05-26 04:14:19'),(3,6,'2011-05-26 04:14:19','2011-05-26 04:14:19'),(3,3,'2011-05-26 04:14:19','2011-05-26 04:14:19'),(3,28,'2011-05-26 04:14:19','2011-05-26 04:14:19'),(3,32,'2011-05-26 04:21:26','2011-05-26 04:21:26'),(3,33,'2011-05-26 04:21:26','2011-05-26 04:21:26'),(3,30,'2011-05-26 04:21:26','2011-05-26 04:21:26'),(3,11,'2011-05-26 04:21:26','2011-05-26 04:21:26'),(3,10,'2011-05-26 04:21:26','2011-05-26 04:21:26'),(3,17,'2011-05-26 04:21:26','2011-05-26 04:21:26'),(3,18,'2011-05-26 04:21:26','2011-05-26 04:21:26'),(3,19,'2011-05-26 04:21:26','2011-05-26 04:21:26'),(3,12,'2011-05-26 04:21:26','2011-05-26 04:21:26'),(3,14,'2011-05-26 04:21:26','2011-05-26 04:21:26'),(3,36,'2011-05-26 04:21:26','2011-05-26 04:21:26'),(3,26,'2011-05-26 04:21:26','2011-05-26 04:21:26'),(3,23,'2011-05-26 04:21:26','2011-05-26 04:21:26');
+/*!40000 ALTER TABLE `tunings_upgrades` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -336,4 +418,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2011-05-26  4:01:29
+-- Dump completed on 2011-05-26  5:30:42
