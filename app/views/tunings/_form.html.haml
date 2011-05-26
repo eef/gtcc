@@ -1,0 +1,16 @@
+= form_for @tuning do |f|
+  %p
+    = f.label :name
+    = f.text_field :name, :class => "text-input"
+  %p
+    = f.label :car_id
+    = f.select :car_id, @cars.map {|u| [u.car.name,u.car.id]}
+  %p
+    = f.label :description
+    = f.text_area :description, :class => "text-input"
+  %p
+    %ul#upgrade_tree
+      - for rootnode in UpgradeGroup.roots.sort! {|a,b| a.name <=> b.name}
+        = render :partial => "upgrade_tree", :locals => {:root => rootnode, :tag => :h4, :f => f}
+  %p
+    = f.submit 'Save'

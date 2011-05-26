@@ -1,0 +1,18 @@
+%p#notice= notice
+
+%p
+  %h3
+    = @tuning.name
+%p
+  %h5
+    = @tuning.car.name
+%p
+  = @tuning.description
+%p
+  %ul#upgrade_tree
+    - for rootnode in UpgradeGroup.roots.sort! {|a,b| a.name <=> b.name}
+      = render :partial => "show_upgrade_tree", :locals => {:root => rootnode, :tag => :h4}
+
+= link_to 'Edit', edit_tuning_path(@tuning)
+\|
+= link_to 'Back', tunings_path

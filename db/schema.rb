@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110125161134) do
+ActiveRecord::Schema.define(:version => 20110125161136) do
 
   create_table "cars", :force => true do |t|
     t.string   "name"
@@ -69,6 +69,22 @@ ActiveRecord::Schema.define(:version => 20110125161134) do
     t.text     "description"
     t.integer  "track_type_id"
     t.integer  "location_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "tunings", :force => true do |t|
+    t.string   "name"
+    t.integer  "car_id"
+    t.integer  "user_id"
+    t.text     "description"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "tunings_upgrades", :id => false, :force => true do |t|
+    t.integer  "tuning_id"
+    t.integer  "upgrade_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

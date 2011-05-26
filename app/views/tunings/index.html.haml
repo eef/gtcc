@@ -1,0 +1,25 @@
+%h1 Listing tunings
+
+%table
+  %tr
+    %th Name
+    %th Car
+    %th User
+    %th Description
+    %th
+    %th
+    %th
+
+  - @tunings.each do |tuning|
+    %tr
+      %td= tuning.name
+      %td= tuning.car_id
+      %td= tuning.user_id
+      %td= tuning.description
+      %td= link_to 'Show', tuning
+      %td= link_to 'Edit', edit_tuning_path(tuning)
+      %td= link_to 'Destroy', tuning, :confirm => 'Are you sure?', :method => :delete
+
+%br
+
+= link_to 'New Tuning', new_tuning_path

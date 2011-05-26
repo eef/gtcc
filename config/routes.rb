@@ -1,5 +1,7 @@
 Rcorp::Application.routes.draw do
   
+  resources :tunings
+
   get "garage/index"
 
   resources :owned_cars

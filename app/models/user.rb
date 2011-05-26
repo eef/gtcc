@@ -7,6 +7,7 @@ class User < ActiveRecord::Base
   easy_roles :roles
   has_one :site
   has_many :owned_cars
+  has_many :tunings
   
 
   # Setup accessible (or protected) attributes for your model

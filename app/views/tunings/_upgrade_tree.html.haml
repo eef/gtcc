@@ -1,0 +1,13 @@
+- last_class = ""
+- last_class = "last_level" if root.children.length == 0
+- content_tag :li, :id => dom_id(root), :class => last_class do
+  = content_tag tag, "#{root.name}", :id => root.id
+  - if root.upgrades.length > 0
+    - root.upgrades.each do |upgrade|
+      = upgrade.name
+      = check_box_tag "tuning[upgrade_ids][]", upgrade.id, @tuning.upgrades.include?(upgrade)
+      %br
+  - if !root.leaf?
+    - content_tag :ul, :class => "inner" do
+      - for child in root.children.sort! {|a,b| a.name <=> b.name} do
+        = render :partial => "upgrade_tree", :locals => {:root => child, :tag => :h5, :f => f}
