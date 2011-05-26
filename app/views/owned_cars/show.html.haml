@@ -1,0 +1,15 @@
+%p#notice= notice
+
+%p
+  %b Nickname:
+  = @owned_car.nickname
+%p
+  %b Car:
+  = @owned_car.car_id
+%p
+  %b User:
+  = @owned_car.user_id
+
+= link_to 'Edit', edit_owned_car_path(@owned_car)
+\|
+= link_to 'Back', owned_cars_path

@@ -1,5 +1,11 @@
 Rcorp::Application.routes.draw do
   
+  resources :owned_cars
+
+  resources :upgrades
+
+  resources :upgrade_groups
+
   resources :races
 
   resources :cars

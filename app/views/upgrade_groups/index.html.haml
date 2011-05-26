@@ -1,0 +1,25 @@
+%h1 Listing upgrade_groups
+
+%table
+  %tr
+    %th Name
+    %th Parent
+    %th Lft
+    %th Rgt
+    %th
+    %th
+    %th
+
+  - @upgrade_groups.each do |upgrade_group|
+    %tr
+      %td= upgrade_group.name
+      %td= upgrade_group.parent_id
+      %td= upgrade_group.lft
+      %td= upgrade_group.rgt
+      %td= link_to 'Show', upgrade_group
+      %td= link_to 'Edit', edit_upgrade_group_path(upgrade_group)
+      %td= link_to 'Destroy', upgrade_group, :confirm => 'Are you sure?', :method => :delete
+
+%br
+
+= link_to 'New Upgrade group', new_upgrade_group_path

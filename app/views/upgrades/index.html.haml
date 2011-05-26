@@ -1,0 +1,23 @@
+%h1 Listing upgrades
+
+%table
+  %tr
+    %th Name
+    %th Upgrade group
+    %th Description
+    %th
+    %th
+    %th
+
+  - @upgrades.each do |upgrade|
+    %tr
+      %td= upgrade.name
+      %td= upgrade.upgrade_group_id
+      %td= upgrade.description
+      %td= link_to 'Show', upgrade
+      %td= link_to 'Edit', edit_upgrade_path(upgrade)
+      %td= link_to 'Destroy', upgrade, :confirm => 'Are you sure?', :method => :delete
+
+%br
+
+= link_to 'New Upgrade', new_upgrade_path

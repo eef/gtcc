@@ -1,0 +1,23 @@
+%h1 Listing owned_cars
+
+%table
+  %tr
+    %th Nickname
+    %th Car
+    %th User
+    %th
+    %th
+    %th
+
+  - @owned_cars.each do |owned_car|
+    %tr
+      %td= owned_car.nickname
+      %td= owned_car.car_id
+      %td= owned_car.user_id
+      %td= link_to 'Show', owned_car
+      %td= link_to 'Edit', edit_owned_car_path(owned_car)
+      %td= link_to 'Destroy', owned_car, :confirm => 'Are you sure?', :method => :delete
+
+%br
+
+= link_to 'New Owned car', new_owned_car_path

@@ -1,0 +1,18 @@
+%p#notice= notice
+
+%p
+  %b Name:
+  = @upgrade_group.name
+%p
+  %b Parent:
+  = @upgrade_group.parent_id
+%p
+  %b Lft:
+  = @upgrade_group.lft
+%p
+  %b Rgt:
+  = @upgrade_group.rgt
+
+= link_to 'Edit', edit_upgrade_group_path(@upgrade_group)
+\|
+= link_to 'Back', upgrade_groups_path

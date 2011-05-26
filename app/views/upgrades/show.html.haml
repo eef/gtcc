@@ -1,0 +1,15 @@
+%p#notice= notice
+
+%p
+  %b Name:
+  = @upgrade.name
+%p
+  %b Upgrade group:
+  = @upgrade.upgrade_group.name
+%p
+  %b Description:
+  = @upgrade.description
+
+= link_to 'Edit', edit_upgrade_path(@upgrade)
+\|
+= link_to 'Back', upgrades_path
