@@ -1,5 +1,11 @@
 Rcorp::Application.routes.draw do
   
+  resources :setting_types
+
+  resources :settings
+
+  resources :setup_groups
+
   resources :tunings
 
   get "garage/index"
@@ -28,6 +34,7 @@ Rcorp::Application.routes.draw do
 
   root :to => "home#index"
   
+  match "/tunings/car/:id" => "tunings#index"
   match "/setup" => "home#setup"
   match "/save_setup" => "home#save_setup"
   match "/account" => "account#index"

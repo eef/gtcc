@@ -4,9 +4,9 @@
   = content_tag tag, "#{root.name}", :id => root.id
   - if root.upgrades.length > 0
     - root.upgrades.each do |upgrade|
-      = upgrade.name
-      = check_box_tag "tuning[upgrade_ids][]", upgrade.id, @tuning.upgrades.include?(upgrade)
-      %br
+      %span.upgrade
+        = upgrade.name
+        = check_box_tag "tuning[upgrade_ids][]", upgrade.id, @tuning.upgrades.include?(upgrade)
   - if !root.leaf?
     - content_tag :ul, :class => "inner" do
       - for child in root.children.sort! {|a,b| a.name <=> b.name} do

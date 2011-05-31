@@ -1,3 +1,9 @@
 - if @owned_cars.length > 0
   - @owned_cars.each do |car|
     = car.car.name
+    = "- "
+    - if car.tunings.length > 0
+      = link_to "Tunings", "/tunings/car/#{car.car_id}"
+    - else
+      = link_to 'New Tuning', new_tuning_path
+    %br

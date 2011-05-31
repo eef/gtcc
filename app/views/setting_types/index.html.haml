@@ -1,0 +1,19 @@
+%h1 Listing setting_types
+
+%table
+  %tr
+    %th Name
+    %th
+    %th
+    %th
+
+  - @setting_types.each do |setting_type|
+    %tr
+      %td= setting_type.name
+      %td= link_to 'Show', setting_type
+      %td= link_to 'Edit', edit_setting_type_path(setting_type)
+      %td= link_to 'Destroy', setting_type, :confirm => 'Are you sure?', :method => :delete
+
+%br
+
+= link_to 'New Setting type', new_setting_type_path

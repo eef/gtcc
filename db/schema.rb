@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110125161136) do
+ActiveRecord::Schema.define(:version => 20110125161140) do
 
   create_table "cars", :force => true do |t|
     t.string   "name"
@@ -46,6 +46,31 @@ ActiveRecord::Schema.define(:version => 20110125161136) do
     t.string   "name"
     t.integer  "location_id"
     t.integer  "track_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "setting_types", :force => true do |t|
+    t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "setup_group_id"
+  end
+
+  create_table "settings", :force => true do |t|
+    t.string   "value"
+    t.integer  "setup_group_id"
+    t.integer  "tuning_id"
+    t.integer  "setting_type_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "setup_groups", :force => true do |t|
+    t.string   "name"
+    t.integer  "parent_id"
+    t.integer  "lft"
+    t.integer  "rgt"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

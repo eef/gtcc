@@ -1,5 +1,5 @@
-%h1 Listing tunings
-
+%h1
+  Tunings
 %table
   %tr
     %th Name
@@ -13,8 +13,8 @@
   - @tunings.each do |tuning|
     %tr
       %td= tuning.name
-      %td= tuning.car_id
-      %td= tuning.user_id
+      %td= tuning.car.name
+      %td= tuning.user.username
       %td= tuning.description
       %td= link_to 'Show', tuning
       %td= link_to 'Edit', edit_tuning_path(tuning)

@@ -11,7 +11,7 @@
   - @cars.each do |car|
     %tr
       %td= car.name
-      %td= car.manufacturer
+      %td= car.manufacturer.name
       %td= link_to 'Show', car
       %td= link_to 'Edit', edit_car_path(car)
       %td= link_to 'Destroy', car, :confirm => 'Are you sure?', :method => :delete

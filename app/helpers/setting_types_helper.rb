@@ -1,0 +1,2 @@
+module SettingTypesHelper
+end

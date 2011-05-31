@@ -11,6 +11,7 @@
   %p
     %ul#upgrade_tree
       - for rootnode in UpgradeGroup.roots.sort! {|a,b| a.name <=> b.name}
-        = render :partial => "upgrade_tree", :locals => {:root => rootnode, :tag => :h4, :f => f}
+        .upgrade-group{:style => "margin-top: 5px;"}
+          = render :partial => "upgrade_tree", :locals => {:root => rootnode, :tag => :h4, :f => f}
   %p
     = f.submit 'Save'

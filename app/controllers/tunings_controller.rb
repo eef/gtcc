@@ -2,8 +2,11 @@ class TuningsController < ApplicationController
   # GET /tunings
   # GET /tunings.xml
   def index
-    @tunings = Tuning.all
-
+    if params[:id]
+      @tunings = Tuning.where(:car_id => params[:id]).all
+    else
+      @tunings = Tuning.all
+    end
     respond_to do |format|
       format.html # index.html.erb
       format.xml  { render :xml => @tunings }
@@ -58,7 +61,7 @@ class TuningsController < ApplicationController
   # PUT /tunings/1.xml
   def update
     @tuning = Tuning.find(params[:id])
-
+    params[:tuning][:upgrade_ids] ||= []
     respond_to do |format|
       if @tuning.update_attributes(params[:tuning])
         format.html { redirect_to(@tuning, :notice => 'Tuning was successfully updated.') }

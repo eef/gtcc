@@ -1,0 +1,25 @@
+%h1 Listing setup_groups
+
+%table
+  %tr
+    %th Name
+    %th Parent
+    %th Lft
+    %th Rgt
+    %th
+    %th
+    %th
+
+  - @setup_groups.each do |setup_group|
+    %tr
+      %td= setup_group.name
+      %td= setup_group.parent_id
+      %td= setup_group.lft
+      %td= setup_group.rgt
+      %td= link_to 'Show', setup_group
+      %td= link_to 'Edit', edit_setup_group_path(setup_group)
+      %td= link_to 'Destroy', setup_group, :confirm => 'Are you sure?', :method => :delete
+
+%br
+
+= link_to 'New Setup group', new_setup_group_path

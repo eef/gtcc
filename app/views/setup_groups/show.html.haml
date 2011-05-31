@@ -1,0 +1,18 @@
+%p#notice= notice
+
+%p
+  %b Name:
+  = @setup_group.name
+%p
+  %b Parent:
+  = @setup_group.parent_id
+%p
+  %b Lft:
+  = @setup_group.lft
+%p
+  %b Rgt:
+  = @setup_group.rgt
+
+= link_to 'Edit', edit_setup_group_path(@setup_group)
+\|
+= link_to 'Back', setup_groups_path

@@ -1,0 +1,18 @@
+%p#notice= notice
+
+%p
+  %b Value:
+  = @setting.value
+%p
+  %b Setup group:
+  = @setting.setup_group_id
+%p
+  %b Tuning:
+  = @setting.tuning_id
+%p
+  %b Setting type:
+  = @setting.setting_type_id
+
+= link_to 'Edit', edit_setting_path(@setting)
+\|
+= link_to 'Back', settings_path

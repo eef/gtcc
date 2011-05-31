@@ -4,6 +4,11 @@ label {
   color: #ccc;
 }
 
+textarea {
+  height: 50px;
+  width: 350px;
+}
+
 input, textarea, select {
   font-family: inherit;
   padding: 5px;

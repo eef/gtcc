@@ -8,8 +8,7 @@
 }
 
 body {
- font-family: Monaco, Helvetica, sans-serif;
- font-size: 1em;
+ font-family: tahoma;
  background: #000;
 }
 
@@ -56,9 +55,9 @@ body {
   width: 900px;
   border: 1px solid #232323;
   background: #000;
+  font-size: 0.8em;
   margin: 0px 0px 5px 0px;
   padding: 10px;
-  font-size: .7em;
   -webkit-border-radius: 2px;
   -moz-border-radius: 2px;
   border-radius: 2px;
@@ -118,4 +117,26 @@ body {
 
 .required {
   border-left: 2px solid red !important;
+}
+
+/*----- TABLES -----*/
+
+table {
+  background-color: transparent;
+  width: 100%;
+  padding: 10px 0 10px 0;
+}
+
+th,td {
+  padding: 5px;
+  border: 1px solid #0C0C0C;
+}
+
+td {
+  background-color: #222;
+}
+
+th {
+  color: #38B0DE;
+  background-color: #333;
 }

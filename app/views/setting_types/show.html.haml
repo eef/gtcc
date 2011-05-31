@@ -1,0 +1,9 @@
+%p#notice= notice
+
+%p
+  %b Name:
+  = @setting_type.name
+
+= link_to 'Edit', edit_setting_type_path(@setting_type)
+\|
+= link_to 'Back', setting_types_path

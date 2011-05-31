@@ -5,8 +5,8 @@
   - if root.upgrades.length > 0
     - root.upgrades.each do |upgrade|
       - if @tuning.upgrades.include?(upgrade)
-        = upgrade.name
-        %br
+        %span.upgrade
+          = upgrade.name
   - if !root.leaf?
     - content_tag :ul, :class => "inner" do
       - for child in root.children.sort! {|a,b| a.name <=> b.name} do

@@ -1,0 +1,13 @@
+= form_for @setting_type do |f|
+  -if @setting_type.errors.any?
+    #error_explanation
+      %h2= "#{pluralize(@setting_type.errors.count, "error")} prohibited this setting_type from being saved:"
+      %ul
+        - @setting_type.errors.full_messages.each do |msg|
+          %li= msg
+
+  .field
+    = f.label :name
+    = f.text_field :name
+  .actions
+    = f.submit 'Save'

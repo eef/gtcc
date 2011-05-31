@@ -1,11 +1,46 @@
 #upgrade_tree {
   list-style: none;
+  margin-top: 5px;
+}
+
+#upgrade_tree li {
+  padding: 5px;
+  background-color: black;
+}
+
+#upgrade_tree h4 {
+  border: 1px solid #232323;
+  -webkit-border-radius: 2px;
+  -moz-border-radius: 2px;
+  border-radius: 2px;
+  background: #232323;
+  background: -webkit-gradient(linear, 0 0, 0 bottom, from(#232323), to(#0C0C0C));
+  background: -moz-linear-gradient(#232323, #0C0C0C);
+  background: linear-gradient(#232323, #0C0C0C);
+  -pie-background: linear-gradient(#232323, #0C0C0C);
+  behavior: url(/stylesheets/pie.htc);
+  padding: 3px;
+}
+
+#upgrade_tree h5 {
+  border: 1px solid #232323;
+  -webkit-border-radius: 2px;
+  -moz-border-radius: 2px;
+  border-radius: 2px;
+  background: #232323;
+  background: -webkit-gradient(linear, 0 0, 0 bottom, from(#232323), to(#0C0C0C));
+  background: -moz-linear-gradient(#232323, #0C0C0C);
+  background: linear-gradient(#232323, #0C0C0C);
+  -pie-background: linear-gradient(#232323, #0C0C0C);
+  behavior: url(/stylesheets/pie.htc);
+  padding: 3px;
 }
 
 #upgrade_tree ul {
   list-style: none;
 }
 
-#upgrade_tree ul {
-  list-style: none;
+span.upgrade {
+  padding: 3px;
+  display: block;
 }
