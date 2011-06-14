@@ -3,9 +3,9 @@ class TuningsController < ApplicationController
   # GET /tunings.xml
   def index
     if params[:id]
-      @tunings = Tuning.where(:car_id => params[:id]).all
+      @tunings = current_user.tunings.where(:car_id => params[:id]).all
     else
-      @tunings = Tuning.all
+      @tunings = current_user.tunings.all
     end
     respond_to do |format|
       format.html # index.html.erb
@@ -16,7 +16,7 @@ class TuningsController < ApplicationController
   # GET /tunings/1
   # GET /tunings/1.xml
   def show
-    @tuning = Tuning.find(params[:id])
+    @tuning = current_user.tunings.find(params[:id])
 
     respond_to do |format|
       format.html # show.html.erb
@@ -37,7 +37,7 @@ class TuningsController < ApplicationController
 
   # GET /tunings/1/edit
   def edit
-    @tuning = Tuning.find(params[:id])
+    @tuning = current_user.tunings.find(params[:id])
     @cars = current_user.owned_cars
   end
 

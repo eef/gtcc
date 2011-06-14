@@ -25,7 +25,7 @@ class SettingTypesController < ApplicationController
   # GET /setting_types/new.xml
   def new
     @setting_type = SettingType.new
-
+    @setup_groups = SetupGroup.all
     respond_to do |format|
       format.html # new.html.erb
       format.xml  { render :xml => @setting_type }

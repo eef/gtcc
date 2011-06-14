@@ -2,7 +2,7 @@ class OwnedCarsController < ApplicationController
   # GET /owned_cars
   # GET /owned_cars.xml
   def index
-    @owned_cars = OwnedCar.all
+    @owned_cars = current_user.owned_cars.all
 
     respond_to do |format|
       format.html # index.html.erb
@@ -13,7 +13,7 @@ class OwnedCarsController < ApplicationController
   # GET /owned_cars/1
   # GET /owned_cars/1.xml
   def show
-    @owned_car = OwnedCar.find(params[:id])
+    @owned_car = current_user.owned_cars.find(params[:id])
 
     respond_to do |format|
       format.html # show.html.erb
@@ -34,7 +34,8 @@ class OwnedCarsController < ApplicationController
 
   # GET /owned_cars/1/edit
   def edit
-    @owned_car = OwnedCar.find(params[:id])
+    @cars = Car.all
+    @owned_car = current_user.owned_cars.find(params[:id])
   end
 
   # POST /owned_cars
@@ -56,7 +57,7 @@ class OwnedCarsController < ApplicationController
   # PUT /owned_cars/1
   # PUT /owned_cars/1.xml
   def update
-    @owned_car = OwnedCar.find(params[:id])
+    @owned_car = current_user.owned_cars.find(params[:id])
 
     respond_to do |format|
       if @owned_car.update_attributes(params[:owned_car])
@@ -72,7 +73,7 @@ class OwnedCarsController < ApplicationController
   # DELETE /owned_cars/1
   # DELETE /owned_cars/1.xml
   def destroy
-    @owned_car = OwnedCar.find(params[:id])
+    @owned_car = current_user.owned_cars.find(params[:id])
     @owned_car.destroy
 
     respond_to do |format|

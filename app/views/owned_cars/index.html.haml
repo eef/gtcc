@@ -3,7 +3,7 @@
 %table
   %tr
     %th Nickname
-    %th Car
+    %th Car Type
     %th User
     %th
     %th
@@ -12,7 +12,7 @@
   - @owned_cars.each do |owned_car|
     %tr
       %td= owned_car.nickname
-      %td= owned_car.car_id
+      %td= owned_car.car.name
       %td= owned_car.user_id
       %td= link_to 'Show', owned_car
       %td= link_to 'Edit', edit_owned_car_path(owned_car)

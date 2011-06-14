@@ -9,5 +9,8 @@
   .field
     = f.label :name
     = f.text_field :name
+  .field
+    = f.label :setup_group_id
+    = f.select :setup_group_id, nested_set_options(SetupGroup, @setup_group) {|i| "#{'-' * i.level} #{i.name}" }
   .actions
     = f.submit 'Save'
