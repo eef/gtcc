@@ -14,6 +14,6 @@
     = f.text_field :location
   .field
     = f.label :track
-    = f.text_field :track
+    = f.select :track_id, Track.all.map {|u| [u.name,u.id]}
   .actions
     = f.submit 'Save'
