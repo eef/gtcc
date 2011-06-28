@@ -5,36 +5,54 @@
       %ul
         - @race.errors.full_messages.each do |msg|
           %li= msg
-
-  %p
-    = f.label :name
-    = f.text_field :name, :class => "text-input"
-  %p
-    = f.label :track
-    = f.select :track_id, Track.all.map {|u| [u.name,u.id]}
-  %p
-    = f.label :race_type
-    = f.select :race_type, SiteConfig.race_types
-  %p
-    = f.label :max_players
-    = f.select :max_players, SiteConfig.max_players
-  %p
-    = f.label "Race start"
-    = f.datetime_select :start_time
-  %p
-    = f.label :timezone
-    = f.select :timezone, ActiveSupport::TimeZone.all.map {|u| ["#{u.name} #{u.formatted_offset}",u.name]}, :blank => true
-  %p
-    = f.label "Number of laps"
-    = f.text_field :laps, :class => "text-input tenth"
-  %p
-    = f.label "PSN Race ID"
-    = f.text_field :psn_race_id, :class => "text-input half"
-    = note("e.g 1111-2222-3333-4444")
-  %p
-    = f.check_box(:public, {}, true, false)
-    = f.label :public, :style => "display: inline;"
-    = note("Choose if the race is open to the public")
+  %table{:class => "race-table"}
+    %tr
+      %td{:class => "first"}
+        = f.label :name
+      %td
+        = f.text_field :name, :class => "text-input"
+    %tr
+      %td{:class => "first"}
+        = f.label :track
+      %td
+        = f.select :track_id, Track.all.map {|u| [u.name,u.id]}
+    %tr
+      %td{:class => "first"}
+        = f.label :race_type
+      %td
+        = f.select :race_type, SiteConfig.race_types
+    %tr
+      %td{:class => "first"}
+        = f.label :max_players
+      %td
+        = f.select :max_players, SiteConfig.max_players
+    %tr
+      %td{:class => "first"}
+        = f.label "Race start"
+      %td
+        = f.datetime_select :start_time
+    %tr
+      %td{:class => "first"}
+        = f.label :timezone
+      %td
+        = f.select :timezone, ActiveSupport::TimeZone.all.map {|u| ["#{u.name} #{u.formatted_offset}",u.name]}, :blank => true
+    %tr
+      %td{:class => "first"}
+        = f.label "Number of laps"
+      %td
+        = f.select :laps, SiteConfig.laps
+    %tr
+      %td{:class => "first"}
+        = f.label "PSN Race ID"
+      %td
+        = f.text_field :psn_race_id, :class => "text-input half"
+        = note("e.g 1111-2222-3333-4444")
+    %tr
+      %td{:class => "first"}
+        = f.label :public, :style => "display: inline;"
+      %td
+        = f.check_box(:public, {}, true, false)
+        = note("Choose if the race is open to the public")
   %h2
     Race Regulations
   - f.fields_for :race_regulations do |regs|
@@ -43,5 +61,5 @@
     Event Settings
   - f.fields_for :event_settings do |es|
     = render :partial => 'event_settings', :locals => {:f => es}
-  .actions
-    = f.submit 'Save'
+  %p
+    = f.submit 'Save', :class => "submit"

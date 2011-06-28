@@ -1,41 +1,54 @@
-%p
-  = f.check_box(:skid_recovery, {}, true, false)
-  = f.label :skid_recovery, :style => "display: inline;"
-  %br
-  = f.check_box(:active_steering, {}, true, false)
-  = f.label :active_steering, :style => "display: inline;"
-  %br
-  = f.check_box(:asm, {}, true, false)
-  = f.label :asm, :style => "display: inline;"
-  %br
-  = f.check_box(:driving_line, {}, true, false)
-  = f.label :driving_line, :style => "display: inline;"
-  %br
-  = f.check_box(:tcs, {}, true, false)
-  = f.label :tcs, :style => "display: inline;"
-  = note("Tick which are allowed")
-  %br
-  = f.label "Car Restriction"
-  = f.select :car_restriction, SiteConfig.car_restrictions
-  %br
-  = f.label "Tyre Restrictions"
-  = f.select :tyre_restrictions, SiteConfig.tyre_restrictions
-  %br
-  = f.label :performance_points
-  = f.text_field :performance_points, :id => "pp-input", :class => "text-input quarter"
-  #pp-slider.quarter{:style => "margin: 0px 0px 10px 10px;"}
-  = note("Enter 0 for no limit")
-  %br
-  = f.label :power
-  = f.text_field :power, :id => "pow-input", :class => "text-input quarter"
-  %br
-  %br
-  #pow-slider.quarter{:style => "margin: 0px 0px 10px 10px;"}
-  = note("Enter 0 for no limit")
-  %br
-  = f.label :weight
-  = f.text_field :weight, :id => "we-input", :class => "text-input quarter"
-  %br
-  %br
-  #we-slider.quarter{:style => "margin: 0px 0px 10px 10px;"}
-  = note("Enter 0 for no limit")
+%table{:class => "race-table"}
+  %tr
+    %td{:class => "first"}
+      = f.label :skid_recovery
+    %td
+      = f.check_box(:skid_recovery, {}, true, false)
+  %tr
+    %td{:class => "first"}
+      = f.label :active_steering
+    %td
+      = f.check_box(:active_steering, {}, true, false)
+  %tr
+    %td{:class => "first"}
+      = f.label :asm
+    %td
+      = f.check_box(:asm, {}, true, false)
+  %tr
+    %td{:class => "first"}
+      = f.label :driving_line
+    %td
+      = f.check_box(:driving_line, {}, true, false)
+  %tr
+    %td{:class => "first"}
+      = f.label :tcs
+    %td
+      = f.check_box(:tcs, {}, true, false)
+  %tr
+    %td{:class => "first"}
+      = f.label "Car Restriction"
+    %td
+      = f.select :car_restriction, SiteConfig.car_restrictions
+  %tr
+    %td{:class => "first"}
+      = f.label "Tyre Restrictions"
+    %td
+      = f.select :tyre_restrictions, SiteConfig.tyre_restrictions
+  %tr
+    %td{:class => "first"}
+      = f.label :performance_points
+    %td
+      = f.text_field :performance_points, :id => "pp-input", :class => "text-input quarter"
+      = note("Enter 0 for no limit")
+  %tr
+    %td{:class => "first"}
+      = f.label :power
+    %td
+      = f.text_field :power, :id => "pow-input", :class => "text-input quarter"
+      = note("Enter 0 for no limit")
+  %tr
+    %td{:class => "first"}
+      = f.label :weight
+    %td
+      = f.text_field :weight, :id => "we-input", :class => "text-input quarter"
+      = note("Enter 0 for no limit")

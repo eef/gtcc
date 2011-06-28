@@ -1,27 +1,46 @@
-%p
-  = f.label "Mechanical damage"
-  = f.select :mechanical, SiteConfig.mechanical
-  %br
-  = f.label "Game mode"
-  = f.select :game_mode, SiteConfig.game_mode
-  %br
-  = f.label "Penalties"
-  = f.select :penalty, SiteConfig.penalties
-  %br
-  = f.label "Type/Fuel Depletion"
-  = f.select :tyre_fuel_depletion, SiteConfig.type_fuel_dep
-  %br
-  = f.label "Start Type"
-  = f.select :start_type, SiteConfig.start_type
-  %br
-  = f.label "Grid order"
-  = f.select :grid_order, SiteConfig.grid_order
-  %br
-  = f.label "Grip reduction on wet track/track edge"
-  = f.select :grip_reduction, SiteConfig.grip_reduction
-  %br
-  = f.label "Boost"
-  = f.select :boost, SiteConfig.boost
-  %br
-  = f.label "Shuffle ratio"
-  = f.select :shuffle_ratio, SiteConfig.shuffle_ratio
+%table{:class => "race-table"}
+  %tr
+    %td{:class => "first"}
+      = f.label "Mechanical damage"
+    %td
+      = f.select :mechanical, SiteConfig.mechanical
+  %tr
+    %td{:class => "first"}
+      = f.label "Game mode"
+    %td
+      = f.select :game_mode, SiteConfig.game_mode
+  %tr
+    %td{:class => "first"}
+      = f.label "Penalties"
+    %td
+      = f.select :penalty, SiteConfig.penalties
+  %tr
+    %td{:class => "first"}
+      = f.label "Type/Fuel Depletion"
+    %td
+      = f.select :tyre_fuel_depletion, SiteConfig.type_fuel_dep
+  %tr
+    %td{:class => "first"}
+      = f.label "Start Type"
+    %td
+      = f.select :start_type, SiteConfig.start_type
+  %tr
+    %td{:class => "first"}
+      = f.label "Grid order"
+    %td
+      = f.select :grid_order, SiteConfig.grid_order
+  %tr
+    %td{:class => "first"}
+      = f.label "Grip reduction"
+    %td
+      = f.select :grip_reduction, SiteConfig.grip_reduction
+  %tr
+    %td{:class => "first"}
+      = f.label "Boost"
+    %td
+      = f.select :boost, SiteConfig.boost
+  %tr
+    %td{:class => "first"}
+      = f.label "Shuffle ratio"
+    %td
+      = f.select :shuffle_ratio, SiteConfig.shuffle_ratio
