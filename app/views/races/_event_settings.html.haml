@@ -1,0 +1,27 @@
+%p
+  = f.label "Mechanical damage"
+  = f.select :mechanical, SiteConfig.mechanical
+  %br
+  = f.label "Game mode"
+  = f.select :game_mode, SiteConfig.game_mode
+  %br
+  = f.label "Penalties"
+  = f.select :penalty, SiteConfig.penalties
+  %br
+  = f.label "Type/Fuel Depletion"
+  = f.select :tyre_fuel_depletion, SiteConfig.type_fuel_dep
+  %br
+  = f.label "Start Type"
+  = f.select :start_type, SiteConfig.start_type
+  %br
+  = f.label "Grid order"
+  = f.select :grid_order, SiteConfig.grid_order
+  %br
+  = f.label "Grip reduction on wet track/track edge"
+  = f.select :grip_reduction, SiteConfig.grip_reduction
+  %br
+  = f.label "Boost"
+  = f.select :boost, SiteConfig.boost
+  %br
+  = f.label "Shuffle ratio"
+  = f.select :shuffle_ratio, SiteConfig.shuffle_ratio

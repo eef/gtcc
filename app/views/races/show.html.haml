@@ -1,48 +1,191 @@
 %h2
   Race details
-%p
-  %label
-    Name
-  = @race.name
-%p
-  %label
-    Race organiser
-  = @race.organiser.username
-- unless @race.psn_race_id.blank?
-  %p
-    %label
-      PSN Race ID
-    = @race.psn_race_id
-%p
-  %label
-    Location
-  = @race.location.name
-%p
-  %label
-    Track
-  = @race.track.name
-%p
-  %label
-    Start time
-  = @race.start_time.strftime("%a %d %b at %I:%M%p")
-%p
-  %label
-    Timezone
-  = ActiveSupport::TimeZone.zones_map[@race.timezone]
-%p
-  %label
-    Laps
-  = @race.laps
-%p
-  %label
-    Max players
-  = @race.max_players
+%table{:class => "race-table"}
+  %tr
+    %td{:class => "first"}
+      %label
+        Name
+    %td
+      = @race.name
+  %tr
+    %td{:class => "first"}
+      %label
+        Race organiser
+    %td
+      = @race.organiser.username
+  - unless @race.psn_race_id.blank?
+    %tr
+      %td{:class => "first"}
+        %label
+          PSN Race ID
+      %td
+        = @race.psn_race_id
+  %tr
+    %td{:class => "first"}
+      %label
+        Location
+    %td
+      = @race.location.name
+  %tr
+    %td{:class => "first"}
+      %label
+        Track
+    %td
+      = @race.track.name
+  %tr
+    %td{:class => "first"}
+      %label
+        Start time
+    %td
+      = @race.start_time.strftime("%a %d %b at %I:%M%p") 
+      = ActiveSupport::TimeZone.zones_map[@race.timezone]
+  %tr
+    %td{:class => "first"}
+      %label
+        Laps
+    %td
+      = @race.laps
+  %tr
+    %td{:class => "first"}
+      %label
+        Max players
+    %td
+      = @race.max_players
 %h2
   Race regulations
-%p
-  %label
-    Skid recovery
-  = @regulations.skid_recovery ? "Yes" : "No"
-
+%table{:class => "race-table"}
+  %tr
+    %td{:class => "first"}
+      %label
+        Skid recovery
+    %td
+      = @regulations.skid_recovery ? "Yes" : "No"
+  %tr
+    %td{:class => "first"}
+      %label
+        Active steering
+    %td
+      = @regulations.active_steering ? "Yes" : "No"
+  %tr
+    %td{:class => "first"}
+      %label
+        ASM
+    %td
+      = @regulations.asm ? "Yes" : "No"
+  %tr
+    %td{:class => "first"}
+      %label
+        Driving line
+    %td
+      = @regulations.driving_line ? "Yes" : "No"
+  %tr
+    %td{:class => "first"}
+      %label
+        TCS
+    %td
+      = @regulations.tcs ? "Yes" : "No"
+  %tr
+    %td{:class => "first"}
+      %label
+        Car restriction
+    %td
+      = @regulations.car_restriction
+  %tr
+    %td{:class => "first"}
+      %label
+        Performance Points
+    %td
+      = @regulations.performance_points >= 300 ? @regulations.performance_points : "No limit"
+  %tr
+    %td{:class => "first"}
+      %label
+        Power
+    %td
+      = @regulations.power >= 300 ? @regulations.power : "No limit"
+  %tr
+    %td{:class => "first"}
+      %label
+        Weight
+    %td
+      = @regulations.weight >= 300 ? @regulations.weight : "No limit"
+  %tr
+    %td{:class => "first"}
+      %label
+        Tyre restrictions
+    %td
+      = @regulations.tyre_restrictions
+%h2
+  Event settings
+%table{:class => "race-table"}
+  %tr
+    %td{:class => "first"}
+      %label
+        Mechanical damage
+    %td
+      = @event_settings.mechanical
+  %tr
+    %td{:class => "first"}
+      %label
+        Game mode
+    %td
+      = @event_settings.game_mode
+  %tr
+    %td{:class => "first"}
+      %label
+        Penalities
+    %td
+      = @event_settings.penalty
+  %tr
+    %td{:class => "first"}
+      %label
+        Tyre/Fuel Depletion
+    %td
+      = @event_settings.tyre_fuel_depletion
+  %tr
+    %td{:class => "first"}
+      %label
+        Grip reduction
+    %td
+      = @event_settings.grip_reduction
+  %tr
+    %td{:class => "first"}
+      %label
+        Grid order
+    %td
+      = @event_settings.grid_order
+  %tr
+    %td{:class => "first"}
+      %label
+        Start type
+    %td
+      = @event_settings.start_type
+  %tr
+    %td{:class => "first"}
+      %label
+        Boost
+    %td
+      = @event_settings.boost
+  %tr
+    %td{:class => "first"}
+      %label
+        Shuffle ratio
+    %td
+      = @event_settings.shuffle_ratio
+%h2
+  Entrants
+- if @race.users.include?(current_user)
+  You are participating in this race.
+  %br
+  If you can not take part, please remove yourself ASAP
+  = link_to "Exit race", exit_race_path(@race)
+- elsif @race.users.length.eql?(@race.max_players)
+  Entries closed, maximum players entered.
+- elsif !@race.users.include?(current_user)
+  = link_to("Click here", enter_race_path(@race)) + " to enter race"
+%table{:class => "race-table"}
+  - @race.users.each do |user|
+    %tr
+      %td
+        = user.username   
 = link_to('Edit', edit_race_path(@race)) + " | " if @race.organiser.eql?(current_user)
 = link_to 'Back', races_path

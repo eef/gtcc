@@ -15,6 +15,7 @@ class RacesController < ApplicationController
   def show
     @race = Race.find(params[:id])
     @regulations = @race.race_regulations.first
+    @event_settings = @race.event_settings.first
     respond_to do |format|
       format.html # show.html.erb
       format.xml  { render :xml => @race }
@@ -26,8 +27,7 @@ class RacesController < ApplicationController
   def new
     @race = Race.new
     @race.race_regulations.build
-    logger.info "*"*50 
-    logger.info "Site Config: #{SiteConfig.race_types.inspect}"
+    @race.event_settings.build
     respond_to do |format|
       format.html # new.html.erb
       format.xml  { render :xml => @race }
@@ -44,12 +44,41 @@ class RacesController < ApplicationController
   def create
     @race = Race.new(params[:race])
     @race.organiser = current_user
+    @race.users << current_user
     respond_to do |format|
       if @race.save
         format.html { redirect_to(@race, :notice => 'Race was successfully created.') }
         format.xml  { render :xml => @race, :status => :created, :location => @race }
       else
         format.html { render :action => "new" }
+        format.xml  { render :xml => @race.errors, :status => :unprocessable_entity }
+      end
+    end
+  end
+  
+  def enter_race
+    @race = Race.find(params[:id])
+    @race.users << current_user
+    respond_to do |format|
+      if @race.save
+        format.html { redirect_to(@race, :notice => 'You have entered the race.') }
+        format.xml  { render :xml => @race, :status => :created, :location => @race }
+      else
+        format.html { redirect_to(@race, :notice => 'Unable to enter race.') }
+        format.xml  { render :xml => @race.errors, :status => :unprocessable_entity }
+      end
+    end
+  end
+  
+  def exit_race
+    @race = Race.find(params[:id])
+    @race.users.delete(current_user)
+    respond_to do |format|
+      if @race.save
+        format.html { redirect_to(@race, :notice => 'You have exited the race.') }
+        format.xml  { render :xml => @race, :status => :created, :location => @race }
+      else
+        format.html { redirect_to(@race, :notice => 'Unable to exit race.') }
         format.xml  { render :xml => @race.errors, :status => :unprocessable_entity }
       end
     end

@@ -143,6 +143,14 @@ table {
   padding: 10px 0 10px 0;
 }
 
+table label {
+  margin: 0;
+}
+
+td.first {
+  width: 200px;
+}
+
 th,td {
   padding: 5px;
   border: 1px solid #0C0C0C;

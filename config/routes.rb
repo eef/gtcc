@@ -45,5 +45,7 @@ Rcorp::Application.routes.draw do
   match "/site" => "site#show"
   match "/site/edit" => "site#edit"
   match "/site/update" => "site#update"
+  match "/race/enter/:id", :to => "races#enter_race", :as => "enter_race"
+  match "/race/exit/:id", :to => "races#exit_race", :as => "exit_race"
   
 end

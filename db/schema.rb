@@ -10,11 +10,26 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110125161147) do
+ActiveRecord::Schema.define(:version => 20110125161148) do
 
   create_table "cars", :force => true do |t|
     t.string   "name"
     t.integer  "manufacturer_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "event_settings", :force => true do |t|
+    t.string   "mechanical"
+    t.string   "game_mode"
+    t.string   "penalty"
+    t.string   "tyre_fuel_depletion"
+    t.string   "grip_reduction"
+    t.string   "grid_order"
+    t.string   "start_type"
+    t.string   "boost"
+    t.integer  "shuffle_ratio"
+    t.integer  "race_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -54,15 +69,15 @@ ActiveRecord::Schema.define(:version => 20110125161147) do
   end
 
   create_table "race_regulations", :force => true do |t|
-    t.boolean  "no_skid_recovery"
-    t.boolean  "no_active_steering"
-    t.boolean  "no_asm"
-    t.boolean  "driving_line_off"
-    t.boolean  "no_tcs"
+    t.boolean  "skid_recovery"
+    t.boolean  "active_steering"
+    t.boolean  "asm"
+    t.boolean  "driving_line"
+    t.boolean  "tcs"
     t.string   "car_restriction"
     t.integer  "performance_points", :default => 0
-    t.integer  "power"
-    t.integer  "weight"
+    t.integer  "power",              :default => 0
+    t.integer  "weight",             :default => 0
     t.string   "tyre_restrictions"
     t.integer  "race_id"
     t.integer  "season_id"
@@ -79,11 +94,11 @@ ActiveRecord::Schema.define(:version => 20110125161147) do
     t.integer  "organiser_id"
     t.datetime "start_time"
     t.integer  "laps"
-    t.string   "timezone"
+    t.string   "timezone",     :default => "UTC"
     t.string   "psn_race_id"
     t.string   "race_type"
     t.integer  "max_players"
-    t.boolean  "public"
+    t.boolean  "public",       :default => true
   end
 
   create_table "races_users", :id => false, :force => true do |t|

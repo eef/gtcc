@@ -39,5 +39,9 @@
     Race Regulations
   - f.fields_for :race_regulations do |regs|
     = render :partial => 'race_regulations', :locals => {:f => regs}
+  %h2
+    Event Settings
+  - f.fields_for :event_settings do |es|
+    = render :partial => 'event_settings', :locals => {:f => es}
   .actions
     = f.submit 'Save'
