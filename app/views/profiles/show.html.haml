@@ -1,0 +1,21 @@
+%p#notice= notice
+
+%p
+  %b First name:
+  = @profile.first_name
+%p
+  %b Last name:
+  = @profile.last_name
+%p
+  %b Date of birth:
+  = @profile.date_of_birth
+%p
+  %b Psn name:
+  = @profile.psn_name
+%p
+  %b Country:
+  = @profile.country_id
+
+= link_to 'Edit', edit_profile_path(@profile)
+\|
+= link_to 'Back', profiles_path

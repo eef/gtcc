@@ -14,7 +14,7 @@ class RacesController < ApplicationController
   # GET /races/1.xml
   def show
     @race = Race.find(params[:id])
-
+    @regulations = @race.race_regulations.first
     respond_to do |format|
       format.html # show.html.erb
       format.xml  { render :xml => @race }
@@ -25,7 +25,9 @@ class RacesController < ApplicationController
   # GET /races/new.xml
   def new
     @race = Race.new
-
+    @race.race_regulations.build
+    logger.info "*"*50 
+    logger.info "Site Config: #{SiteConfig.race_types.inspect}"
     respond_to do |format|
       format.html # new.html.erb
       format.xml  { render :xml => @race }
@@ -41,7 +43,7 @@ class RacesController < ApplicationController
   # POST /races.xml
   def create
     @race = Race.new(params[:race])
-
+    @race.organiser = current_user
     respond_to do |format|
       if @race.save
         format.html { redirect_to(@race, :notice => 'Race was successfully created.') }

@@ -5,7 +5,10 @@ class TuningsController < ApplicationController
     if params[:id]
       @tunings = current_user.tunings.where(:car_id => params[:id]).all
     else
-      @tunings = current_user.tunings.all
+      t = Tuning.arel_table
+      @tunings = Tuning.where(
+                  t[:user_id].eq(current_user.id).or(t[:public].eq(true))
+                )
     end
     respond_to do |format|
       format.html # index.html.erb
@@ -16,11 +19,15 @@ class TuningsController < ApplicationController
   # GET /tunings/1
   # GET /tunings/1.xml
   def show
-    @tuning = current_user.tunings.find(params[:id])
+    @tuning = Tuning.find(params[:id])
 
     respond_to do |format|
-      format.html # show.html.erb
-      format.xml  { render :xml => @tuning }
+      if @tuning.user.eql?(current_user) or @tuning.public
+        format.html # show.html.erb
+        format.xml  { render :xml => @tuning }
+      else
+        format.html { redirect_to(tunings_path, :notice => "Can't be looking at that.") }
+      end
     end
   end
 

@@ -19,3 +19,4 @@ gem "autotest"
 gem 'factory_girl_rails'
 gem "rspec-rails"
 gem 'awesome_nested_set', :git => 'git://github.com/galetahub/awesome_nested_set.git'
+gem 'awesome_print'

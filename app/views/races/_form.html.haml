@@ -6,14 +6,38 @@
         - @race.errors.full_messages.each do |msg|
           %li= msg
 
-  .field
+  %p
     = f.label :name
-    = f.text_field :name
-  .field
-    = f.label :location
-    = f.text_field :location
-  .field
+    = f.text_field :name, :class => "text-input"
+  %p
     = f.label :track
     = f.select :track_id, Track.all.map {|u| [u.name,u.id]}
+  %p
+    = f.label :race_type
+    = f.select :race_type, SiteConfig.race_types
+  %p
+    = f.label :max_players
+    = f.select :max_players, SiteConfig.max_players
+  %p
+    = f.label "Race start"
+    = f.datetime_select :start_time
+  %p
+    = f.label :timezone
+    = f.select :timezone, ActiveSupport::TimeZone.all.map {|u| ["#{u.name} #{u.formatted_offset}",u.name]}, :blank => true
+  %p
+    = f.label "Number of laps"
+    = f.text_field :laps, :class => "text-input tenth"
+  %p
+    = f.label "PSN Race ID"
+    = f.text_field :psn_race_id, :class => "text-input half"
+    = note("e.g 1111-2222-3333-4444")
+  %p
+    = f.check_box(:public, {}, true, false)
+    = f.label :public, :style => "display: inline;"
+    = note("Choose if the race is open to the public")
+  %h2
+    Race Regulations
+  - f.fields_for :race_regulations do |regs|
+    = render :partial => 'race_regulations', :locals => {:f => regs}
   .actions
     = f.submit 'Save'

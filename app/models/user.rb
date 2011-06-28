@@ -8,6 +8,8 @@ class User < ActiveRecord::Base
   has_one :site
   has_many :owned_cars
   has_many :tunings
+  has_many :races, :foreign_key => "organiser_id"
+  has_and_belongs_to_many :races
   
 
   # Setup accessible (or protected) attributes for your model

@@ -1,6 +1,9 @@
 $(document).ready(function() {
   hide_flash();
   solar_system_autocomplete();
+  slider("pp", 300, 2000, 300);
+  slider("pow", 300, 2000, 300);
+  slider("we", 300, 2000, 300);
 });
 
 function hide_flash() {
@@ -26,4 +29,29 @@ function get_celestials() {
 
 function show_loading(title, selector) {
   $(selector).html("<div class='loading'><img src='/stylesheets/indicator.gif' /><span class='form-note'>" + title + "</span></div>");
+}
+
+function slider(div_id, min, max, value) {
+  $("#" + div_id + "-slider").slider({
+    range: "min",
+		value: value,
+		min: min,
+		max: max,
+		slide: function( event, ui ) {
+		  $("#" + div_id + "-input").val(ui.value);
+		}
+	});
+	$("#" + div_id + "-input").keyup(function(){
+	  var value = $(this).val();
+	  if(value > 0 && value < min) {
+	    $("#" + div_id + "-slider").slider("value", min);
+	  } else if(value >= min && value < max) {
+	    $("#" + div_id + "-slider").slider("value", value);
+	  }
+	})
+  if($("#" + div_id + "-input").val() > 0) {
+    $("#" + div_id + "-slider").slider("value", $("#" + div_id + "-input").val());
+  } else {
+    $("#" + div_id + "-slider").slider("value", min);
+  }
 }

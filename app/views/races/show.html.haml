@@ -1,15 +1,48 @@
-%p#notice= notice
-
+%h2
+  Race details
 %p
-  %b Name:
+  %label
+    Name
   = @race.name
 %p
-  %b Location:
-  = @race.location
+  %label
+    Race organiser
+  = @race.organiser.username
+- unless @race.psn_race_id.blank?
+  %p
+    %label
+      PSN Race ID
+    = @race.psn_race_id
 %p
-  %b Track:
-  = @race.track
+  %label
+    Location
+  = @race.location.name
+%p
+  %label
+    Track
+  = @race.track.name
+%p
+  %label
+    Start time
+  = @race.start_time.strftime("%a %d %b at %I:%M%p")
+%p
+  %label
+    Timezone
+  = ActiveSupport::TimeZone.zones_map[@race.timezone]
+%p
+  %label
+    Laps
+  = @race.laps
+%p
+  %label
+    Max players
+  = @race.max_players
+%h2
+  Race regulations
+%p
+  %label
+    Skid recovery
+  = @regulations.skid_recovery ? "Yes" : "No"
 
-= link_to 'Edit', edit_race_path(@race)
-\|
+= link_to('Edit', edit_race_path(@race)) + " | " if @race.organiser.eql?(current_user)
 = link_to 'Back', races_path

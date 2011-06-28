@@ -44,3 +44,20 @@ span.upgrade {
   padding: 3px;
   display: block;
 }
+
+#error_explanation {
+  margin: 10px 0px 10px 0px;
+}
+
+#error_explanation h2 {
+  color: rgb(247, 93, 89);
+  font-size: 1.3em;
+}
+
+#error_explanation ul {
+  list-style: none;
+}
+
+.field_with_errors input {
+  border: 1px solid rgb(247, 93, 89);
+}

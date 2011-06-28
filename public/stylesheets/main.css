@@ -115,6 +115,22 @@ body {
   width: 50%;
 }
 
+.quarter {
+  width: 25%;
+}
+
+.third {
+  width: 33%;
+}
+
+.tenth {
+  width: 10%;
+}
+
+.twenty {
+  width: 20%;
+}
+
 .required {
   border-left: 2px solid red !important;
 }
@@ -139,4 +155,8 @@ td {
 th {
   color: #38B0DE;
   background-color: #333;
+}
+
+form p {
+  margin: 20px 0px 20px 0px;
 }

@@ -7,8 +7,6 @@
     %th User
     %th Description
     %th
-    %th
-    %th
 
   - @tunings.each do |tuning|
     %tr
@@ -16,9 +14,11 @@
       %td= tuning.car.name
       %td= tuning.user.username
       %td= tuning.description
-      %td= link_to 'Show', tuning
-      %td= link_to 'Edit', edit_tuning_path(tuning)
-      %td= link_to 'Destroy', tuning, :confirm => 'Are you sure?', :method => :delete
+      %td
+        = link_to 'Show', tuning
+        - if tuning.user.eql?(current_user)
+          = link_to 'Edit', edit_tuning_path(tuning)
+          = link_to 'Destroy', tuning, :confirm => 'Are you sure?', :method => :delete
 
 %br
 

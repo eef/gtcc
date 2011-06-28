@@ -1,5 +1,7 @@
 Rcorp::Application.routes.draw do
   
+  resources :profiles
+
   resources :setting_types
 
   resources :settings

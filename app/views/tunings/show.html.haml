@@ -1,17 +1,17 @@
-%p
-  %h3
-    = @tuning.name
-%p
-  %h5
-    = @tuning.car.name
-%p
-  = @tuning.description
-%p
-  %ul#upgrade_tree
-    - for rootnode in UpgradeGroup.roots.sort! {|a,b| a.name <=> b.name}
-      .upgrade-group{:style => "margin-top: 5px;"}
-        = render :partial => "show_upgrade_tree", :locals => {:root => rootnode, :tag => :h4}
+- unless @tuning.blank?
+  %p
+    %h3
+      = @tuning.name
+  %p
+    %h5
+      = @tuning.car.name
+  %p
+    = @tuning.description
+  %p
+    %ul#upgrade_tree
+      - for rootnode in UpgradeGroup.roots.sort! {|a,b| a.name <=> b.name}
+        .upgrade-group{:style => "margin-top: 5px;"}
+          = render :partial => "show_upgrade_tree", :locals => {:root => rootnode, :tag => :h4}
 
-= link_to 'Edit', edit_tuning_path(@tuning)
-\|
-= link_to 'Back', tunings_path
+  = link_to('Edit', edit_tuning_path(@tuning)) + " | " if @tuning.user.eql?(current_user)
+  = link_to 'Back', tunings_path

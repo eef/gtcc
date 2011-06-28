@@ -17,8 +17,6 @@ class SiteController < ApplicationController
       else
         flash[:alert] = ""
         @site.errors.full_messages.each {|error| flash[:alert] << "#{error}, " }
-        flash[:alert].chop!
-        logger.info flash[:alert].chop!
         format.html { redirect_to site_edit_path }
       end
     end
