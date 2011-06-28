@@ -181,7 +181,7 @@
 - elsif @race.users.length.eql?(@race.max_players)
   Entries closed, maximum players entered.
 - elsif !@race.users.include?(current_user)
-  = link_to("Click here", enter_race_path(@race)) + " to enter race"
+  = link_to("Click here", enter_race_path(@race)) + " to enter race (#{@race.max_players - @race.users.length} spaces left)"
 %table{:class => "race-table"}
   - @race.users.each do |user|
     %tr

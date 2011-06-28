@@ -3,20 +3,22 @@
 %table
   %tr
     %th Name
-    %th Location
     %th Track
-    %th
-    %th
+    %th Start time
+    %th Entries
     %th
 
   - @races.each do |race|
     %tr
-      %td= race.name
-      %td= race.location.name
-      %td= race.track.name
-      %td= link_to 'Show', race
-      %td= link_to 'Edit', edit_race_path(race)
-      %td= link_to 'Destroy', race, :confirm => 'Are you sure?', :method => :delete
+      %td= link_to race.name, race
+      %td= link_to race.track.name, race
+      %td= link_to "#{race.start_time.strftime("%d/%m/%y %I:%M%p")} #{ActiveSupport::TimeZone.zones_map[race.timezone]}", race
+      %td= link_to "#{race.users.length}/#{race.max_players} (#{race.max_players - race.users.length} left)", race
+      %td{:style => "min-width: 26px; text-align: center;"}
+        = link_to "Show", race, :class => "ui-state-default ui-corner-all ui-icon ui-icon-search", :title => "View race details", :style => "float: left; margin-right: 5px;"
+        - if race.organiser.eql?(current_user)
+          = link_to 'Edit', edit_race_path(race), :class => "ui-state-default ui-corner-all ui-icon ui-icon-wrench", :style => "float: left; margin-right: 5px;", :title => "Edit race details"
+          = link_to 'Destroy', race, :confirm => 'Are you sure?', :method => :delete, :class => "ui-state-default ui-corner-all ui-icon ui-icon-trash", :style => "float: left; margin-right: 5px;", :title => "Delete race"
 
 %br
 
