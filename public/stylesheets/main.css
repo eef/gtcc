@@ -14,11 +14,11 @@ body {
 
 #wrapper { 
  margin: 0 auto;
- width: 922px;
+ width: 1000px;
 }
 
 #header {
-  width: 900px;
+  width: 978px;
   padding: 10px;
   margin: 10px 0px 5px 0px;
   border: 1px solid #232323;
@@ -34,7 +34,7 @@ body {
 }
 
 #flash {
-  width: 900px;
+  width: 978px;
   border: 1px solid #232323;
   padding: 10px;
   font-size: .7em;
@@ -52,7 +52,7 @@ body {
 }
 
 #content { 
-  width: 900px;
+  width: 978px;
   border: 1px solid #232323;
   background: #000;
   font-size: 0.8em;

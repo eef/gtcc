@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110125161148) do
+ActiveRecord::Schema.define(:version => 20110125161150) do
 
   create_table "cars", :force => true do |t|
     t.string   "name"
@@ -57,17 +57,6 @@ ActiveRecord::Schema.define(:version => 20110125161148) do
     t.datetime "updated_at"
   end
 
-  create_table "profiles", :force => true do |t|
-    t.string   "first_name"
-    t.string   "last_name"
-    t.datetime "date_of_birth"
-    t.string   "psn_name"
-    t.string   "reddit_name"
-    t.integer  "country_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
   create_table "race_regulations", :force => true do |t|
     t.boolean  "skid_recovery"
     t.boolean  "active_steering"
@@ -93,11 +82,11 @@ ActiveRecord::Schema.define(:version => 20110125161148) do
     t.datetime "updated_at"
     t.integer  "organiser_id"
     t.datetime "start_time"
-    t.integer  "laps"
+    t.integer  "laps",         :default => 1
     t.string   "timezone",     :default => "UTC"
     t.string   "psn_race_id"
     t.string   "race_type"
-    t.integer  "max_players"
+    t.integer  "max_players",  :default => 2
     t.boolean  "public",       :default => true
   end
 
@@ -206,6 +195,12 @@ ActiveRecord::Schema.define(:version => 20110125161148) do
     t.datetime "updated_at"
     t.string   "username"
     t.string   "roles",                               :default => "--- []"
+    t.string   "first_name"
+    t.string   "last_name"
+    t.string   "psn_name"
+    t.string   "reddit_name"
+    t.integer  "age"
+    t.string   "timezone"
   end
 
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true

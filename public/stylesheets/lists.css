@@ -46,7 +46,11 @@ span.upgrade {
 }
 
 #error_explanation {
-  margin: 10px 0px 10px 0px;
+  margin: 10px;
+}
+
+.field_with_errors {
+  margin: 10px;
 }
 
 #error_explanation h2 {

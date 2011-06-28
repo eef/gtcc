@@ -32,7 +32,7 @@ Rcorp::Application.routes.draw do
 
   resources :tracks
 
-  devise_for :users
+  devise_for :users, :controllers => {:registrations => "registrations"}
 
   root :to => "home#index"
   
@@ -47,5 +47,6 @@ Rcorp::Application.routes.draw do
   match "/site/update" => "site#update"
   match "/race/enter/:id", :to => "races#enter_race", :as => "enter_race"
   match "/race/exit/:id", :to => "races#exit_race", :as => "exit_race"
+  match "/race/exit/:id/:user_id", :to => "races#exit_race", :as => "admin_exit_race"
   
 end

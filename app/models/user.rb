@@ -10,10 +10,11 @@ class User < ActiveRecord::Base
   has_many :tunings
   has_many :races, :foreign_key => "organiser_id"
   has_and_belongs_to_many :races
+  validates_presence_of :psn_name
   
 
   # Setup accessible (or protected) attributes for your model
-  attr_accessible :email, :password, :password_confirmation, :remember_me, :username
+  attr_accessible :email, :password, :password_confirmation, :remember_me, :username, :timezone, :psn_name, :first_name, :last_name
   
   protected
     def password_required?

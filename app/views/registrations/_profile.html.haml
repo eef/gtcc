@@ -1,0 +1,16 @@
+%p.form-sep
+  %label
+    PSN Name
+  = text_field_tag "user[profile_attributes][psn_name]","", :class => "text-input required", :size => 30
+%p.form-sep
+  %label
+    Reddit username
+  = text_field_tag "user[profile_attributes][reddit_name]","", :class => "text-input full", :size => 30
+%p.form-sep
+  %label
+    First name
+  = text_field_tag "user[profile_attributes][first_name]","", :class => "text-input full", :size => 30
+%p.form-sep
+  %label
+    Last name
+  = text_field_tag "user[profile_attributes][last_name]","", :class => "text-input full", :size => 30

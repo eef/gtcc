@@ -48,3 +48,7 @@ input.text-input, textarea.text-input, option, select {
   display: inline;
   margin: 10px 0 5px;
 }
+
+.required {
+  border-left: 1px solid red;
+}

@@ -4,12 +4,36 @@ $(document).ready(function() {
   slider("pp", 300, 2000, 300);
   slider("pow", 300, 2000, 300);
   slider("we", 300, 2000, 300);
+  tooltips();
 });
 
 function hide_flash() {
   if($('#flash').length > 0) {
     setTimeout("$('#flash').slideUp('fast')", 5000);
   }
+}
+
+function tooltips() {
+    $('.has-tip').qtip({
+    style: {
+      name: 'dark',
+      tip: true,
+      'font-size': 12,
+      width: {
+        max: 400
+      },
+      border: {
+        width: 2,
+        radius: 4
+      }
+    },
+    position: {
+      corner: {
+        target: 'leftMiddle',
+        tooltip: 'rightMiddle'
+      }
+    }
+  })
 }
 
 function solar_system_autocomplete() {

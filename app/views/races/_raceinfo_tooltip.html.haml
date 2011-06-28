@@ -1,0 +1,35 @@
+%label{:style => "display: inline;"}
+  Race organiser:
+= "#{race.organiser.username} (#{race.organiser.psn_name})"
+%br
+%label{:style => "display: inline;"}
+  Location:
+= "#{race.location.name}, #{race.track.name}"
+- unless race.race_regulations.first.car_restriction.blank?
+  %br
+  %label{:style => "display: inline;"}
+    Car:
+  = race.race_regulations.first.car_restriction
+- if race.race_regulations.first.tcs
+  %br
+  %label{:style => "display: inline;"}
+    TCS:
+  allowed
+- if race.race_regulations.first.driving_line
+  %br
+  %label{:style => "display: inline;"}
+    Driving line:
+  on
+- if race.race_regulations.first.performance_points > 0
+  %br
+  %label{:style => "display: inline;"}
+    PP limit:
+  = race.race_regulations.first.performance_points
+- if race.race_regulations.first.power > 0
+  %br
+  %label{:style => "display: inline;"}
+    Power limit:
+  = "#{race.race_regulations.first.power}BHP"
+%br
+%br
+View race details for more info

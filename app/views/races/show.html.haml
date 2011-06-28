@@ -13,6 +13,7 @@
         Race organiser
     %td
       = @race.organiser.username
+      = " - PSN name: #{@race.organiser.psn_name}"
   - unless @race.psn_race_id.blank?
     %tr
       %td{:class => "first"}
@@ -95,19 +96,19 @@
       %label
         Performance Points
     %td
-      = @regulations.performance_points >= 300 ? @regulations.performance_points : "No limit"
+      = @regulations.performance_points >= 300 ? "#{@regulations.performance_points} PP" : "No limit"
   %tr
     %td{:class => "first"}
       %label
         Power
     %td
-      = @regulations.power >= 300 ? @regulations.power : "No limit"
+      = @regulations.power >= 300 ? "#{@regulations.power}BHP" : "No limit"
   %tr
     %td{:class => "first"}
       %label
         Weight
     %td
-      = @regulations.weight >= 300 ? @regulations.weight : "No limit"
+      = @regulations.weight >= 300 ? "#{@regulations.weight}kg" : "No limit"
   %tr
     %td{:class => "first"}
       %label
@@ -182,10 +183,25 @@
   Entries closed, maximum players entered.
 - elsif !@race.users.include?(current_user)
   = link_to("Click here", enter_race_path(@race)) + " to enter race (#{@race.max_players - @race.users.length} spaces left)"
-%table{:class => "race-table"}
-  - @race.users.each do |user|
+- if @race.users.length > 0
+  %table{:class => "race-table", :style => "width: 50%;"}
     %tr
-      %td
-        = user.username   
+      %th
+        Username
+      %th
+        PSN Name
+      - if @race.organiser.eql?(current_user)
+        %th
+    - @race.users.each do |user|
+      %tr
+        %td
+          = user.username
+        %td
+          = user.psn_name
+        - if @race.organiser.eql?(current_user)
+          %td{:style => "width: 8px"}
+            = link_to 'Remove driver', admin_exit_race_path(@race, user), :confirm => 'Are you sure?', :method => :delete, :class => "ui-state-default ui-corner-all ui-icon ui-icon-trash", :title => "Remove driver"
+- else
+  No entries yet
 = link_to('Edit', edit_race_path(@race)) + " | " if @race.organiser.eql?(current_user)
 = link_to 'Back', races_path

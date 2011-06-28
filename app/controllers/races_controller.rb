@@ -44,6 +44,8 @@ class RacesController < ApplicationController
   def create
     @race = Race.new(params[:race])
     @race.organiser = current_user
+    logger.info current_user.inspect
+    logger.info @race.organiser.inspect 
     @race.users << current_user
     respond_to do |format|
       if @race.save
@@ -58,24 +60,39 @@ class RacesController < ApplicationController
   
   def enter_race
     @race = Race.find(params[:id])
-    @race.users << current_user
+    added = false
+    if @race.users.length < @race.max_players
+      @race.users << current_user
+      added = true
+    end
     respond_to do |format|
-      if @race.save
-        format.html { redirect_to(@race, :notice => 'You have entered the race.') }
-        format.xml  { render :xml => @race, :status => :created, :location => @race }
+      if added
+        if @race.save
+          format.html { redirect_to(@race, :notice => 'You have entered the race.') }
+          format.xml  { render :xml => @race, :status => :created, :location => @race }
+        else
+          format.html { redirect_to(@race, :notice => 'Unable to enter race.') }
+          format.xml  { render :xml => @race.errors, :status => :unprocessable_entity }
+        end
       else
-        format.html { redirect_to(@race, :notice => 'Unable to enter race.') }
-        format.xml  { render :xml => @race.errors, :status => :unprocessable_entity }
+        format.html { redirect_to(@race, :notice => 'No more places left on race.') }
       end
     end
   end
   
   def exit_race
     @race = Race.find(params[:id])
-    @race.users.delete(current_user)
+    if params[:user_id] and params[:id] and @race.organiser.eql?(current_user)
+      temp_user = User.find(params[:user_id])
+      @race.users.delete()
+      f_notice = "Removed #{temp_user.username}(#{temp_user.psn_name})"
+    else
+      @race.users.delete(current_user)
+      f_notice = 'You have exited the race.'
+    end
     respond_to do |format|
       if @race.save
-        format.html { redirect_to(@race, :notice => 'You have exited the race.') }
+        format.html { redirect_to(@race, :notice => f_notice) }
         format.xml  { render :xml => @race, :status => :created, :location => @race }
       else
         format.html { redirect_to(@race, :notice => 'Unable to exit race.') }

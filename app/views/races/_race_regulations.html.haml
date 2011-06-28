@@ -28,7 +28,8 @@
     %td{:class => "first"}
       = f.label "Car Restriction"
     %td
-      = f.select :car_restriction, SiteConfig.car_restrictions
+      = f.text_field :car_restriction, :class => "text-input"
+      = note("e.g DTM Cars, 60's Only, Japanese Only, Lamborghini Gallardo LP 560-4 '08")
   %tr
     %td{:class => "first"}
       = f.label "Tyre Restrictions"
