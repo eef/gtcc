@@ -8,7 +8,9 @@ class User < ActiveRecord::Base
   has_one :site
   has_many :owned_cars
   has_many :tunings
+  has_many :results
   has_many :races, :foreign_key => "organiser_id"
+  has_many :leagues, :foreign_key => "organiser_id"
   has_and_belongs_to_many :races
   validates_presence_of :psn_name
   

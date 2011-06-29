@@ -2,8 +2,8 @@ class RacesController < ApplicationController
   # GET /races
   # GET /races.xml
   def index
-    @races = Race.where(:public => true)
-    @my_races = current_user.races
+    @races = Race.where(:public => true).where(:league_id => nil)
+    @my_races = current_user.races.where(:league_id => nil)
     respond_to do |format|
       format.html # index.html.erb
       format.xml  { render :xml => @races }
@@ -26,8 +26,12 @@ class RacesController < ApplicationController
   # GET /races/new.xml
   def new
     @race = Race.new
-    @race.race_regulations.build
-    @race.event_settings.build
+    unless params[:league_id]
+      @race.race_regulations.build
+      @race.event_settings.build
+    else
+      @league = League.find(params[:league_id])
+    end
     respond_to do |format|
       format.html # new.html.erb
       format.xml  { render :xml => @race }
@@ -37,6 +41,21 @@ class RacesController < ApplicationController
   # GET /races/1/edit
   def edit
     @race = current_user.races.where(:id => params[:id]).first
+    unless @race.league_id.blank?
+      @league = League.find(@race.league_id)
+    end
+  end
+  
+  def generate_results
+    @race = current_user.races.where(:id => params[:id]).first
+    unless @race.league.blank?
+      @race.league.max_players.times { @race.results.build }
+    else
+      @race.max_players.times { @race.results.build }
+    end
+    respond_to do |format|
+      format.html  { render :partial => "edit_result", :locals => {:race => @race} }
+    end
   end
 
   # POST /races
@@ -45,9 +64,16 @@ class RacesController < ApplicationController
     @race = Race.new(params[:race])
     @race.organiser = current_user
     @race.users << current_user
+    if params[:race][:league_id]
+      logger.info "*"*100 
+      redir = League.find(params[:race][:league_id])
+    else
+      logger.info "&"*100
+      redir = @race
+    end
     respond_to do |format|
       if @race.save
-        format.html { redirect_to(@race, :notice => 'Race was successfully created.') }
+        format.html { redirect_to(redir, :notice => 'Race was successfully created.') }
         format.xml  { render :xml => @race, :status => :created, :location => @race }
       else
         format.html { render :action => "new" }

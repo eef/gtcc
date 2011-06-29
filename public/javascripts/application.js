@@ -6,6 +6,7 @@ $(document).ready(function() {
   slider("we", 300, 2000, 300);
   tooltips();
   tabs();
+  generate_results();
 });
 
 function hide_flash() {
@@ -16,6 +17,21 @@ function hide_flash() {
 
 function tabs() {
   $( "#tabs" ).tabs();
+}
+
+function generate_results() {
+  $("#gen_results").click(function(){
+    var race_id = $(this).data("race-id");
+    $.ajax({
+      type: 'GET',
+      dataType: "html",
+      url: "/race/gen_results/" + race_id,
+      success: function(data){
+  			$("#results").html(data);
+      }
+    });
+    return false;
+  })
 }
 
 function tooltips() {

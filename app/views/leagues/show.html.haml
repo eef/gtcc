@@ -1,0 +1,68 @@
+#tabs
+  %ul
+    %li
+      = link_to "League Details", "#league-details"
+    %li
+      = link_to "League Regulations", "#league-regulations"
+    %li
+      = link_to "League Settings", "#league-settings"
+    %li
+      = link_to "Points", "#points"
+    %li
+      = link_to "Races", "#races"
+  #league-details
+    %table{:class => "race-table"}
+      %tr
+        %td{:class => "first"}
+          %label
+            Name
+        %td
+          = @league.name
+      %tr
+        %td
+          %label
+            Max players
+        %td
+          = @league.max_players
+  #league-regulations
+    = render :partial => "races/show_race_regulations"
+  #league-settings
+    = render :partial => "races/show_event_settings"
+  #points
+    %table{:class => "half"}
+      %tr
+        %th
+          Position
+        %th
+          Points
+      - @league.league_points.each do |lp|
+        = render :partial => "show_points", :locals => {:points => lp}
+  #races
+    - if @league.races.blank? and @league.organiser.eql?(current_user)
+      You have not races yet
+      = link_to "Click here", new_league_race_path(@league)
+    - elsif @league.races.blank?
+      No races have been scheduled yet
+    - else
+      - unless @league.races.blank?
+        %table
+          %tr
+            %th Name
+            %th Track
+            %th Start time
+            %th
+
+          - @league.races.each do |race|
+            %tr
+              %td= link_to race.name, race
+              %td= link_to race.track.name, race
+              %td= link_to "#{race.start_time.strftime("%d/%m/%y %I:%M%p")} #{ActiveSupport::TimeZone.zones_map[race.timezone]}", race
+              %td{:style => "min-width: 26px; text-align: center;"}
+                = link_to "Show", race, :class => "ui-icon ui-icon-search", :title => "View race details", :style => "float: left; margin-right: 5px;"
+                - if race.organiser.eql?(current_user)
+                  = link_to 'Edit', edit_race_path(race), :class => "ui-icon ui-icon-wrench", :style => "float: left; margin-right: 5px;", :title => "Edit race details"
+                  = link_to 'Destroy', race, :confirm => 'Are you sure?', :method => :delete, :class => "ui-icon ui-icon-trash", :style => "float: left; margin-right: 5px;", :title => "Delete race"
+
+= link_to 'Edit', edit_league_path(@league)
+\|
+= link_to 'Back', leagues_path

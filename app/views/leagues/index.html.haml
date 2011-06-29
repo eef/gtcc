@@ -1,0 +1,23 @@
+%h1 Listing leagues
+
+%table
+  %tr
+    %th Name
+    %th Max players
+    %th Organiser
+    %th
+    %th
+    %th
+
+  - @leagues.each do |league|
+    %tr
+      %td= league.name
+      %td= league.max_players
+      %td= "#{league.organiser.username} (PSN name: #{league.organiser.psn_name})"
+      %td= link_to 'Show', league
+      %td= link_to 'Edit', edit_league_path(league)
+      %td= link_to 'Destroy', league, :confirm => 'Are you sure?', :method => :delete
+
+%br
+
+= link_to 'New League', new_league_path

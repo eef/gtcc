@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110125161150) do
+ActiveRecord::Schema.define(:version => 20110125161155) do
 
   create_table "cars", :force => true do |t|
     t.string   "name"
@@ -30,6 +30,24 @@ ActiveRecord::Schema.define(:version => 20110125161150) do
     t.string   "boost"
     t.integer  "shuffle_ratio"
     t.integer  "race_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "league_id"
+  end
+
+  create_table "league_points", :force => true do |t|
+    t.integer  "position"
+    t.integer  "points"
+    t.integer  "league_id"
+    t.integer  "race_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "leagues", :force => true do |t|
+    t.string   "name"
+    t.integer  "max_players"
+    t.integer  "organiser_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -72,6 +90,7 @@ ActiveRecord::Schema.define(:version => 20110125161150) do
     t.integer  "season_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "league_id"
   end
 
   create_table "races", :force => true do |t|
@@ -88,11 +107,20 @@ ActiveRecord::Schema.define(:version => 20110125161150) do
     t.string   "race_type"
     t.integer  "max_players",  :default => 2
     t.boolean  "public",       :default => true
+    t.integer  "league_id"
   end
 
   create_table "races_users", :id => false, :force => true do |t|
     t.integer  "race_id"
     t.integer  "user_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "results", :force => true do |t|
+    t.integer  "user_id"
+    t.integer  "race_id"
+    t.integer  "position"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -200,7 +228,7 @@ ActiveRecord::Schema.define(:version => 20110125161150) do
     t.string   "psn_name"
     t.string   "reddit_name"
     t.integer  "age"
-    t.string   "timezone"
+    t.string   "timezone",                            :default => "UTC"
   end
 
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true

@@ -21,7 +21,7 @@
         %td= link_to race.name, race
         %td= link_to race.track.name, race
         %td= link_to "#{race.start_time.strftime("%d/%m/%y %I:%M%p")} #{ActiveSupport::TimeZone.zones_map[race.timezone]}", race
-        %td= link_to "#{race.users.length}/#{race.max_players} (#{race.max_players - race.users.length} left)", race
+        %td= link_to "#{race.users.length}/#{race.max_players} (#{race.max_players - race.users.length} left)", "/races/#{race.id}#register"
         %td{:style => "min-width: 26px; text-align: center;"}
           = link_to "Show", race, :class => "ui-state-default ui-corner-all ui-icon ui-icon-search", :title => "View race details", :style => "float: left; margin-right: 5px;"
           = link_to "Info", "#", :class => "ui-state-default ui-corner-all ui-icon ui-icon-info has-tip", :title => tooltip(race), :style => "float: left; margin-right: 5px;"
@@ -44,7 +44,7 @@
         %td= link_to race.name, race
         %td= link_to race.track.name, race
         %td= link_to "#{race.start_time.strftime("%d/%m/%y %I:%M%p")} #{ActiveSupport::TimeZone.zones_map[race.timezone]}", race
-        %td= link_to "#{race.users.length}/#{race.max_players} (#{race.max_players - race.users.length} left)", race
+        %td= link_to "#{race.users.length}/#{race.max_players} (#{race.max_players - race.users.length} left)", "/races/#{race.id}#register"
         %td{:style => "min-width: 26px; text-align: center;"}
           = link_to "Show", race, :class => "ui-state-default ui-corner-all ui-icon ui-icon-search", :title => "View race details", :style => "float: left; margin-right: 5px;"
           = link_to "Info", "#", :class => "ui-state-default ui-corner-all ui-icon ui-icon-info has-tip", :title => tooltip(race), :style => "float: left; margin-right: 5px;"

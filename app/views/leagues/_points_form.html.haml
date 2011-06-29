@@ -1,0 +1,6 @@
+%tr
+  %td{:width => "20px", :style => "text-align: center"}
+    = f.hidden_field :position, :value => pos
+    = pos.ordinalize
+  %td
+    = f.text_field :points, :class => "text-input half"

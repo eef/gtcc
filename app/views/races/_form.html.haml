@@ -9,10 +9,13 @@
     %ul
       %li
         = link_to "Race Details", "#race-details"
+      - if @league.nil?
+        %li
+          = link_to "Race Regulations", "#race-regulations"
+        %li
+          = link_to "Event Settings", "#event-settings"
       %li
-        = link_to "Race Regulations", "#race-regulations"
-      %li
-        = link_to "Event Settings", "#event-settings"
+        = link_to "Results", "#results"
     #race-details
       %table{:class => "race-table"}
         %tr
@@ -34,7 +37,10 @@
           %td{:class => "first"}
             = f.label :max_players
           %td
-            = f.select :max_players, SiteConfig.max_players
+            - if @league
+              = @league.max_players
+            - else
+              = f.select :max_players, SiteConfig.max_players
         %tr
           %td{:class => "first"}
             = f.label "Race start"
@@ -62,11 +68,21 @@
           %td
             = f.check_box(:public, {}, true, false)
             = note("Choose if the race is open to the public")
-    #race-regulations
-      - f.fields_for :race_regulations do |regs|
-        = render :partial => 'race_regulations', :locals => {:f => regs}
-    #event-settings
-      - f.fields_for :event_settings do |es|
-        = render :partial => 'event_settings', :locals => {:f => es}
+    - unless @league.nil?
+      = f.hidden_field :league_id, :value => @league.id
+    - if @league.nil?
+      #race-regulations
+        - f.fields_for :race_regulations do |regs|
+          = render :partial => 'race_regulations', :locals => {:f => regs}
+      #event-settings
+        - f.fields_for :event_settings do |es|
+          = render :partial => 'event_settings', :locals => {:f => es}
+    #results
+      - if @race.new_record?
+        Once you have created the race you can enter results
+      - elsif @race.results.length.eql?(0)
+        If the race has finished the results are in then
+        = link_to "Click here", "#", :id => "gen_results", "data-race-id" => @race.id
+        to generate results
   %p
     = f.submit 'Save', :class => "submit"

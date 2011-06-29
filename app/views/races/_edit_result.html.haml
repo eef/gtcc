@@ -1,0 +1,15 @@
+- pos = 0
+%table{:class => "half"}
+  %tr
+    %th
+      Position
+    %th
+      User
+  - race.max_players.times do
+    %tr
+      %td{:width => "20px", :style => "text-align: center"}
+        = hidden_field_tag "race[results_attributes][#{pos}][position]", (pos + 1)
+        = (pos + 1).ordinalize
+      %td
+        = select_tag "race[results_attributes][#{pos}][user_id]", options_for_select(race.users.map {|u| ["#{u.username} (#{u.psn_name})", u.id]})
+        - pos += 1

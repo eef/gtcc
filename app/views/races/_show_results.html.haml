@@ -1,0 +1,16 @@
+- if @race.results.blank?
+  The race has not taken place or the organiser has not entered the results
+- else
+  %table{:class => "half"}
+    %tr
+      %th
+        Position
+      %th
+        User
+    - @race.results.each do |result|
+      %tr
+        %td{:width => "20px", :style => "text-align: center"}
+          = result.position.ordinalize
+        %td
+          = result.user.username
+          = "(#{result.user.psn_name})"

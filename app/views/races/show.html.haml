@@ -2,10 +2,13 @@
   %ul
     %li
       = link_to "Race Details", "#race-details"
+    - if @race.league_id.blank?
+      %li
+        = link_to "Race Regulations", "#race-regulations"
+      %li
+        = link_to "Event Settings", "#event-settings"
     %li
-      = link_to "Race Regulations", "#race-regulations"
-    %li
-      = link_to "Event Settings", "#event-settings"
+      = link_to "Results", "#results"
     %li
       = link_to "Register", "#register"
     - if @race.organiser.eql?(current_user)
@@ -13,12 +16,15 @@
         = link_to "Admin", "#admin"
   #race-details
     = render :partial => "show_race_details"
-  #race-regulations
-    = render :partial => "show_race_regulations"
-  #event-settings
-    = render :partial => "show_event_settings"
+  - if @race.league_id.blank?
+    #race-regulations
+      = render :partial => "show_race_regulations"
+    #event-settings
+      = render :partial => "show_event_settings"
   #register
     = render :partial => "race_register"
+  #results
+    = render :partial => "show_results"
   - if @race.organiser.eql?(current_user)
     #admin
       = link_to 'Destroy', @race, :confirm => 'Are you sure?', :method => :delete, :title => "Delete race"
