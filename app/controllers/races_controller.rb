@@ -2,8 +2,8 @@ class RacesController < ApplicationController
   # GET /races
   # GET /races.xml
   def index
-    @races = Race.all
-
+    @races = Race.where(:public => true)
+    @my_races = current_user.races
     respond_to do |format|
       format.html # index.html.erb
       format.xml  { render :xml => @races }
@@ -36,7 +36,7 @@ class RacesController < ApplicationController
 
   # GET /races/1/edit
   def edit
-    @race = Race.find(params[:id])
+    @race = current_user.races.where(:id => params[:id]).first
   end
 
   # POST /races
@@ -44,8 +44,6 @@ class RacesController < ApplicationController
   def create
     @race = Race.new(params[:race])
     @race.organiser = current_user
-    logger.info current_user.inspect
-    logger.info @race.organiser.inspect 
     @race.users << current_user
     respond_to do |format|
       if @race.save
@@ -84,7 +82,7 @@ class RacesController < ApplicationController
     @race = Race.find(params[:id])
     if params[:user_id] and params[:id] and @race.organiser.eql?(current_user)
       temp_user = User.find(params[:user_id])
-      @race.users.delete()
+      @race.users.delete(temp_user)
       f_notice = "Removed #{temp_user.username}(#{temp_user.psn_name})"
     else
       @race.users.delete(current_user)
@@ -104,7 +102,7 @@ class RacesController < ApplicationController
   # PUT /races/1
   # PUT /races/1.xml
   def update
-    @race = Race.find(params[:id])
+    @race = current_user.races.where(:id => params[:id]).first
 
     respond_to do |format|
       if @race.update_attributes(params[:race])
@@ -120,9 +118,8 @@ class RacesController < ApplicationController
   # DELETE /races/1
   # DELETE /races/1.xml
   def destroy
-    @race = Race.find(params[:id])
+    @race = current_user.races.where(:id => params[:id]).first
     @race.destroy
-
     respond_to do |format|
       format.html { redirect_to(races_url) }
       format.xml  { head :ok }

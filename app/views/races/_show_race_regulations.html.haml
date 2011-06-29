@@ -1,0 +1,61 @@
+%table{:class => "race-table"}
+  %tr
+    %td{:class => "first"}
+      %label
+        Skid recovery
+    %td
+      = @regulations.skid_recovery ? "Yes" : "No"
+  %tr
+    %td{:class => "first"}
+      %label
+        Active steering
+    %td
+      = @regulations.active_steering ? "Yes" : "No"
+  %tr
+    %td{:class => "first"}
+      %label
+        ASM
+    %td
+      = @regulations.asm ? "Yes" : "No"
+  %tr
+    %td{:class => "first"}
+      %label
+        Driving line
+    %td
+      = @regulations.driving_line ? "Yes" : "No"
+  %tr
+    %td{:class => "first"}
+      %label
+        TCS
+    %td
+      = @regulations.tcs ? "Yes" : "No"
+  %tr
+    %td{:class => "first"}
+      %label
+        Car restriction
+    %td
+      = @regulations.car_restriction
+  %tr
+    %td{:class => "first"}
+      %label
+        Performance Points
+    %td
+      = @regulations.performance_points >= 300 ? "#{@regulations.performance_points} PP" : "No limit"
+  %tr
+    %td{:class => "first"}
+      %label
+        Power
+    %td
+      = @regulations.power >= 300 ? "#{@regulations.power}BHP" : "No limit"
+  %tr
+    %td{:class => "first"}
+      %label
+        Weight
+    %td
+      = @regulations.weight >= 300 ? "#{@regulations.weight}kg" : "No limit"
+  %tr
+    %td{:class => "first"}
+      %label
+        Tyre restrictions
+    %td
+      = @regulations.tyre_restrictions

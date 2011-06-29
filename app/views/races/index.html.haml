@@ -1,26 +1,53 @@
 %h2
   Races
+- if @races.blank?
+  %br
+  No races scheduled
+  %br
 %br
 = link_to "New race", "#", :class => "ui-state-default ui-corner-all ui-icon ui-icon-plusthick", :title => "New race", :style => "float: left; margin-right: 5px;"
 = link_to 'New Race', new_race_path
-%table
-  %tr
-    %th Name
-    %th Track
-    %th Start time
-    %th Entries
-    %th
-
-  - @races.each do |race|
+- unless @races.blank?
+  %table
     %tr
-      %td= link_to race.name, race
-      %td= link_to race.track.name, race
-      %td= link_to "#{race.start_time.strftime("%d/%m/%y %I:%M%p")} #{ActiveSupport::TimeZone.zones_map[race.timezone]}", race
-      %td= link_to "#{race.users.length}/#{race.max_players} (#{race.max_players - race.users.length} left)", race
-      %td{:style => "min-width: 26px; text-align: center;"}
-        = link_to "Show", race, :class => "ui-state-default ui-corner-all ui-icon ui-icon-search", :title => "View race details", :style => "float: left; margin-right: 5px;"
-        = link_to "Info", "#", :class => "ui-state-default ui-corner-all ui-icon ui-icon-info has-tip", :title => tooltip(race), :style => "float: left; margin-right: 5px;"
-        - if race.organiser.eql?(current_user)
-          = link_to 'Edit', edit_race_path(race), :class => "ui-state-default ui-corner-all ui-icon ui-icon-wrench", :style => "float: left; margin-right: 5px;", :title => "Edit race details"
-          = link_to 'Destroy', race, :confirm => 'Are you sure?', :method => :delete, :class => "ui-state-default ui-corner-all ui-icon ui-icon-trash", :style => "float: left; margin-right: 5px;", :title => "Delete race"
-          
+      %th Name
+      %th Track
+      %th Start time
+      %th Entries
+      %th
+
+    - @races.each do |race|
+      %tr
+        %td= link_to race.name, race
+        %td= link_to race.track.name, race
+        %td= link_to "#{race.start_time.strftime("%d/%m/%y %I:%M%p")} #{ActiveSupport::TimeZone.zones_map[race.timezone]}", race
+        %td= link_to "#{race.users.length}/#{race.max_players} (#{race.max_players - race.users.length} left)", race
+        %td{:style => "min-width: 26px; text-align: center;"}
+          = link_to "Show", race, :class => "ui-state-default ui-corner-all ui-icon ui-icon-search", :title => "View race details", :style => "float: left; margin-right: 5px;"
+          = link_to "Info", "#", :class => "ui-state-default ui-corner-all ui-icon ui-icon-info has-tip", :title => tooltip(race), :style => "float: left; margin-right: 5px;"
+          - if race.organiser.eql?(current_user)
+            = link_to 'Edit', edit_race_path(race), :class => "ui-state-default ui-corner-all ui-icon ui-icon-wrench", :style => "float: left; margin-right: 5px;", :title => "Edit race details"
+            = link_to 'Destroy', race, :confirm => 'Are you sure?', :method => :delete, :class => "ui-state-default ui-corner-all ui-icon ui-icon-trash", :style => "float: left; margin-right: 5px;", :title => "Delete race"
+- unless @my_races.blank?
+  %h2
+    My Races
+  %table
+    %tr
+      %th Name
+      %th Track
+      %th Start time
+      %th Entries
+      %th
+
+    - @my_races.each do |race|
+      %tr
+        %td= link_to race.name, race
+        %td= link_to race.track.name, race
+        %td= link_to "#{race.start_time.strftime("%d/%m/%y %I:%M%p")} #{ActiveSupport::TimeZone.zones_map[race.timezone]}", race
+        %td= link_to "#{race.users.length}/#{race.max_players} (#{race.max_players - race.users.length} left)", race
+        %td{:style => "min-width: 26px; text-align: center;"}
+          = link_to "Show", race, :class => "ui-state-default ui-corner-all ui-icon ui-icon-search", :title => "View race details", :style => "float: left; margin-right: 5px;"
+          = link_to "Info", "#", :class => "ui-state-default ui-corner-all ui-icon ui-icon-info has-tip", :title => tooltip(race), :style => "float: left; margin-right: 5px;"
+          - if race.organiser.eql?(current_user)
+            = link_to 'Edit', edit_race_path(race), :class => "ui-state-default ui-corner-all ui-icon ui-icon-wrench", :style => "float: left; margin-right: 5px;", :title => "Edit race details"
+            = link_to 'Destroy', race, :confirm => 'Are you sure?', :method => :delete, :class => "ui-state-default ui-corner-all ui-icon ui-icon-trash", :style => "float: left; margin-right: 5px;", :title => "Delete race"

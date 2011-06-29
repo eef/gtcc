@@ -5,12 +5,17 @@ $(document).ready(function() {
   slider("pow", 300, 2000, 300);
   slider("we", 300, 2000, 300);
   tooltips();
+  tabs();
 });
 
 function hide_flash() {
   if($('#flash').length > 0) {
     setTimeout("$('#flash').slideUp('fast')", 5000);
   }
+}
+
+function tabs() {
+  $( "#tabs" ).tabs();
 }
 
 function tooltips() {

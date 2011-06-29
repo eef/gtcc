@@ -1,0 +1,52 @@
+%table{:class => "race-table"}
+  %tr
+    %td{:class => "first"}
+      %label
+        Name
+    %td
+      = @race.name
+  %tr
+    %td{:class => "first"}
+      %label
+        Race organiser
+    %td
+      = @race.organiser.username
+      = " - PSN name: #{@race.organiser.psn_name}"
+  - unless @race.psn_race_id.blank?
+    %tr
+      %td{:class => "first"}
+        %label
+          PSN Race ID
+      %td
+        = @race.psn_race_id
+  %tr
+    %td{:class => "first"}
+      %label
+        Location
+    %td
+      = @race.location.name
+  %tr
+    %td{:class => "first"}
+      %label
+        Track
+    %td
+      = @race.track.name
+  %tr
+    %td{:class => "first"}
+      %label
+        Start time
+    %td
+      = @race.start_time.strftime("%a %d %b at %I:%M%p") 
+      = ActiveSupport::TimeZone.zones_map[@race.timezone]
+  %tr
+    %td{:class => "first"}
+      %label
+        Laps
+    %td
+      = @race.laps
+  %tr
+    %td{:class => "first"}
+      %label
+        Max players
+    %td
+      = @race.max_players

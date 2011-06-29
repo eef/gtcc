@@ -59,16 +59,16 @@
 .ui-widget { font-family: Segoe UI, Arial, sans-serif; font-size: 1.1em; }
 .ui-widget .ui-widget { font-size: 1em; }
 .ui-widget input, .ui-widget select, .ui-widget textarea, .ui-widget button { font-family: Segoe UI, Arial, sans-serif; font-size: 1em; }
-.ui-widget-content { border: 1px solid #666666; background: #000000 url(images/ui-bg_inset-soft_0_000000_1x100.png) 50% bottom repeat-x; color: #cccccc; }
-.ui-widget-content a { color: #38B0DE; }
-.ui-widget-header { border: 1px solid #333333; background: #232323 url(images/ui-bg_highlight-soft_25_232323_1x100.png) 50% 50% repeat-x; color: #cccccc; font-weight: bold; }
+.ui-widget-content { border: 1px solid #666666; background: #000000 url(images/ui-bg_inset-soft_0_000000_1x100.png) 50% bottom repeat-x; color: #ffffff; }
+.ui-widget-content a { color: #ffffff; }
+.ui-widget-header { border: 1px solid #333333; background: #232323 url(images/ui-bg_highlight-soft_25_232323_1x100.png) 50% 50% repeat-x; color: #ffffff; font-weight: bold; }
 .ui-widget-header a { color: #ffffff; }
 
 /* Interaction states
 ----------------------------------*/
-.ui-state-default, .ui-widget-content .ui-state-default, .ui-widget-header .ui-state-default { border: 1px solid #666666; background: #555555 url(images/ui-bg_highlight-hard_20_555555_1x100.png) 50% 50% repeat-x; font-weight: bold; color: #CCCCCC; }
+.ui-state-default, .ui-widget-content .ui-state-default, .ui-widget-header .ui-state-default { border: 1px solid #666666; background: #555555 url(images/ui-bg_highlight-hard_20_555555_1x100.png) 50% 50% repeat-x; font-weight: bold; color: #eeeeee; }
 .ui-state-default a, .ui-state-default a:link, .ui-state-default a:visited { color: #eeeeee; text-decoration: none; }
-.ui-state-hover, .ui-widget-content .ui-state-hover, .ui-widget-header .ui-state-hover, .ui-state-focus, .ui-widget-content .ui-state-focus, .ui-widget-header .ui-state-focus { border: 1px solid #555555; background: #666666 url(images/ui-bg_highlight-hard_40_666666_1x100.png) 50% 50% repeat-x; font-weight: bold; color: #CCCCCC; }
+.ui-state-hover, .ui-widget-content .ui-state-hover, .ui-widget-header .ui-state-hover, .ui-state-focus, .ui-widget-content .ui-state-focus, .ui-widget-header .ui-state-focus { border: 1px solid #555555; background: #666666 url(images/ui-bg_highlight-hard_40_666666_1x100.png) 50% 50% repeat-x; font-weight: bold; color: #ffffff; }
 .ui-state-hover a, .ui-state-hover a:hover { color: #ffffff; text-decoration: none; }
 .ui-state-active, .ui-widget-content .ui-state-active, .ui-widget-header .ui-state-active { border: 1px solid #666666; background: #232323 url(images/ui-bg_inset-soft_30_232323_1x100.png) 50% 50% repeat-x; font-weight: bold; color: #cccccc; }
 .ui-state-active a, .ui-state-active a:link, .ui-state-active a:visited { color: #cccccc; text-decoration: none; }

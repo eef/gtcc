@@ -1,0 +1,31 @@
+%p
+  Before registering for this event please read the settings and regulations.
+- if @race.users.include?(current_user)
+  You are participating in this race.
+  %br
+  If you can not take part, please remove yourself ASAP
+  = link_to "Exit race", exit_race_path(@race)
+- elsif @race.users.length.eql?(@race.max_players)
+  Entries closed, maximum players entered.
+- elsif !@race.users.include?(current_user)
+  = link_to("Click here", enter_race_path(@race)) + " to enter race (#{@race.max_players - @race.users.length} spaces left)"
+- if @race.users.length > 0
+  %table{:class => "race-table", :style => "width: 50%;"}
+    %tr
+      %th
+        Username
+      %th
+        PSN Name
+      - if @race.organiser.eql?(current_user)
+        %th
+    - @race.users.each do |user|
+      %tr
+        %td
+          = user.username
+        %td
+          = user.psn_name
+        - if @race.organiser.eql?(current_user)
+          %td{:style => "width: 8px"}
+            = link_to 'Remove driver', admin_exit_race_path(@race, user), :confirm => 'Are you sure?', :method => :delete, :class => "ui-icon ui-icon-trash", :title => "Remove driver", :style => "float: left;"
+- else
+  No entries yet
