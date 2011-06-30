@@ -1,23 +1,28 @@
-%h1 Listing leagues
-
-%table
-  %tr
-    %th Name
-    %th Max players
-    %th Organiser
-    %th
-    %th
-    %th
-
-  - @leagues.each do |league|
-    %tr
-      %td= league.name
-      %td= league.max_players
-      %td= "#{league.organiser.username} (PSN name: #{league.organiser.psn_name})"
-      %td= link_to 'Show', league
-      %td= link_to 'Edit', edit_league_path(league)
-      %td= link_to 'Destroy', league, :confirm => 'Are you sure?', :method => :delete
-
+%h2
+  Leagues
+- if @leagues.blank?
+  %br
+  No leagues scheduled
+  %br
 %br
+= link_to "New league", "#", :class => "ui-icon ui-icon-plusthick", :title => "New league", :style => "float: left; margin-right: 5px;"
+= link_to 'Add New League', new_league_path, :title => "New league"
+- unless @leagues.blank?
+  %table
+    %tr
+      %th Name
+      %th Start time
+      %th Entries
+      %th
 
-= link_to 'New League', new_league_path
+    - @leagues.each do |league|
+      %tr
+        %td= link_to league.name, league
+        %td= link_to "#{!league.races.blank? ? league.races.first.start_time.strftime("%d/%m/%y %I:%M%p") : "No races scheduled"} #{ActiveSupport::TimeZone.zones_map[league.races.first.timezone] unless league.races.blank?}", league
+        %td= link_to "#{league.users.length}/#{league.max_players} (#{league.max_players - league.users.length} left)", "/leagues/#{league.id}#register"
+        %td{:style => "min-width: 26px; text-align: center;"}
+          = link_to "Show", league, :class => "ui-icon ui-icon-search", :title => "View league details", :style => "float: left; margin-right: 5px;"
+          = link_to "Info", "#", :class => "ui-icon ui-icon-info has-tip", :title => tooltip(league), :style => "float: left; margin-right: 5px;"
+          - if league.organiser.eql?(current_user)
+            = link_to 'Edit', edit_league_path(league), :class => "ui-icon ui-icon-wrench", :style => "float: left; margin-right: 5px;", :title => "Edit league details"
+            = link_to 'Destroy', league, :confirm => 'Are you sure?', :method => :delete, :class => "ui-icon ui-icon-trash", :style => "float: left; margin-right: 5px;", :title => "Delete league"

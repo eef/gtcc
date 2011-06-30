@@ -10,6 +10,8 @@
       = link_to "Points", "#points"
     %li
       = link_to "Races", "#races"
+    %li
+      = link_to "Register", "#register"
   #league-details
     %table{:class => "race-table"}
       %tr
@@ -24,6 +26,13 @@
             Max players
         %td
           = @league.max_players
+      %tr
+        %td
+          %label
+            Organiser
+        %td
+          = @league.organiser.username
+          = " - PSN name: #{@league.organiser.psn_name}"
   #league-regulations
     = render :partial => "races/show_race_regulations"
   #league-settings
@@ -62,6 +71,8 @@
                 - if race.organiser.eql?(current_user)
                   = link_to 'Edit', edit_race_path(race), :class => "ui-icon ui-icon-wrench", :style => "float: left; margin-right: 5px;", :title => "Edit race details"
                   = link_to 'Destroy', race, :confirm => 'Are you sure?', :method => :delete, :class => "ui-icon ui-icon-trash", :style => "float: left; margin-right: 5px;", :title => "Delete race"
+  #register
+    = render :partial => "league_register"
 
 = link_to 'Edit', edit_league_path(@league)
 \|

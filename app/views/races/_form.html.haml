@@ -39,6 +39,7 @@
           %td
             - if @league
               = @league.max_players
+              = f.hidden_field :max_players, :value => @league.max_players
             - else
               = f.select :max_players, SiteConfig.max_players
         %tr

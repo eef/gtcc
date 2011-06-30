@@ -50,11 +50,13 @@ class RacesController < ApplicationController
     @race = current_user.races.where(:id => params[:id]).first
     unless @race.league.blank?
       @race.league.max_players.times { @race.results.build }
+      @users = @race.league.users
     else
+      @users = @race.users
       @race.max_players.times { @race.results.build }
     end
     respond_to do |format|
-      format.html  { render :partial => "edit_result", :locals => {:race => @race} }
+      format.html  { render :partial => "edit_result", :locals => {:race => @race, :users => @users} }
     end
   end
 

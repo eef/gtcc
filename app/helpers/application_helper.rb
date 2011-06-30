@@ -5,8 +5,11 @@ module ApplicationHelper
   end
   
   def tooltip(object)
-    if object.class.eql?(Race)
+    case object
+    when Race
       render :partial => "raceinfo_tooltip", :locals => {:race => object}
+    when League
+      render :partial => "leagueinfo_tooltip", :locals => {:league => object}
     end
   end
   

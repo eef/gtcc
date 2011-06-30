@@ -1,0 +1,32 @@
+%label{:style => "display: inline;"}
+  League organiser:
+= "#{league.organiser.username} (#{league.organiser.psn_name})"
+%br
+- unless league.race_regulations.first.car_restriction.blank?
+  %br
+  %label{:style => "display: inline;"}
+    Car:
+  = league.race_regulations.first.car_restriction
+- if league.race_regulations.first.tcs
+  %br
+  %label{:style => "display: inline;"}
+    TCS:
+  allowed
+- if league.race_regulations.first.driving_line
+  %br
+  %label{:style => "display: inline;"}
+    Driving line:
+  on
+- if league.race_regulations.first.performance_points > 0
+  %br
+  %label{:style => "display: inline;"}
+    PP limit:
+  = league.race_regulations.first.performance_points
+- if league.race_regulations.first.power > 0
+  %br
+  %label{:style => "display: inline;"}
+    Power limit:
+  = "#{league.race_regulations.first.power}BHP"
+%br
+%br
+View league details for more info

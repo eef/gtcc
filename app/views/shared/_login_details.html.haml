@@ -1,6 +1,6 @@
 - if user_signed_in?
   #login-details
     = form_tag(destroy_user_session_path, :method => "get") do
-      = submit_tag "Sign out", :class => "submit sign-out"
+      = submit_tag "Sign out (#{current_user.username})", :class => "submit sign-out"
   .clear
 .clear
