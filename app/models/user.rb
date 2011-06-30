@@ -12,6 +12,7 @@ class User < ActiveRecord::Base
   has_many :races, :foreign_key => "organiser_id"
   has_many :leagues, :foreign_key => "organiser_id"
   has_and_belongs_to_many :races
+  has_and_belongs_to_many :leagues
   validates_presence_of :psn_name
   
 
