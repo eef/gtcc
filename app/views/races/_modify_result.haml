@@ -1,0 +1,6 @@
+%tr
+  %td{:width => "20px", :style => "text-align: center"}
+    = f.hidden_field :position
+    = pos.ordinalize
+  %td
+    = f.select :user_id, @league.users.map {|u| ["#{u.username} (#{u.psn_name})", u.id]}

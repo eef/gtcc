@@ -85,5 +85,16 @@
         If the race has finished the results are in then
         = link_to "Click here", "#", :id => "gen_results", "data-race-id" => @race.id
         to generate results
+      - elsif @race.results.length > 0
+        - pos = 0
+        %table{:class => "half"}
+          %tr
+            %th
+              Position
+            %th
+              User
+          - f.fields_for :results do |result|
+            = render :partial => "modify_result", :locals => {:f => result, :pos => (pos += 1)}
+          
   %p
     = f.submit 'Save', :class => "submit"
