@@ -12,6 +12,7 @@
     %tr
       %th Name
       %th Track
+      %th No. Laps
       %th Start time
       %th Entries
       %th
@@ -20,6 +21,7 @@
       %tr
         %td= link_to race.name, race
         %td= link_to race.track.name, race
+        %td= link_to race.laps, race
         %td= link_to "#{race.start_time.strftime("%d/%m/%y %I:%M%p")} #{ActiveSupport::TimeZone.zones_map[race.timezone]}", race
         %td= link_to "#{race.users.length}/#{race.max_players} (#{race.max_players - race.users.length} left)", "/races/#{race.id}#register"
         %td{:style => "min-width: 26px; text-align: center;"}
@@ -35,6 +37,7 @@
     %tr
       %th Name
       %th Track
+      %th No. Laps
       %th Start time
       %th Entries
       %th
@@ -43,6 +46,7 @@
       %tr
         %td= link_to race.name, race
         %td= link_to race.track.name, race
+        %td= link_to race.laps, race
         %td= link_to "#{race.start_time.strftime("%d/%m/%y %I:%M%p")} #{ActiveSupport::TimeZone.zones_map[race.timezone]}", race
         %td= link_to "#{race.users.length}/#{race.max_players} (#{race.max_players - race.users.length} left)", "/races/#{race.id}#register"
         %td{:style => "min-width: 26px; text-align: center;"}
