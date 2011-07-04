@@ -1,0 +1,25 @@
+- if @my_races.blank?
+  You have no races
+- else
+  %table
+    %tr
+      %th Name
+      %th Track
+      %th No. Laps
+      %th Start time
+      %th Entries
+      %th
+
+    - @my_races.each do |race|
+      %tr
+        %td= link_to race.name, race
+        %td= link_to race.track.name, race
+        %td= link_to race.laps, race
+        %td= link_to "#{race.start_time.strftime("%d/%m/%y %I:%M%p")} #{ActiveSupport::TimeZone.zones_map[race.timezone]}", race
+        %td= link_to "#{race.users.length}/#{race.max_players} (#{race.max_players - race.users.length} left)", "/races/#{race.id}#register"
+        %td{:style => "min-width: 26px; text-align: center;"}
+          = link_to "Show", race, :class => "ui-icon ui-icon-search", :title => "View race details", :style => "float: left; margin-right: 5px;"
+          = link_to "Info", "#", :class => "ui-icon ui-icon-info has-tip", :title => tooltip(race), :style => "float: left; margin-right: 5px;"
+          - if race.organiser.eql?(current_user)
+            = link_to 'Edit', edit_race_path(race), :class => "ui-icon ui-icon-wrench", :style => "float: left; margin-right: 5px;", :title => "Edit race details"
+            = link_to 'Destroy', race, :confirm => 'Are you sure?', :method => :delete, :class => "ui-icon ui-icon-trash", :style => "float: left; margin-right: 5px;", :title => "Delete race"

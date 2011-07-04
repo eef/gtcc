@@ -1,0 +1,27 @@
+- if @my_leagues.blank?
+  You do not have any leagues
+- else
+  %table
+    %tr
+      %th Name
+      %th Start time
+      %th Leader
+      %th Entries
+      %th
+
+    - @my_leagues.each do |league|
+      %tr
+        %td= link_to league.name, league
+        %td= link_to "#{!league.races.blank? ? league.races.first.start_time.strftime("%d/%m/%y %I:%M%p") : "No races scheduled"} #{ActiveSupport::TimeZone.zones_map[league.races.first.timezone] unless league.races.blank?}", league
+        %td
+          - if !league.standings.blank?
+            = link_to league.standings.order("standings.points desc").first.user.username, "/leagues/#{league.id}#league-standings", :title => "View all standings"
+          - else
+            N/A
+        %td= link_to "#{league.users.length}/#{league.max_players} (#{league.max_players - league.users.length} left)", "/leagues/#{league.id}#register"
+        %td{:style => "min-width: 26px; text-align: center;"}
+          = link_to "Show", league, :class => "ui-icon ui-icon-search", :title => "View league details", :style => "float: left; margin-right: 5px;"
+          = link_to "Info", "#", :class => "ui-icon ui-icon-info has-tip", :title => tooltip(league), :style => "float: left; margin-right: 5px;"
+          - if league.organiser.eql?(current_user)
+            = link_to 'Edit', edit_league_path(league), :class => "ui-icon ui-icon-wrench", :style => "float: left; margin-right: 5px;", :title => "Edit league details"
+            = link_to 'Destroy', league, :confirm => 'Are you sure?', :method => :delete, :class => "ui-icon ui-icon-trash", :style => "float: left; margin-right: 5px;", :title => "Delete league"

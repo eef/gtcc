@@ -1,53 +1,29 @@
 #tabs
   %ul
     %li
-      = link_to "League Details", "#league-details"
-    %li
-      = link_to "League Regulations", "#league-regulations"
-    %li
-      = link_to "League Settings", "#league-settings"
-    %li
-      = link_to "Points", "#points"
+      = link_to "Standings", "#league-standings"
     %li
       = link_to "Races", "#races"
+    %li
+      = link_to "Details", "#league-details"
+    %li
+      = link_to "Regulations", "#league-regulations"
+    %li
+      = link_to "Settings", "#league-settings"
+    %li
+      = link_to "Tuning Settings", "#tuning-settings"
     %li
       = link_to "Register", "#register"
     %li
       = link_to "Admin", "#admin" if @league.organiser.eql?(current_user)
+  #league-standings
+    = render :partial => "league_standings"
   #league-details
-    %table{:class => "race-table"}
-      %tr
-        %td{:class => "first"}
-          %label
-            Name
-        %td
-          = @league.name
-      %tr
-        %td
-          %label
-            Max players
-        %td
-          = @league.max_players
-      %tr
-        %td
-          %label
-            Organiser
-        %td
-          = @league.organiser.username
-          = " - PSN name: #{@league.organiser.psn_name}"
+    = render :partial => "league_details"
   #league-regulations
     = render :partial => "races/show_race_regulations"
   #league-settings
     = render :partial => "races/show_event_settings"
-  #points
-    %table{:class => "half"}
-      %tr
-        %th
-          Position
-        %th
-          Points
-      - @league.league_points.each do |lp|
-        = render :partial => "show_points", :locals => {:points => lp}
   #races
     - if @league.races.blank? and @league.organiser.eql?(current_user)
       You have not races yet

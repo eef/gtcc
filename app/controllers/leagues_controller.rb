@@ -2,8 +2,9 @@ class LeaguesController < ApplicationController
   # GET /leagues
   # GET /leagues.xml
   def index
-    @leagues = League.all
-
+    @open_leagues = League.open_leagues
+    @my_leagues = current_user.leagues
+    @closed_leagues = League.closed_leagues
     respond_to do |format|
       format.html # index.html.erb
       format.xml  { render :xml => @leagues }
@@ -29,6 +30,7 @@ class LeaguesController < ApplicationController
     @league.race_regulations.build
     @league.event_settings.build
     16.times { @league.league_points.build }
+    2.times { @league.car_classes.build }
     respond_to do |format|
       format.html # new.html.erb
       format.xml  { render :xml => @league }
@@ -79,7 +81,7 @@ class LeaguesController < ApplicationController
     end
   end
   
-  def exit_race
+  def exit_league
     @league = League.find(params[:id])
     if params[:user_id] and params[:id] and @league.organiser.eql?(current_user)
       temp_user = User.find(params[:user_id])

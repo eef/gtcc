@@ -9,11 +9,15 @@
   #tabs
     %ul
       %li
-        = link_to "League Details", "#league-details"
+        = link_to "Details", "#league-details"
       %li
-        = link_to "League Regulations", "#league-regulations"
+        = link_to "Regulations", "#league-regulations"
       %li
-        = link_to "League Settings", "#league-settings"
+        = link_to "Settings", "#league-settings"
+      %li
+        = link_to "Classes", "#car-classes"
+      %li
+        = link_to "Allowed Cars", "#allowed-cars"
       %li
         = link_to "Point Settings", "#points"
       %li
@@ -30,12 +34,37 @@
             = f.label :max_players
           %td
             = f.select :max_players, SiteConfig.max_players
+        %tr
+          %td
+            = f.label "Status"
+          %td
+            %label{:style => "display: inline;"}
+              Open
+            = " - "
+            = f.radio_button :open, true, :style => "display: inline;"
+            %label{:style => "display: inline;"}
+              Closed
+            = " - "
+            = f.radio_button :open, false, :style => "display: inline;"
+            = note("When the league is complete close it.")
     #league-regulations
       - f.fields_for :race_regulations do |regs|
         = render :partial => 'races/race_regulations', :locals => {:f => regs}
     #league-settings
       - f.fields_for :event_settings do |es|
         = render :partial => 'races/event_settings', :locals => {:f => es}
+    - if @league.new_record?
+      #car-classes
+        %table{:class => "half"}
+          %tr
+            %th
+              Name
+            %th
+              Max players
+          - f.fields_for :car_classes do |cc|
+            = render :partial => 'car_classes', :locals => {:f => cc}
+    #allowed-cars
+      These are the cars
     #races
       - if @league.new_record?
         Once you have created the league you can add races

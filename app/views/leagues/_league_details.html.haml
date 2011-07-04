@@ -1,0 +1,30 @@
+%table{:class => "race-table"}
+  %tr
+    %td{:class => "first"}
+      %label
+        Name
+    %td
+      = @league.name
+  %tr
+    %td
+      %label
+        Max players
+    %td
+      = @league.max_players
+  %tr
+    %td
+      %label
+        Organiser
+    %td
+      = @league.organiser.username
+      = " - PSN name: #{@league.organiser.psn_name}"
+%h4
+  Points system
+%table{:class => "half"}
+  %tr
+    %th
+      Position
+    %th
+      Points
+  - @league.league_points.each do |lp|
+    = render :partial => "show_points", :locals => {:points => lp}

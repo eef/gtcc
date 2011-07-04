@@ -10,11 +10,26 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110125161157) do
+ActiveRecord::Schema.define(:version => 20110125161164) do
+
+  create_table "car_classes", :force => true do |t|
+    t.integer  "league_id"
+    t.string   "name"
+    t.integer  "max_players"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "cars", :force => true do |t|
     t.string   "name"
     t.integer  "manufacturer_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "cars_leagues", :id => false, :force => true do |t|
+    t.integer  "car_id"
+    t.integer  "league_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -35,6 +50,23 @@ ActiveRecord::Schema.define(:version => 20110125161157) do
     t.integer  "league_id"
   end
 
+  create_table "league_cars", :force => true do |t|
+    t.integer  "league_id"
+    t.integer  "car_id"
+    t.integer  "amount"
+    t.string   "restrictions"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "league_entries", :force => true do |t|
+    t.integer  "user_id"
+    t.integer  "car_class_id"
+    t.integer  "league_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "league_points", :force => true do |t|
     t.integer  "position"
     t.integer  "points"
@@ -50,6 +82,7 @@ ActiveRecord::Schema.define(:version => 20110125161157) do
     t.integer  "organiser_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.boolean  "open",         :default => true
   end
 
   create_table "leagues_users", :id => false, :force => true do |t|
@@ -115,6 +148,7 @@ ActiveRecord::Schema.define(:version => 20110125161157) do
     t.integer  "max_players",  :default => 2
     t.boolean  "public",       :default => true
     t.integer  "league_id"
+    t.boolean  "open",         :default => true
   end
 
   create_table "races_users", :id => false, :force => true do |t|
@@ -162,6 +196,14 @@ ActiveRecord::Schema.define(:version => 20110125161157) do
     t.string   "name"
     t.string   "url"
     t.integer  "user_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "standings", :force => true do |t|
+    t.integer  "user_id"
+    t.integer  "league_id"
+    t.integer  "points"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

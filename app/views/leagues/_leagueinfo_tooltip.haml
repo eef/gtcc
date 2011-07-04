@@ -3,30 +3,34 @@
 = "#{league.organiser.username} (#{league.organiser.psn_name})"
 %br
 - unless league.race_regulations.first.car_restriction.blank?
-  %br
   %label{:style => "display: inline;"}
     Car:
   = league.race_regulations.first.car_restriction
-- if league.race_regulations.first.tcs
   %br
+- if league.race_regulations.first.tcs
   %label{:style => "display: inline;"}
     TCS:
   allowed
-- if league.race_regulations.first.driving_line
   %br
+- if league.race_regulations.first.driving_line
   %label{:style => "display: inline;"}
     Driving line:
   on
-- if league.race_regulations.first.performance_points > 0
   %br
+- if league.race_regulations.first.performance_points > 0
   %label{:style => "display: inline;"}
     PP limit:
   = league.race_regulations.first.performance_points
-- if league.race_regulations.first.power > 0
   %br
+- if league.race_regulations.first.power > 0
   %label{:style => "display: inline;"}
     Power limit:
   = "#{league.race_regulations.first.power}BHP"
-%br
+  %br
+- if league.standings.length > 0
+  %label{:style => "display: inline;"}
+    Current leader:
+  = league.standings.order("standings.points desc").first.user.username
+  %br
 %br
 View league details for more info

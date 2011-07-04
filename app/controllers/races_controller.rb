@@ -2,8 +2,9 @@ class RacesController < ApplicationController
   # GET /races
   # GET /races.xml
   def index
-    @races = Race.where(:public => true).where(:league_id => nil)
-    @my_races = current_user.races.where(:league_id => nil)
+    @open_races = Race.open_races
+    @closed_races = Race.closed_races
+    @my_races = current_user.my_races
     respond_to do |format|
       format.html # index.html.erb
       format.xml  { render :xml => @races }
@@ -41,8 +42,10 @@ class RacesController < ApplicationController
   # GET /races/1/edit
   def edit
     @race = current_user.races.where(:id => params[:id]).first
+    @users = @race.users
     unless @race.league_id.blank?
       @league = League.find(@race.league_id)
+      @users = @league.users
     end
   end
   
@@ -131,7 +134,6 @@ class RacesController < ApplicationController
   # PUT /races/1.xml
   def update
     @race = current_user.races.where(:id => params[:id]).first
-
     respond_to do |format|
       if @race.update_attributes(params[:race])
         format.html { redirect_to(@race, :notice => 'Race was successfully updated.') }

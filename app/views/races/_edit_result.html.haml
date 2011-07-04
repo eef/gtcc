@@ -5,6 +5,7 @@
       Position
     %th
       User
+      = hidden_field_tag "race[open]", "0"
   - race.max_players.times do
     %tr
       %td{:width => "20px", :style => "text-align: center"}
@@ -15,3 +16,4 @@
       %td
         = select_tag "race[results_attributes][#{pos}][user_id]", options_for_select(users.map {|u| ["#{u.username} (#{u.psn_name})", u.id]})
         - pos += 1
+  
