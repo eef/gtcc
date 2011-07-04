@@ -1,0 +1,12 @@
+%table{:class => "half"}
+  %tr
+    %th
+      Name
+    %th
+      Max players
+  - @league.car_classes.each do |cc|
+    %tr
+      %td{:width => "20px", :style => "text-align: center"}
+        = cc.name
+      %td
+        = cc.max_players

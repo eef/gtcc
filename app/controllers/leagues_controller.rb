@@ -17,6 +17,13 @@ class LeaguesController < ApplicationController
     @league = League.find(params[:id])
     @regulations = @league.race_regulations.first
     @event_settings = @league.event_settings.first
+    @show_reg = false
+    unless @league.car_classes.blank?
+      unless @league.league_entries.where(:user_id => current_user.id).length > 0
+        @show_reg = true
+        @reg_cars = @league.league_cars.select {|cc| !cc.car_name.blank? }
+      end
+    end
     respond_to do |format|
       format.html # show.html.erb
       format.xml  { render :xml => @league }
@@ -39,7 +46,10 @@ class LeaguesController < ApplicationController
 
   # GET /leagues/1/edit
   def edit
-    @league = League.find(params[:id])
+    @league = current_user.leagues.find(params[:id])
+    16.times { @league.league_cars.build } if @league.league_cars.blank?
+    @cars = Car.all
+    @car_classes = @league.car_classes
   end
 
   # POST /leagues
@@ -106,7 +116,7 @@ class LeaguesController < ApplicationController
   # PUT /leagues/1.xml
   def update
     @league = League.find(params[:id])
-
+    @league.league_cars = []
     respond_to do |format|
       if @league.update_attributes(params[:league])
         format.html { redirect_to(@league, :notice => 'League was successfully updated.') }

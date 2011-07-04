@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110125161164) do
+ActiveRecord::Schema.define(:version => 20110125161166) do
 
   create_table "car_classes", :force => true do |t|
     t.integer  "league_id"
@@ -57,6 +57,7 @@ ActiveRecord::Schema.define(:version => 20110125161164) do
     t.string   "restrictions"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "car_class_id"
   end
 
   create_table "league_entries", :force => true do |t|
@@ -165,6 +166,7 @@ ActiveRecord::Schema.define(:version => 20110125161164) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "league_id"
+    t.integer  "car_class_id"
   end
 
   create_table "setting_types", :force => true do |t|
@@ -206,6 +208,7 @@ ActiveRecord::Schema.define(:version => 20110125161164) do
     t.integer  "points"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "car_class_id"
   end
 
   create_table "track_types", :force => true do |t|

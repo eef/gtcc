@@ -1,12 +1,12 @@
 $(document).ready(function() {
   hide_flash();
-  solar_system_autocomplete();
   slider("pp", 300, 2000, 300);
   slider("pow", 300, 2000, 300);
   slider("we", 300, 2000, 300);
   tooltips();
   tabs();
   generate_results();
+  car_name_autocomplete();
 });
 
 function hide_flash() {
@@ -21,6 +21,7 @@ function tabs() {
 
 function generate_results() {
   $("#gen_results").click(function(){
+    show_loading("Generating results...", "#results");
     var race_id = $(this).data("race-id");
     $.ajax({
       type: 'GET',
@@ -57,19 +58,12 @@ function tooltips() {
   })
 }
 
-function solar_system_autocomplete() {
-  $("#starbase_solar_system").autocomplete("/solar_systems").result(function(){
-    show_loading("Loading moons...", "#celestial");
-    get_celestials();
-  }).flushCache();
-}
-
-function get_celestials() {
-  $.get("/celestials", {
-    solar_system_name: $('#starbase_solar_system').val()
-  }, function(response){
-    $("#celestial").html(response);
-  })
+function car_name_autocomplete() {
+  $(".autocomplete").each(function(){
+    $(this).autocomplete("/find_car").result(function(){
+      alert($(this).val());
+    }).flushCache();
+  });
 }
 
 function show_loading(title, selector) {

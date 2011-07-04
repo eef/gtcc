@@ -11,6 +11,7 @@ class League < ActiveRecord::Base
   has_many :league_cars, :dependent => :destroy
   has_and_belongs_to_many :users
   accepts_nested_attributes_for :league_cars, :allow_destroy => true
+  accepts_nested_attributes_for :league_entries, :allow_destroy => true
   accepts_nested_attributes_for :car_classes, :allow_destroy => true
   accepts_nested_attributes_for :race_regulations, :allow_destroy => true
   accepts_nested_attributes_for :event_settings, :allow_destroy => true

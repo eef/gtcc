@@ -1,0 +1,21 @@
+%table
+  %tr
+    %th
+      Car
+    %th
+      Class
+    %th
+      Amount
+    %th
+      Restrictions
+  - @league.league_cars.order("league_cars.car_class_id ASC").each do |cc|
+    - unless cc.car_name.blank?
+      %tr
+        %td{:class => "first"}
+          = cc.car_name
+        %td
+          = cc.car_class.name
+        %td
+          = cc.amount
+        %td
+          = cc.restrictions

@@ -18,6 +18,14 @@
     %td
       = @league.organiser.username
       = " - PSN name: #{@league.organiser.psn_name}"
+- unless @league.league_cars.blank?
+  %h4
+    Allowed cars
+  = render :partial => "show_allowed_cars"
+- unless @league.car_classes.blank?
+  %h4
+    Classes
+  = render :partial => "show_car_classes"
 %h4
   Points system
 %table{:class => "half"}
@@ -28,3 +36,4 @@
       Points
   - @league.league_points.each do |lp|
     = render :partial => "show_points", :locals => {:points => lp}
+  

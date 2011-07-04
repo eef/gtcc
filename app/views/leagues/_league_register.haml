@@ -1,14 +1,18 @@
-%p
-  Before registering for this event please read the settings and regulations.
-- if @league.users.include?(current_user)
-  You are participating in this race.
-  %br
-  If you can not take part, please remove yourself ASAP
-  = link_to "Exit race", exit_league_path(@league)
-- elsif @league.users.length.eql?(@league.max_players)
-  Entries closed, maximum players entered.
-- elsif !@league.users.include?(current_user)
-  = link_to("Click here", enter_league_path(@league)) + " to enter race (#{@league.max_players - @league.users.length} spaces left)"
+%p{:style => "color: red;"}
+  Before registering for this event read the league details, regulations and settings.
+- if !@league.car_classes.blank?
+  - if @show_reg
+    = render :partial => 'league_entry'
+- else
+  - if @league.users.include?(current_user)
+    You are participating in this race.
+    %br
+    If you can not take part, please remove yourself ASAP
+    = link_to "Exit race", exit_league_path(@league)
+  - elsif @league.users.length.eql?(@league.max_players)
+    Entries closed, maximum players entered.
+  - elsif !@league.users.include?(current_user)
+    = link_to("Click here", enter_league_path(@league)) + " to enter race (#{@league.max_players - @league.users.length} spaces left)"
 - if @league.users.length > 0
   %table{:class => "race-table", :style => "width: 50%;"}
     %tr

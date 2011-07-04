@@ -55,5 +55,6 @@ Rcorp::Application.routes.draw do
   match "/league/exit/:id/:user_id", :to => "leagues#exit_league", :as => "admin_exit_league"
   match "/race/gen_results/:id", :to => "races#generate_results", :as => "generate_results"
   match "/races/new/:league_id", :to => "races#new", :as => "new_league_race"
+  match "/find_car", :to => "casr#find_car"
   
 end

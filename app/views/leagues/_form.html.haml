@@ -53,18 +53,30 @@
     #league-settings
       - f.fields_for :event_settings do |es|
         = render :partial => 'races/event_settings', :locals => {:f => es}
-    - if @league.new_record?
-      #car-classes
-        %table{:class => "half"}
-          %tr
-            %th
-              Name
-            %th
-              Max players
-          - f.fields_for :car_classes do |cc|
-            = render :partial => 'car_classes', :locals => {:f => cc}
+    #car-classes
+      %p
+        If your league does not have car classes leave these blank
+      %table{:class => "half"}
+        %tr
+          %th
+            Name
+          %th
+            Max players
+        - f.fields_for :car_classes do |cc|
+          = render :partial => 'car_classes', :locals => {:f => cc}
     #allowed-cars
-      These are the cars
+      %table{:class => "half"}
+        %tr
+          %th{:width => "20px", }
+            Car
+          %th
+            Class
+          %th
+            Amount
+          %th
+            Restrictions
+        - f.fields_for :league_cars do |cc|
+          = render :partial => 'allowed_cars', :locals => {:f => cc}
     #races
       - if @league.new_record?
         Once you have created the league you can add races

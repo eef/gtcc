@@ -1,0 +1,2 @@
+= select_tag "class_id", options_for_select(@reg_cars.map {|cc| ["#{cc.car_name} - #{cc.car_class.name}", cc.id] })
+= submit_tag "Register", :class => "submit", "data-league-id" => @league.id, :id => "submit-entry"

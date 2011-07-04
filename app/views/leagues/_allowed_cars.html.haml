@@ -1,0 +1,9 @@
+%tr
+  %td{:width => "20px", :style => "text-align: center"}
+    = f.text_field :car_name,:class => "text-input"
+  %td
+    = f.select :car_class_id, @car_classes.map {|c|[c.name, c.id]}
+  %td
+    = f.text_field :amount, :class => "text-input"
+  %td
+    = f.text_field :restrictions, :class => "text-input"

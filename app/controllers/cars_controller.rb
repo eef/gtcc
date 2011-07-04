@@ -52,6 +52,15 @@ class CarsController < ApplicationController
       end
     end
   end
+  
+  def find_car
+    search_string = params[:q].concat("%")
+    response = ""
+    car = Car.where("name LIKE ?", search_string).each {|res| response << "#{res.name}\n"}
+    respond_to do |format|
+      format.js  { render :text => response }
+    end
+  end
 
   # PUT /cars/1
   # PUT /cars/1.xml
