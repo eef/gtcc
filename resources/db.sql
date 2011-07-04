@@ -1,8 +1,8 @@
--- MySQL dump 10.13  Distrib 5.1.51, for apple-darwin10.3.2 (i386)
+-- MySQL dump 10.13  Distrib 5.1.49, for apple-darwin10.3.0 (i386)
 --
 -- Host: localhost    Database: gtcc_dev
 -- ------------------------------------------------------
--- Server version	5.1.51
+-- Server version	5.1.49
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -750,7 +750,6 @@ CREATE TABLE `tunings_upgrades` (
 
 LOCK TABLES `tunings_upgrades` WRITE;
 /*!40000 ALTER TABLE `tunings_upgrades` DISABLE KEYS */;
-INSERT INTO `tunings_upgrades` VALUES (9,7,'2011-06-22 23:14:27','2011-06-22 23:14:27');
 /*!40000 ALTER TABLE `tunings_upgrades` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -853,7 +852,7 @@ CREATE TABLE `users` (
 
 LOCK TABLES `users` WRITE;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
-INSERT INTO `users` VALUES (1,'admin@local.com','$2a$10$SbX0H3TlcXfyKmBS5b6TO.nRf/5NUR12FW0BSjzKchlAyMOnnUkGW','$2a$10$SbX0H3TlcXfyKmBS5b6TO.',NULL,NULL,NULL,25,'2011-07-03 18:56:26','2011-06-30 12:33:38','127.0.0.1','127.0.0.1','2011-05-19 20:29:31','2011-07-03 18:56:26','admin','--- \n- admin\n- owner\n','Arthur','Canal','uberhaqer','uberhaqer',26,'UTC'),(8,'admina@lks.xom','$2a$10$txXXXa0Dpf45ZfECmCm6Uuv8o7mHPmDhuBSfM3RXQLAQqaw7E0BxO','$2a$10$txXXXa0Dpf45ZfECmCm6Uu',NULL,NULL,NULL,5,'2011-07-04 01:27:06','2011-06-30 11:08:43','127.0.0.1','127.0.0.1','2011-06-29 00:41:51','2011-07-04 01:27:06','testuser','--- []\n\n','test','admin','testpsn',NULL,NULL,'Belgrade'),(9,'test@testw.com','$2a$10$HgMO2zjesiT8YfFhWcs0NOCZpfuF36lvwbpj3ujlDojhAjLzlUTiy','$2a$10$HgMO2zjesiT8YfFhWcs0NO',NULL,NULL,NULL,2,'2011-07-04 01:46:29','2011-06-29 01:03:55','127.0.0.1','127.0.0.1','2011-06-29 01:03:55','2011-07-04 01:46:29','arthur','--- []\n\n','test','admin','ieihf9uh',NULL,NULL,'UTC');
+INSERT INTO `users` VALUES (1,'admin@local.com','$2a$10$SbX0H3TlcXfyKmBS5b6TO.nRf/5NUR12FW0BSjzKchlAyMOnnUkGW','$2a$10$SbX0H3TlcXfyKmBS5b6TO.',NULL,NULL,NULL,28,'2011-07-04 10:08:13','2011-07-04 09:27:54','127.0.0.1','127.0.0.1','2011-05-19 20:29:31','2011-07-04 10:08:13','admin','--- \n- admin\n- owner\n','Arthur','Canal','uberhaqer','uberhaqer',26,'UTC'),(8,'admina@lks.xom','$2a$10$txXXXa0Dpf45ZfECmCm6Uuv8o7mHPmDhuBSfM3RXQLAQqaw7E0BxO','$2a$10$txXXXa0Dpf45ZfECmCm6Uu',NULL,NULL,NULL,5,'2011-07-04 01:27:06','2011-06-30 11:08:43','127.0.0.1','127.0.0.1','2011-06-29 00:41:51','2011-07-04 01:27:06','testuser','--- []\n\n','test','admin','testpsn',NULL,NULL,'Belgrade'),(9,'test@testw.com','$2a$10$HgMO2zjesiT8YfFhWcs0NOCZpfuF36lvwbpj3ujlDojhAjLzlUTiy','$2a$10$HgMO2zjesiT8YfFhWcs0NO',NULL,NULL,NULL,4,'2011-07-04 12:17:05','2011-07-04 09:41:34','127.0.0.1','127.0.0.1','2011-06-29 01:03:55','2011-07-04 12:17:05','arthur','--- []\n\n','test','admin','ieihf9uh',NULL,NULL,'UTC');
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -866,4 +865,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2011-07-04  8:23:59
+-- Dump completed on 2011-07-04 17:21:26
