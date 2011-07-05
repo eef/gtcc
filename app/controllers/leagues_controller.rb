@@ -21,7 +21,7 @@ class LeaguesController < ApplicationController
     unless @league.car_classes.blank?
       unless @league.league_entries.where(:user_id => current_user.id).length > 0
         @show_reg = true
-        @reg_cars = @league.league_cars.select {|cc| !cc.car_name.blank? }
+        @reg_cars = @league.league_cars.order("league_cars.car_class_id DESC").select {|cc| !cc.car_name.blank? or (!cc.amount.eql?(0) and !cc.car_name.blank?) }
       end
     end
     respond_to do |format|
@@ -48,7 +48,6 @@ class LeaguesController < ApplicationController
   def edit
     @league = current_user.leagues.find(params[:id])
     16.times { @league.league_cars.build } if @league.league_cars.blank?
-    @cars = Car.all
     @car_classes = @league.car_classes
   end
 
@@ -56,8 +55,6 @@ class LeaguesController < ApplicationController
   # POST /leagues.xml
   def create
     @league = League.new(params[:league])
-    @league.organiser = current_user
-    @league.users << current_user
     respond_to do |format|
       if @league.save
         format.html { redirect_to(@league, :notice => 'League was successfully created.') }
@@ -71,22 +68,16 @@ class LeaguesController < ApplicationController
   
   def enter_league
     @league = League.find(params[:id])
-    added = false
-    if @league.users.length < @league.max_players
-      @league.users << current_user
-      added = true
-    end
+    added = @league.register_driver(current_user, LeagueCar.find(params[:lc_id]))
     respond_to do |format|
       if added
         if @league.save
-          format.html { redirect_to(@league, :notice => 'You have entered the league.') }
-          format.xml  { render :xml => @league, :status => :created, :location => @league }
+          format.js  { render :text => 'You have entered the league.' }
         else
-          format.html { redirect_to(@league, :notice => 'Unable to enter race.') }
-          format.xml  { render :xml => @league.errors, :status => :unprocessable_entity }
+          format.js  { render :text => 'Unable to enter league.' }
         end
       else
-        format.html { redirect_to(@league, :notice => 'No more places left on league.') }
+        format.js  { render :text => 'Unable to enter league.' }
       end
     end
   end
@@ -116,7 +107,6 @@ class LeaguesController < ApplicationController
   # PUT /leagues/1.xml
   def update
     @league = League.find(params[:id])
-    @league.league_cars = []
     respond_to do |format|
       if @league.update_attributes(params[:league])
         format.html { redirect_to(@league, :notice => 'League was successfully updated.') }

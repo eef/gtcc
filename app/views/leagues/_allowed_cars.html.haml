@@ -1,6 +1,6 @@
 %tr
   %td{:width => "20px", :style => "text-align: center"}
-    = f.text_field :car_name,:class => "text-input"
+    = f.text_field :car_name, :class => "text-input autocomplete"
   %td
     = f.select :car_class_id, @car_classes.map {|c|[c.name, c.id]}
   %td

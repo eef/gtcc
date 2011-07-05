@@ -17,6 +17,7 @@ class League < ActiveRecord::Base
   accepts_nested_attributes_for :event_settings, :allow_destroy => true
   accepts_nested_attributes_for :league_points, :allow_destroy => true
   
+  # class methods
   class << self
     
     def open_leagues
@@ -27,5 +28,19 @@ class League < ActiveRecord::Base
       where(:open => false)
     end
     
+  end
+  
+  # instance methods
+  def register_driver(user, league_car)
+    league_entry = LeagueEntry.new
+    league_entry.user = user
+    league_entry.league = self
+    league_entry.league_car = league_car
+    league_entry.car_class = league_car.car_class
+    if league_entry.save
+      true
+    else
+      false
+    end
   end
 end

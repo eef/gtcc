@@ -5,7 +5,7 @@
       GTR
       = " ~ #{@page_title}" unless @page_title.nil?
     = stylesheet_link_tag :all
-    = javascript_include_tag "jquery", "jquery.autocomplete", "jquery-ui", "jquery-qtip", "tokeninput", "rails", "application"
+    = javascript_include_tag "jquery", "jquery-ui", "jquery-qtip", "tokeninput", "rails", "application"
     = csrf_meta_tag
   %body
     #wrapper
@@ -13,3 +13,4 @@
       = render :partial => "shared/flash"
       #content
         = yield
+    #loading-holder{:style => "position: absolute; border: 1px solid red; top: 10px; width: 300px; left: 426px; height: 50px;"}

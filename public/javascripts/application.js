@@ -6,13 +6,31 @@ $(document).ready(function() {
   tooltips();
   tabs();
   generate_results();
-  car_name_autocomplete();
+  name_autocomplete();
+  league_register();
 });
 
 function hide_flash() {
   if($('#flash').length > 0) {
     setTimeout("$('#flash').slideUp('fast')", 5000);
   }
+}
+
+function league_register() {
+  $("#submit-entry").click(function(){
+    show_loading("Registering...", "#loading-holder");
+    var league_id = $(this).data("league-id");
+    var lc_id = $("#league_car_id option:selected").val();
+    $.ajax({
+      type: 'GET',
+      dataType: "html",
+      url: "/league/enter/" + league_id + "/" + lc_id,
+      success: function(data) {
+  			$("#response").html(data);
+      }
+    });
+    return false;
+  })
 }
 
 function tabs() {
@@ -63,6 +81,25 @@ function car_name_autocomplete() {
     $(this).autocomplete("/find_car").result(function(){
       alert($(this).val());
     }).flushCache();
+  });
+}
+
+function name_autocomplete() {
+  $.widget( "custom.catcomplete", $.ui.autocomplete, {
+		_renderMenu: function( ul, items ) {
+			var self = this,
+				currentCategory = "";
+			$.each( items, function( index, item ) {
+				if ( item.category != currentCategory ) {
+					ul.append( "<li class='ui-autocomplete-category'>" + item.category + "</li>" );
+					currentCategory = item.category;
+				}
+				self._renderItem( ul, item );
+			});
+		}
+	});
+  $(".autocomplete").catcomplete({
+    source:"/find_car"
   });
 }
 
