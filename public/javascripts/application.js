@@ -10,6 +10,7 @@ $(document).ready(function() {
   league_register();
   add_car_class_field();
   add_allowed_car_field();
+  add_point_field();
 });
 
 function add_car_class_field() {
@@ -24,7 +25,6 @@ function add_car_class_field() {
 
 function add_allowed_car_field() {
   $('.add-ac').click(function(){
-    console.log("asdasd")
     var tr = $("#allowed-car-table tr:last")
     var new_tr = tr.clone();
     var idx = parseInt(tr.data("idx")) + 1;
@@ -32,9 +32,26 @@ function add_allowed_car_field() {
     new_tr.find('.amount').attr("name", 'league[league_cars_attributes]['+idx+'][amount]').val("");
     new_tr.find('.rest').attr("name", 'league[league_cars_attributes]['+idx+'][restrictions]').val("");
     new_tr.find('select').attr("name", 'league[league_cars_attributes]['+idx+'][car_class_id]').val("");
+    new_tr.data("idx", idx);
     new_tr.addClass("hidden");
     tr.after(new_tr);
     name_autocomplete();
+    new_tr.fadeIn();
+    return false;
+  });
+}
+
+function add_point_field() {
+  $('.add-pp').click(function(){
+    var tr = $("#points-setting-table tr:last")
+    var new_tr = tr.clone();
+    var idx = parseInt(tr.data("idx")) + 1;
+    new_tr.find('td:first').text((idx + 1).toOrdinal());
+    new_tr.find('td:first').append('<input type="hidden" value="'+(idx+1)+'" name="league[league_points_attributes]['+idx+'][position]" id="league_league_points_attributes_'+idx+'_position">');
+    new_tr.find('td:last input').attr("name", 'league[league_points_attributes]['+idx+'][points]').val("");
+    new_tr.data("idx", idx);
+    new_tr.addClass("hidden");
+    tr.after(new_tr);
     new_tr.fadeIn();
     return false;
   });
@@ -48,16 +65,16 @@ function hide_flash() {
 
 function league_register() {
   $("#submit-entry").click(function(){
-    show_loading("Registering...", "#loading-holder");
     var league_id = $(this).data("league-id");
     var lc_id = $("#league_car_id option:selected").val();
+    show_loading("Registering...", "#register");
     $.ajax({
       type: 'GET',
       dataType: "html",
       url: "/league/enter/" + league_id + "/" + lc_id,
       success: function(data) {
-  			$("#response").html(data);
-  			hide_loading();
+        hide_loading();
+  			$("#register").html(data);
       }
     });
     return false;
@@ -135,7 +152,8 @@ function name_autocomplete() {
 }
 
 function show_loading(title, selector) {
-  $(selector).html("<div class='loading'><span class='form-note'>" + title + "</span></div>");
+  $(selector).html("<div class='loading' class='hidden'><span class='form-note'>" + title + "</span></div>");
+  $('.loading').fadeIn('fast');
 }
 
 function hide_loading() {
@@ -165,4 +183,11 @@ function slider(div_id, min, max, value) {
   } else {
     $("#" + div_id + "-slider").slider("value", min);
   }
+}
+
+Number.prototype.toOrdinal = function() {
+  var n = this % 100;
+  var suff = ["th", "st", "nd", "rd", "th"]; // suff for suffix
+  var ord= n<21?(n<4 ? suff[n]:suff[0]): (n%10>4 ? suff[0] : suff[n%10]);
+  return this + ord;
 }

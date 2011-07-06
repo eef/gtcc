@@ -72,13 +72,15 @@ class LeaguesController < ApplicationController
     added = @league.register_driver(current_user, LeagueCar.find(params[:lc_id]))
     respond_to do |format|
       if added
+        @show_reg = false
+        @reg_cars = @league.league_cars.order("league_cars.car_class_id DESC").select {|cc| !cc.car_name.blank? or (!cc.amount.eql?(0) and !cc.car_name.blank?) }
         if @league.save
-          format.js  { render :text => 'You have entered the league.' }
+          format.html  { render :partial => "league_register"}
         else
-          format.js  { render :text => 'Unable to enter league.' }
+          format.html  { render :partial => "league_register"}
         end
       else
-        format.js  { render :text => 'Unable to enter league.' }
+        format.html  { render :partial => "league_register"}
       end
     end
   end
