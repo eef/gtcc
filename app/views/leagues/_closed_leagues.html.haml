@@ -18,7 +18,7 @@
             = link_to league.standings.order("standings.points desc").first.user.username, "/leagues/#{league.id}#league-standings", :title => "View all standings"
           - else
             N/A
-        %td= link_to "#{league.users.length}/#{league.max_players} (#{league.max_players - league.users.length} left)", "/leagues/#{league.id}#register"
+        %td= link_to "#{league.league_entries.length}/#{league.max_players} (#{league.max_players - league.league_entries.length} left)", "/leagues/#{league.id}#register"
         %td{:style => "min-width: 26px; text-align: center;"}
           = link_to "Show", league, :class => "ui-icon ui-icon-search", :title => "View league details", :style => "float: left; margin-right: 5px;"
           = link_to "Info", "#", :class => "ui-icon ui-icon-info has-tip", :title => tooltip(league), :style => "float: left; margin-right: 5px;"
