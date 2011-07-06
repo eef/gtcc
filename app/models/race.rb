@@ -45,19 +45,19 @@ class Race < ActiveRecord::Base
       unless self.league.blank?
         results_changed = self.results.any? {|r| r.changed? }
         unless self.league.standings.length > 0
-          self.league.users.each do |user|
+          self.league.league_entries.each do |entry|
             standing = Standing.new(:points => 0)
             standing.league = self.league
-            standing.user = user
+            standing.user = league_entry.user
             standing.save
           end
         end
         if results_changed
           league_points = {}
           self.league.league_points.each { |lp| league_points[lp.position] = lp.points }
-          self.league.users.each do |user|
-            standing = user.standings.where(:league_id => self.league.id).first
-            results = user.results.where(:league_id => self.league.id)
+          self.league.league_entries.each do |entry|
+            standing = entry.user.standings.where(:league_id => self.league.id).first
+            results = entry.user.results.where(:league_id => self.league.id)
             points = 0
             results.each do |result|
               points += league_points[result.position]

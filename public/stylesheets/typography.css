@@ -38,7 +38,15 @@ a:hover {
 
 #logo a {
   text-decoration: none;
-  color: #ADDFFF;
+  border: none;
+}
+
+#logo img {
+  border: none;
+}
+
+#logo {
+  border: none;
 }
 
 .form-sep {

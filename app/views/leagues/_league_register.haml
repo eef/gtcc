@@ -1,8 +1,7 @@
 %p{:style => "color: red;"}
   Before registering for this event read the league details, regulations, settings and you understand all of these.
-- if !@league.car_classes.blank?
-  - if @show_reg
-    = render :partial => 'league_entry'
+- if @show_reg
+  = render :partial => 'league_entry'
 - else
   - if @league.is_registered?(current_user)
     You are participating in this race.

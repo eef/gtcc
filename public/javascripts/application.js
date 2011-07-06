@@ -57,6 +57,7 @@ function league_register() {
       url: "/league/enter/" + league_id + "/" + lc_id,
       success: function(data) {
   			$("#response").html(data);
+  			hide_loading();
       }
     });
     return false;
@@ -134,7 +135,11 @@ function name_autocomplete() {
 }
 
 function show_loading(title, selector) {
-  $(selector).html("<div class='loading'><img src='/stylesheets/indicator.gif' /><span class='form-note'>" + title + "</span></div>");
+  $(selector).html("<div class='loading'><span class='form-note'>" + title + "</span></div>");
+}
+
+function hide_loading() {
+  $(".loading").fadeOut();
 }
 
 function slider(div_id, min, max, value) {

@@ -56,7 +56,9 @@ class League < ActiveRecord::Base
   end
   
   def is_registered?(current_user)
-    if self.league_entries.where(:user_id => current_user.id)
+    test = self.league_entries.where(:user_id => current_user.id)
+    ap test.inspect
+    if test.length > 0
       true
     else
       false
