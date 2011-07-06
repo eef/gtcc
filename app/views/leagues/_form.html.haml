@@ -23,30 +23,7 @@
       %li
         = link_to "Races", "#races"
     #league-details
-      %table{:class => "race-table"}
-        %tr
-          %td{:class => "first"}
-            = f.label :name
-          %td
-            = f.text_field :name, :class => "text-input"
-        %tr
-          %td
-            = f.label :max_players
-          %td
-            = f.select :max_players, SiteConfig.max_players
-        %tr
-          %td
-            = f.label "Status"
-          %td
-            %label{:style => "display: inline;"}
-              Open
-            = " - "
-            = f.radio_button :open, true, :style => "display: inline;"
-            %label{:style => "display: inline;"}
-              Closed
-            = " - "
-            = f.radio_button :open, false, :style => "display: inline;"
-            = note("When the league is complete close it.")
+      = render :partial => "edit_league_details", :locals => {:f => f}
     #league-regulations
       - f.fields_for :race_regulations do |regs|
         = render :partial => 'races/race_regulations', :locals => {:f => regs}
@@ -54,29 +31,9 @@
       - f.fields_for :event_settings do |es|
         = render :partial => 'races/event_settings', :locals => {:f => es}
     #car-classes
-      %p
-        If your league does not have car classes leave these blank
-      %table{:class => "half"}
-        %tr
-          %th
-            Name
-          %th
-            Max players
-        - f.fields_for :car_classes do |cc|
-          = render :partial => 'car_classes', :locals => {:f => cc}
+      = render :partial => "edit_car_classes", :locals => {:f => f}
     #allowed-cars
-      %table{:class => "half"}
-        %tr
-          %th{:width => "20px", }
-            Car
-          %th
-            Class
-          %th
-            Amount
-          %th
-            Restrictions
-        - f.fields_for :league_cars do |cc|
-          = render :partial => 'allowed_cars', :locals => {:f => cc}
+      = render :partial => "edit_allowed_cars", :locals => {:f => f}
     #races
       - if @league.new_record?
         Once you have created the league you can add races

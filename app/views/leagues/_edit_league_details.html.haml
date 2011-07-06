@@ -1,0 +1,24 @@
+%table{:class => "race-table"}
+  %tr
+    %td{:class => "first"}
+      = f.label :name
+    %td
+      = f.text_field :name, :class => "text-input"
+  %tr
+    %td
+      = f.label :max_players
+    %td
+      = f.text_field :max_players, :class => "text-input"
+  %tr
+    %td
+      = f.label "Status"
+    %td
+      %label{:style => "display: inline;"}
+        Open
+      = " - "
+      = f.radio_button :open, true, :style => "display: inline;"
+      %label{:style => "display: inline;"}
+        Closed
+      = " - "
+      = f.radio_button :open, false, :style => "display: inline;"
+      = note("When the league is complete close it.")

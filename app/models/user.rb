@@ -15,7 +15,6 @@ class User < ActiveRecord::Base
   has_many :league_entries
   has_many :league_cars
   has_and_belongs_to_many :races
-  has_and_belongs_to_many :leagues
   validates_presence_of :psn_name
   
 

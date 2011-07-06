@@ -8,7 +8,37 @@ $(document).ready(function() {
   generate_results();
   name_autocomplete();
   league_register();
+  add_car_class_field();
+  add_allowed_car_field();
 });
+
+function add_car_class_field() {
+  $('.add-cc').click(function(){
+    var tr = $("#car-classes-table tr:last")
+    var idx = parseInt(tr.data("idx")) + 1;
+    tr.after('<tr data-idx="'+idx+'" class="hidden"><td width="20px" style="text-align: center;"><input type="text" size="30" name="league[car_classes_attributes]['+idx+'][name]" id="league_car_classes_attributes_'+idx+'_name" class="text-input"></td><td><input type="text" size="30" name="league[car_classes_attributes]['+idx+'][max_players]" id="league_car_classes_attributes_' + idx + '_max_players" class="text-input"></td></tr>')
+    $("#car-classes-table tr:last").fadeIn();
+    return false;
+  });
+}
+
+function add_allowed_car_field() {
+  $('.add-ac').click(function(){
+    console.log("asdasd")
+    var tr = $("#allowed-car-table tr:last")
+    var new_tr = tr.clone();
+    var idx = parseInt(tr.data("idx")) + 1;
+    new_tr.find('.car-name').attr("name", 'league[league_cars_attributes]['+idx+'][car_name]').val("");
+    new_tr.find('.amount').attr("name", 'league[league_cars_attributes]['+idx+'][amount]').val("");
+    new_tr.find('.rest').attr("name", 'league[league_cars_attributes]['+idx+'][restrictions]').val("");
+    new_tr.find('select').attr("name", 'league[league_cars_attributes]['+idx+'][car_class_id]').val("");
+    new_tr.addClass("hidden");
+    tr.after(new_tr);
+    name_autocomplete();
+    new_tr.fadeIn();
+    return false;
+  });
+}
 
 function hide_flash() {
   if($('#flash').length > 0) {
