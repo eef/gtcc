@@ -70,6 +70,8 @@
             Position
           %th
             Points
+          %th
+            Delete
         - pos = 1
         - f.fields_for :league_points do |lp|
           = render :partial => 'points_form', :locals => {:f => lp, :pos => pos}

@@ -48,7 +48,8 @@ class Race < ActiveRecord::Base
           self.league.league_entries.each do |entry|
             standing = Standing.new(:points => 0)
             standing.league = self.league
-            standing.user = league_entry.user
+            standing.user = entry.user
+            standing.car_class_id = entry.car_class_id
             standing.save
           end
         end

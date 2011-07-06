@@ -31,14 +31,18 @@ class League < ActiveRecord::Base
   
   # instance methods
   def register_driver(user, league_car)
-    league_entry = LeagueEntry.new
-    league_entry.user = user
-    league_entry.league = self
-    league_entry.league_car_id = league_car.id
-    league_entry.car_class_id = league_car.car_class.id
-    league_car.amount -= 1
-    if league_entry.save and league_car.save
-      true
+    if league_car.amount > 0
+      league_entry = LeagueEntry.new
+      league_entry.user = user
+      league_entry.league = self
+      league_entry.league_car_id = league_car.id
+      league_entry.car_class_id = league_car.car_class.id
+      league_car.amount -= 1
+      if league_entry.save and league_car.save
+        true
+      else
+        false
+      end
     else
       false
     end

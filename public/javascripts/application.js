@@ -48,7 +48,7 @@ function add_point_field() {
     var idx = parseInt(tr.data("idx")) + 1;
     new_tr.find('td:first').text((idx + 1).toOrdinal());
     new_tr.find('td:first').append('<input type="hidden" value="'+(idx+1)+'" name="league[league_points_attributes]['+idx+'][position]" id="league_league_points_attributes_'+idx+'_position">');
-    new_tr.find('td:last input').attr("name", 'league[league_points_attributes]['+idx+'][points]').val("");
+    new_tr.find('.points-input').attr("name", 'league[league_points_attributes]['+idx+'][points]').val("");
     new_tr.data("idx", idx);
     new_tr.addClass("hidden");
     tr.after(new_tr);

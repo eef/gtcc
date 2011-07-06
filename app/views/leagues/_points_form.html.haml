@@ -3,4 +3,6 @@
     = f.hidden_field :position, :value => pos
     = pos.ordinalize
   %td
-    = f.text_field :points, :class => "text-input", :size => 45
+    = f.text_field :points, :class => "text-input points-input", :size => 45
+  %td
+    = f.check_box '_destroy'

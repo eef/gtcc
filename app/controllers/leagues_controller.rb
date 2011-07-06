@@ -18,6 +18,7 @@ class LeaguesController < ApplicationController
     @regulations = @league.race_regulations.first
     @event_settings = @league.event_settings.first
     @show_reg = false
+    generate_entries
     unless @league.car_classes.blank?
       unless @league.league_entries.where(:user_id => current_user.id).length > 0
         @show_reg = true
@@ -48,6 +49,7 @@ class LeaguesController < ApplicationController
   def edit
     @league = current_user.leagues.find(params[:id])
     @league.league_cars.build if @league.league_cars.blank?
+    @league.league_points.build if @league.league_points.blank?
     @car_classes = @league.car_classes
   end
 
@@ -74,6 +76,7 @@ class LeaguesController < ApplicationController
       if added
         @show_reg = false
         @reg_cars = @league.league_cars.order("league_cars.car_class_id DESC").select {|cc| !cc.car_name.blank? or (!cc.amount.eql?(0) and !cc.car_name.blank?) }
+        generate_entries
         if @league.save
           format.html  { render :partial => "league_register"}
         else
@@ -132,4 +135,13 @@ class LeaguesController < ApplicationController
       format.xml  { head :ok }
     end
   end
+  
+  private
+    def generate_entries
+      @entries_by_class = {}
+      @league.car_classes.each do |cc|
+        @entries_by_class[cc.name] = []
+        cc.league_entries.each {|e| @entries_by_class[cc.name] << e}
+      end
+    end
 end
