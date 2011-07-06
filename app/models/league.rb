@@ -9,7 +9,6 @@ class League < ActiveRecord::Base
   has_many :league_entries
   has_many :car_classes, :dependent => :destroy
   has_many :league_cars, :dependent => :destroy
-  has_and_belongs_to_many :users
   accepts_nested_attributes_for :league_cars, :allow_destroy => true
   accepts_nested_attributes_for :league_entries, :allow_destroy => true
   accepts_nested_attributes_for :car_classes, :allow_destroy => true
@@ -35,12 +34,33 @@ class League < ActiveRecord::Base
     league_entry = LeagueEntry.new
     league_entry.user = user
     league_entry.league = self
-    league_entry.league_car = league_car
-    league_entry.car_class = league_car.car_class
-    if league_entry.save
+    league_entry.league_car_id = league_car.id
+    league_entry.car_class_id = league_car.car_class.id
+    league_car.amount -= 1
+    if league_entry.save and league_car.save
       true
     else
       false
     end
   end
+  
+  def unregister_driver(user)
+    rec = self.league_entries.where(:user_id => user).first
+    league_car = rec.league_car
+    league_car.amount += 1
+    if rec.destroy and league_car.save
+      true
+    else
+      false
+    end
+  end
+  
+  def is_registered?(current_user)
+    if self.league_entries.where(:user_id => current_user.id)
+      true
+    else
+      false
+    end
+  end
+  
 end

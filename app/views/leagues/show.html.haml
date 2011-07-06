@@ -23,30 +23,7 @@
   #league-settings
     = render :partial => "races/show_event_settings"
   #races
-    - if @league.races.blank? and @league.organiser.eql?(current_user)
-      You have not races yet
-      = link_to "Click here", new_league_race_path(@league)
-    - elsif @league.races.blank?
-      No races have been scheduled yet
-    - else
-      - unless @league.races.blank?
-        %table
-          %tr
-            %th Name
-            %th Track
-            %th Start time
-            %th
-
-          - @league.races.each do |race|
-            %tr
-              %td= link_to race.name, race
-              %td= link_to race.track.name, race
-              %td= link_to "#{race.start_time.strftime("%d/%m/%y %I:%M%p")} #{ActiveSupport::TimeZone.zones_map[race.timezone]}", race
-              %td{:style => "min-width: 26px; text-align: center;"}
-                = link_to "Show", race, :class => "ui-icon ui-icon-search", :title => "View race details", :style => "float: left; margin-right: 5px;"
-                - if race.organiser.eql?(current_user)
-                  = link_to 'Edit', edit_race_path(race), :class => "ui-icon ui-icon-wrench", :style => "float: left; margin-right: 5px;", :title => "Edit race details"
-                  = link_to 'Destroy', race, :confirm => 'Are you sure?', :method => :delete, :class => "ui-icon ui-icon-trash", :style => "float: left; margin-right: 5px;", :title => "Delete race"
+    = render :partial => "league_races"
   #register
     = render :partial => "league_register"
   - if @league.organiser.eql?(current_user)

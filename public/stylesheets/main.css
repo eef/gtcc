@@ -169,3 +169,7 @@ th {
 form p {
   margin: 20px 0px 20px 0px;
 }
+
+.hidden {
+  display: none;
+}

@@ -1,0 +1,16 @@
+%table{:class => "half", :id => "allowed-car-table"}
+  %tr
+    %th{:width => "20px", }
+      Car
+    %th
+      Class
+    %th
+      Amount
+    %th
+      Restrictions
+  - idx = 0
+  - f.fields_for :league_cars do |cc|
+    = render :partial => 'allowed_cars', :locals => {:f => cc, :idx => idx}
+    - idx += 1
+= link_to "Add allowed car", "#", :class => "ui-icon ui-icon-plusthick add-ac", :title => "New race", :style => "float: left; margin-right: 5px;"
+= link_to 'Add allowed car', "#", :class => "add-ac"

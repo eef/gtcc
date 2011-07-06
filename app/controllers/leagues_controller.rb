@@ -36,8 +36,8 @@ class LeaguesController < ApplicationController
     @league = League.new
     @league.race_regulations.build
     @league.event_settings.build
-    16.times { @league.league_points.build }
-    2.times { @league.car_classes.build }
+    @league.league_points.build
+    @league.car_classes.build
     respond_to do |format|
       format.html # new.html.erb
       format.xml  { render :xml => @league }
@@ -47,7 +47,7 @@ class LeaguesController < ApplicationController
   # GET /leagues/1/edit
   def edit
     @league = current_user.leagues.find(params[:id])
-    16.times { @league.league_cars.build } if @league.league_cars.blank?
+    @league.league_cars.build if @league.league_cars.blank?
     @car_classes = @league.car_classes
   end
 
@@ -55,6 +55,7 @@ class LeaguesController < ApplicationController
   # POST /leagues.xml
   def create
     @league = League.new(params[:league])
+    @league.organiser = current_user
     respond_to do |format|
       if @league.save
         format.html { redirect_to(@league, :notice => 'League was successfully created.') }
@@ -85,11 +86,11 @@ class LeaguesController < ApplicationController
   def exit_league
     @league = League.find(params[:id])
     if params[:user_id] and params[:id] and @league.organiser.eql?(current_user)
-      temp_user = User.find(params[:user_id])
-      @league.users.delete(temp_user)
-      f_notice = "Removed #{temp_user.username}(#{temp_user.psn_name})"
+      u = User.find(params[:user_id])
+      @league.unregister_driver(u)
+      f_notice = "Removed #{u.username}(#{u.psn_name})"
     else
-      @league.users.delete(current_user)
+      @league.unregister_driver(current_user)
       f_notice = 'You have exited the league.'
     end
     respond_to do |format|

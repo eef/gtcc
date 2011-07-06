@@ -4,32 +4,36 @@
   - if @show_reg
     = render :partial => 'league_entry'
 - else
-  - if @league.users.include?(current_user)
+  - if @league.is_registered?(current_user)
     You are participating in this race.
     %br
     If you can not take part, please remove yourself ASAP
     = link_to "Exit race", exit_league_path(@league)
-  - elsif @league.users.length.eql?(@league.max_players)
+  - elsif @league.league_entries.length.eql?(@league.max_players)
     Entries closed, maximum players entered.
-  - elsif !@league.users.include?(current_user)
+  - elsif !@league.is_registered?(current_user)
     = link_to("Click here", enter_league_path(@league)) + " to enter race (#{@league.max_players - @league.users.length} spaces left)"
-- if @league.users.length > 0
+- if @league.league_entries.length > 0
   %table{:class => "race-table", :style => "width: 50%;"}
     %tr
       %th
         Username
       %th
         PSN Name
+      %th
+        Car
       - if @league.organiser.eql?(current_user)
         %th
-    - @league.users.each do |user|
+    - @league.league_entries.each do |entry|
       %tr
         %td
-          = user.username
+          = entry.user.username
         %td
-          = user.psn_name
+          = entry.user.psn_name
+        %td
+          = entry.league_car.car_name
         - if @league.organiser.eql?(current_user)
           %td{:style => "width: 8px"}
-            = link_to 'Remove driver', admin_exit_league_path(@league, user), :confirm => 'Are you sure?', :method => :delete, :class => "ui-icon ui-icon-trash", :title => "Remove driver", :style => "float: left;"
+            = link_to 'Remove driver', admin_exit_league_path(@league, entry.user), :confirm => 'Are you sure?', :method => :delete, :class => "ui-icon ui-icon-trash", :title => "Remove driver", :style => "float: left;"
 - else
   No entries yet
