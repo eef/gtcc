@@ -15,28 +15,46 @@ $(document).ready(function() {
 
 function add_car_class_field() {
   $('.add-cc').click(function(){
-    var tr = $("#car-classes-table tr:last")
-    var idx = parseInt(tr.data("idx")) + 1;
-    tr.after('<tr data-idx="'+idx+'" class="hidden"><td width="20px" style="text-align: center;"><input type="text" size="30" name="league[car_classes_attributes]['+idx+'][name]" id="league_car_classes_attributes_'+idx+'_name" class="text-input"></td><td><input type="text" size="30" name="league[car_classes_attributes]['+idx+'][max_players]" id="league_car_classes_attributes_' + idx + '_max_players" class="text-input"></td></tr>')
-    $("#car-classes-table tr:last").fadeIn();
+    if($("#first-table").length > 0) {
+      var html_holder = $("#new-class-holder");
+      var old_div = $("#first-table");
+      html_holder.html(old_div.html());
+      html_holder.slideDown();
+      old_div.remove();
+    } else {
+      var tr = $("#car-classes-table tr:last")
+      var idx = parseInt(tr.data("idx")) + 1;
+      tr.after('<tr data-idx="'+idx+'" class="hidden"><td width="20px" style="text-align: center;"><input type="text" size="30" name="league[car_classes_attributes]['+idx+'][name]" id="league_car_classes_attributes_'+idx+'_name" class="text-input"></td><td><input type="text" size="30" name="league[car_classes_attributes]['+idx+'][max_players]" id="league_car_classes_attributes_' + idx + '_max_players" class="text-input"></td></tr>')
+      $("#car-classes-table tr:last").fadeIn();
+    }
     return false;
   });
 }
 
 function add_allowed_car_field() {
   $('.add-ac').click(function(){
-    var tr = $("#allowed-car-table tr:last")
-    var new_tr = tr.clone();
-    var idx = parseInt(tr.data("idx")) + 1;
-    new_tr.find('.car-name').attr("name", 'league[league_cars_attributes]['+idx+'][car_name]').val("");
-    new_tr.find('.amount').attr("name", 'league[league_cars_attributes]['+idx+'][amount]').val("");
-    new_tr.find('.rest').attr("name", 'league[league_cars_attributes]['+idx+'][restrictions]').val("");
-    new_tr.find('select').attr("name", 'league[league_cars_attributes]['+idx+'][car_class_id]').val("");
-    new_tr.data("idx", idx);
-    new_tr.addClass("hidden");
-    tr.after(new_tr);
-    name_autocomplete();
-    new_tr.fadeIn();
+    if($("#first-aa-table").length > 0) {
+      var html_holder = $("#new-aa-holder");
+      var old_div = $("#first-aa-table");
+      html_holder.html(old_div.html());
+      name_autocomplete();
+      html_holder.slideDown();
+      old_div.remove();
+    } else {
+      var tr = $("#allowed-car-table tr:last")
+      var new_tr = tr.clone();
+      var idx = parseInt(tr.data("idx")) + 1;
+      new_tr.find('.car-name').attr("name", 'league[league_cars_attributes]['+idx+'][car_name]').val("");
+      new_tr.find('.amount').attr("name", 'league[league_cars_attributes]['+idx+'][amount]').val("");
+      new_tr.find('.rest').attr("name", 'league[league_cars_attributes]['+idx+'][restrictions]').val("");
+      new_tr.find('select').attr("name", 'league[league_cars_attributes]['+idx+'][car_class_id]').val("");
+      new_tr.data("idx", idx);
+      new_tr.addClass("hidden");
+      new_tr.find('.car-name').removeClass("selected");
+      tr.after(new_tr);
+      name_autocomplete();
+      new_tr.fadeIn(); 
+    }
     return false;
   });
 }
@@ -66,17 +84,29 @@ function hide_flash() {
 function league_register() {
   $("#submit-entry").click(function(){
     var league_id = $(this).data("league-id");
-    var lc_id = $("#league_car_id option:selected").val();
-    show_loading("Registering...", "#register");
-    $.ajax({
-      type: 'GET',
-      dataType: "html",
-      url: "/league/enter/" + league_id + "/" + lc_id,
-      success: function(data) {
-        hide_loading();
-  			$("#register").html(data);
+    if($("#league_car_id option:selected").length > 0) {
+      var lc_id = $("#league_car_id option:selected").val();
+      var remote_url = "/league/enter/" + league_id + "/" + lc_id
+      $.ajax({
+        type: 'GET',
+        dataType: "html",
+        url: remote_url,
+        success: function(data) {
+    			$("#register").html(data);
+        }
+      });
+    }
+    if ($("#car_name").length > 0) {
+      var lc_id = $("#car_name").val();
+      var car_class_id = ""
+      if ($("#car_class_id").length > 0) {
+        car_class_id = $("#car_class_id option:selected").val();
       }
-    });
+      $.post("/league/enter_nocc/", {'car_name': lc_id,'id':league_id, 'car_class_id':car_class_id},
+      function(data) {
+        $("#register").html(data);
+      });
+    };
     return false;
   })
 }
@@ -146,8 +176,36 @@ function name_autocomplete() {
 			});
 		}
 	});
-  $(".autocomplete").catcomplete({
-    source:"/find_car"
+  $(".autocomplete").not(".selected").catcomplete({
+    source:"/find_car",
+    select: function(event, ui) {
+      $("#submit-entry").fadeIn();
+      $(this).addClass("selected");
+    },
+    create: function(event, ui) {
+      if($(this).val() == "") {
+        $(this).val("Start typing...");
+        $(this).css({
+          "color": "#444"
+        })
+      }
+      $(this).click(function(){
+        if($(this).val() == "Start typing...") {
+          $(this).val("");
+          $(this).css({
+            "color": "#CCCCCC"
+          })
+        }
+      });
+      $(this).blur(function(){
+        if($(this).val() == "") {
+          $(this).val("Start typing...");
+          $(this).css({
+            "color": "#444"
+          })
+        }
+      });
+    }
   });
 }
 
@@ -157,7 +215,9 @@ function show_loading(title, selector) {
 }
 
 function hide_loading() {
-  $(".loading").fadeOut();
+  var div = $(".loading");
+  div.html("");
+  div.removeClass("loading");
 }
 
 function slider(div_id, min, max, value) {

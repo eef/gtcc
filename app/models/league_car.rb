@@ -4,4 +4,5 @@ class LeagueCar < ActiveRecord::Base
   belongs_to :car_class
   has_many :users
   has_many :league_entries
+  
 end

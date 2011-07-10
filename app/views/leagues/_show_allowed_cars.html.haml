@@ -1,10 +1,11 @@
 %table
   %tr
-    %th
+    %th{:style => "width: 250px;"}
       Car
-    %th
-      Class
-    %th
+    - unless @car_classes.blank? or (@car_classes.first.name.blank?)
+      %th
+        Class
+    %th{:style => "width: 120px;"}
       Amount
     %th
       Restrictions
@@ -13,9 +14,10 @@
       %tr
         %td{:class => "first"}
           = cc.car_name
+        - unless @car_classes.blank? or (@car_classes.first.name.blank?)  
+          %td
+            = cc.car_class.name
         %td
-          = cc.car_class.name
-        %td
-          = cc.amount
+          = link_to "#{cc.amount - cc.used_amount} entries left", "#register"
         %td
           = cc.restrictions

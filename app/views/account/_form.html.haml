@@ -1,5 +1,17 @@
 = form_for(@user, :url => account_update_path,:html => { :method => :put }) do |f|
   %p
+    = f.label :first_name
+    = f.text_field :first_name, :class => "text-input"
+  %p
+    = f.label :last_name
+    = f.text_field :last_name, :class => "text-input"
+  %p
+    = f.label :psn_name
+    = f.text_field :psn_name, :class => "text-input"
+  %p
+    = f.label :reddit_name
+    = f.text_field :reddit_name, :class => "text-input"
+  %p
     = f.label :email
     = f.text_field :email, :class => "text-input"
   %p

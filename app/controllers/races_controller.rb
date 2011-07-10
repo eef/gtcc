@@ -42,21 +42,21 @@ class RacesController < ApplicationController
   # GET /races/1/edit
   def edit
     @race = current_user.races.where(:id => params[:id]).first
-    @users = @race.users
+    @entries = @race.users
     unless @race.league_id.blank?
       @league = League.find(@race.league_id)
-      @users = @league.users
+      @users = @league.league_entries
     end
   end
   
   def generate_results
     @race = current_user.races.where(:id => params[:id]).first
     unless @race.league.blank?
-      @race.league.max_players.times { @race.results.build }
-      @users = @race.league.users
+      @max_players = @race.league.max_players
+      @users = @race.league.league_entries
     else
       @users = @race.users
-      @race.max_players.times { @race.results.build }
+      @max_players = @race.max_players
     end
     respond_to do |format|
       format.html  { render :partial => "edit_result", :locals => {:race => @race, :users => @users} }

@@ -1,15 +1,18 @@
 %p
-  If your league does not have car classes leave these blank
-%table{:class => "half", :id => "car-classes-table"}
-  %tbody
-    %tr
-      %th
-        Name
-      %th
-        Max players
-    - idx = 0
-    - f.fields_for :car_classes do |cc|
-      = render :partial => 'car_classes', :locals => {:f => cc, :idx => idx}
-      - idx += 1
+  If your league does not have car classes leave these blank. You can not add these later
+- if @league.new_record?
+  #new-class-holder.hidden
+- unless @league.new_record?
+  %table{:class => "half", :id => "car-classes-table"}
+    %tbody
+      %tr
+        %th
+          Name
+        %th
+          Max players
+      - idx = 0
+      - f.fields_for :car_classes do |cc|
+        = render :partial => 'car_classes', :locals => {:f => cc, :idx => idx}
+        - idx += 1
 = link_to "Add car class", "#", :class => "ui-icon ui-icon-plusthick add-cc", :title => "Add car class", :style => "float: left; margin-right: 5px;"
 = link_to 'Add car class', "#", :class => "add-cc"

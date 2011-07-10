@@ -1,6 +1,7 @@
-- if @league.standings.blank?
+- if @league.standings.blank? or @league.results.blank?
   No results posted yet
 - else
+  - standings = @league.standings.order("standings.points desc")
   %table{:class => "race-table half"}
     %tr
       %th{:class => "first", :style => "width: 75px;"}
@@ -10,7 +11,7 @@
       %th
         Points
     - pos = 1
-    - @league.standings.order("standings.points desc").each do |standing|
+    - standings.each do |standing|
       %tr
         %td{:class => "first", :style => "width: 75px; text-align: center;"}
           = pos.ordinalize

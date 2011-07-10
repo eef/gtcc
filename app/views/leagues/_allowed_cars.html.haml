@@ -1,8 +1,9 @@
 %tr{"data-idx" => idx}
   %td{:width => "20px", :style => "text-align: center"}
     = f.text_field :car_name, :class => "text-input car-name autocomplete"
-  %td
-    = f.select :car_class_id, @car_classes.map {|c|[c.name, c.id]}
+  - unless @car_classes.blank? or (@car_classes.first.name.blank?)
+    %td
+      = f.select :car_class_id, @car_classes.map {|c|[c.name, c.id]}
   %td
     = f.text_field :amount, :class => "text-input amount"
   %td

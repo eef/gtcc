@@ -19,11 +19,18 @@ class LeaguesController < ApplicationController
     @event_settings = @league.event_settings.first
     @show_reg = false
     generate_entries
-    unless @league.car_classes.blank?
+    if !@league.car_classes.blank?
       unless @league.league_entries.where(:user_id => current_user.id).length > 0
         @show_reg = true
-        @reg_cars = @league.league_cars.order("league_cars.car_class_id DESC").select {|cc| !cc.car_name.blank? or (!cc.amount.eql?(0) and !cc.car_name.blank?) }
+        if @league.league_cars.blank? or @league.league_cars.where(:amount => nil).length > 0
+          @classes = @league.car_classes
+        else
+          @classes = @league.car_classes
+          @reg_cars = @league.league_cars.order("league_cars.car_class_id DESC").select {|cc| !cc.car_name.blank? or (!cc.amount.eql?(0) and !cc.car_name.blank?) } 
+        end
       end
+    elsif @league.league_cars.where("league_cars.amount > 0 AND league_cars.used_amount < league_cars.amount AND league_cars.car_class_id IS NULL").length > 0
+      @reg_cars = @league.league_cars.where("league_cars.amount > 0 AND league_cars.used_amount < league_cars.amount AND league_cars.car_class_id IS NULL")
     end
     respond_to do |format|
       format.html # show.html.erb
@@ -51,6 +58,10 @@ class LeaguesController < ApplicationController
     @league.league_cars.build if @league.league_cars.blank?
     @league.league_points.build if @league.league_points.blank?
     @car_classes = @league.car_classes
+    @show_table = false
+    if @league.league_cars.where("league_cars.amount > 0").length > 0
+      @show_table = true
+    end
   end
 
   # POST /leagues
@@ -71,18 +82,27 @@ class LeaguesController < ApplicationController
   
   def enter_league
     @league = League.find(params[:id])
-    added = @league.register_driver(current_user, LeagueCar.find(params[:lc_id]))
+    if params[:car_name] and params[:car_class_id]
+      league_car = {:car_name => params[:car_name], :car_class_id => params[:car_class_id]}
+    elsif params[:car_name]
+      league_car = params[:car_name]
+    else
+      league_car = LeagueCar.find_by_id(params[:lc_id])
+    end
+    added = @league.register_driver(current_user, league_car)
     respond_to do |format|
       if added
         @show_reg = false
-        @reg_cars = @league.league_cars.order("league_cars.car_class_id DESC").select {|cc| !cc.car_name.blank? or (!cc.amount.eql?(0) and !cc.car_name.blank?) }
-        generate_entries
+        @reg_cars = @league.league_cars.where("league_cars.car_class_id != NULL").order("league_cars.car_class_id DESC").select {|cc| !cc.car_name.blank? or (!cc.amount.eql?(0) and !cc.car_name.blank?) }
         if @league.save
+          generate_entries
           format.html  { render :partial => "league_register"}
         else
+          generate_entries
           format.html  { render :partial => "league_register"}
         end
       else
+        generate_entries
         format.html  { render :partial => "league_register"}
       end
     end
@@ -139,9 +159,13 @@ class LeaguesController < ApplicationController
   private
     def generate_entries
       @entries_by_class = {}
-      @league.car_classes.each do |cc|
-        @entries_by_class[cc.name] = []
-        cc.league_entries.each {|e| @entries_by_class[cc.name] << e}
+      unless @league.car_classes.blank?
+        @league.car_classes.each do |cc|
+          @entries_by_class[cc.name] = []
+          cc.league_entries.each {|e| @entries_by_class[cc.name] << e}
+        end
+      else
+        @entries_by_class = @league.league_entries
       end
     end
 end

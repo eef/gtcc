@@ -9,12 +9,12 @@ class League < ActiveRecord::Base
   has_many :league_entries
   has_many :car_classes, :dependent => :destroy
   has_many :league_cars, :dependent => :destroy
-  accepts_nested_attributes_for :league_cars, :allow_destroy => true
-  accepts_nested_attributes_for :league_entries, :allow_destroy => true
-  accepts_nested_attributes_for :car_classes, :allow_destroy => true
+  accepts_nested_attributes_for :league_cars, :allow_destroy => true, :reject_if => :all_blank
+  accepts_nested_attributes_for :league_entries, :allow_destroy => true, :reject_if => :all_blank
+  accepts_nested_attributes_for :car_classes, :allow_destroy => true, :reject_if => :all_blank
   accepts_nested_attributes_for :race_regulations, :allow_destroy => true
   accepts_nested_attributes_for :event_settings, :allow_destroy => true
-  accepts_nested_attributes_for :league_points, :allow_destroy => true
+  accepts_nested_attributes_for :league_points, :allow_destroy => true, :reject_if => :all_blank
   
   # class methods
   class << self
@@ -31,31 +31,38 @@ class League < ActiveRecord::Base
   
   # instance methods
   def register_driver(user, league_car)
-    if league_car.amount > 0
-      league_entry = LeagueEntry.new
-      league_entry.user = user
-      league_entry.league = self
-      league_entry.league_car_id = league_car.id
-      league_entry.car_class_id = league_car.car_class.id
-      league_car.amount -= 1
-      if league_entry.save and league_car.save
-        true
-      else
-        false
-      end
-    else
-      false
+    league_entry = LeagueEntry.new
+    league_entry.user = user
+    league_entry.league = self
+    case league_car
+    when Hash
+      car_name = league_car
+      league_car = LeagueCar.new
+      league_car.car_name = car_name[:car_name]
+      league_car.car_class_id = car_name[:car_class_id]
+      league_entry.car_class_id = car_name[:car_class_id]
+    when String
+      car_name = league_car
+      league_car = LeagueCar.new
+      league_car.car_name = car_name
+      league_entry.car_class = nil
+    when LeagueCar
+      league_entry.car_class = league_car.car_class unless league_car.car_class.blank?
+      league_car.used_amount += 1
     end
+    league_car.league = self
+    league_entry.league_car = league_car
+    return(league_entry.save and league_car.save)
   end
   
   def unregister_driver(user)
     rec = self.league_entries.where(:user_id => user).first
     league_car = rec.league_car
-    league_car.amount += 1
-    if rec.destroy and league_car.save
-      true
+    if !league_car.amount.nil?
+      league_car.used_amount -= 1
+      rec.destroy and league_car.save
     else
-      false
+      rec.destroy and league_car.destroy
     end
   end
   

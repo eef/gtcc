@@ -22,14 +22,14 @@
     #event-settings
       = render :partial => "show_event_settings"
   #register
-    - if !@race.results.blank?
-      Enteries for this race are closed as the results are in.
-    - elsif @race.league.blank?
-      = render :partial => "race_register"
-    - elsif !@race.league.blank?
+    - if !@race.league.blank?
       This race is part of a league.
       = link_to "Click here", "/leagues/#{@race.league.id}#register"
       to register for the league.
+    - elsif !@race.results.blank?
+      Enteries for this race are closed as the results are in.
+    - elsif @race.league.blank?
+      = render :partial => "race_register"
   #results
     = render :partial => "show_results"
   - if @race.organiser.eql?(current_user)

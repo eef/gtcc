@@ -1,19 +1,24 @@
 - if @league.new_record?
   You can add allowed cars once the league is created.
 - else
-  %table{:class => "half", :id => "allowed-car-table"}
-    %tr
-      %th{:width => "20px", }
-        Car
-      %th
-        Class
-      %th
-        Amount
-      %th
-        Restrictions
-    - idx = 0
-    - f.fields_for :league_cars do |cc|
-      = render :partial => 'allowed_cars', :locals => {:f => cc, :idx => idx}
-      - idx += 1
+  - if @show_table
+    %table{:class => "half", :id => "allowed-car-table"}
+      %tr
+        %th{:width => "20px", }
+          Car
+        - unless @car_classes.blank? or (@car_classes.first.name.blank?)
+          %th
+            Class
+        %th
+          Amount
+        %th
+          Restrictions
+      - idx = 0
+      - f.fields_for :league_cars do |cc|
+        - unless cc.object.amount.nil?
+          = render :partial => 'allowed_cars', :locals => {:f => cc, :idx => idx}
+          - idx += 1
+  - else
+    #new-aa-holder.hidden
   = link_to "Add allowed car", "#", :class => "ui-icon ui-icon-plusthick add-ac", :title => "New race", :style => "float: left; margin-right: 5px;"
   = link_to 'Add allowed car', "#", :class => "add-ac"

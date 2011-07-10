@@ -6,7 +6,7 @@
     %th
       User
       = hidden_field_tag "race[open]", "0"
-  - race.max_players.times do
+  - @max_players.times do
     %tr
       %td{:width => "20px", :style => "text-align: center"}
         = hidden_field_tag "race[results_attributes][#{pos}][position]", (pos + 1)
@@ -14,6 +14,6 @@
           = hidden_field_tag "race[results_attributes][#{pos}][league_id]", race.league.id
         = (pos + 1).ordinalize
       %td
-        = select_tag "race[results_attributes][#{pos}][user_id]", options_for_select(users.map {|u| ["#{u.username} (#{u.psn_name})", u.id]})
+        = select_tag "race[results_attributes][#{pos}][user_id]", options_for_select(users.map {|u| ["#{u.user.username} (#{u.user.psn_name})", u.user.id]})
         - pos += 1
   

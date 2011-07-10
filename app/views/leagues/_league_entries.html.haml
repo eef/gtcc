@@ -1,0 +1,25 @@
+- if @entries_by_class.is_a?(Array)
+  - if @entries_by_class.blank?
+    No entries to this class yet
+  - else
+    %table{:class => "race-table", :style => "width: 50%;"}
+      %tr
+        %th
+          Username
+        %th
+          PSN Name
+        %th
+          Car
+        - if @league.organiser.eql?(current_user)
+          %th
+      - @entries_by_class.each do |entry|
+        %tr
+          %td
+            = entry.user.username
+          %td
+            = entry.user.psn_name
+          %td
+            = entry.league_car.car_name
+          - if @league.organiser.eql?(current_user)
+            %td{:style => "width: 8px"}
+              = link_to 'Remove driver', admin_exit_league_path(@league, entry.user), :confirm => 'Are you sure?', :method => :delete, :class => "ui-icon ui-icon-trash", :title => "Remove driver", :style => "float: left;"

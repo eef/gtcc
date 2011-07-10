@@ -80,3 +80,42 @@
       = link_to 'Add another position', "#", :class => "add-pp"
   %p
     = f.submit 'Save', :class => "submit"
+- if @league.new_record?
+  .hidden#first-table
+    %table{:class => "half", :id => "car-classes-table"}
+      %tbody
+        %tr
+          %th
+            Name
+          %th
+            Max players
+        %tr{"data-idx" => "0"}
+          %td{:width => "20px", :style => "text-align: center;"}
+            %input{:type => "text", :size => "30", :name => "league[car_classes_attributes][0][name]", :id => "league_car_classes_attributes_0_name", :class => "text-input"}
+          %td
+            %input{:type => "text", :size => "30", :name => "league[car_classes_attributes][0][max_players]", :id => "league_car_classes_attributes_0_max_players", :class => "text-input"}
+- unless @show_table
+  .hidden#first-aa-table
+    %table{:id => "allowed-car-table", :class => "half"}
+      %tbody
+        %tr
+          %th{:width => "20px"}
+            Car
+          - unless @car_classes.blank? or (@car_classes.first.name.blank?)
+            %th
+              Class
+          %th
+            Amount
+          %th
+            Restrictions
+        %tr{"data-idx" => "0"}
+          %td{:width => "20px", :style => "text-align: center;"}
+            %input{:type => "text", :size => "30", :name => "league[league_cars_attributes][0][car_name]", :id => "league_league_cars_attributes_0_car_name", :class => "text-input car-name autocomplete ui-autocomplete-input"}
+          - unless @car_classes.blank? or (@car_classes.first.name.blank?)
+            %td
+              %select{:name => "league[league_cars_attributes][0][car_class_id]", :id => "league_league_cars_attributes_0_car_class_id"}
+                = options_for_select(@car_classes.map {|c|[c.name, c.id]})
+          %td
+            %input{:type => "text", :size => "30", :name => "league[league_cars_attributes][0][amount]", :id => "league_league_cars_attributes_0_amount", :class => "text-input amount"}
+          %td
+            %input{:type => "text", :size => "30", :name => "league[league_cars_attributes][0][restrictions]", :id => "league_league_cars_attributes_0_restrictions", :class => "text-input rest"}

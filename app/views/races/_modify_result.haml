@@ -3,4 +3,4 @@
     = f.hidden_field :position
     = pos.ordinalize
   %td
-    = f.select :user_id, @users.map {|u| ["#{u.username} (#{u.psn_name})", u.id]}
+    = f.select :user_id, @users.map {|u| ["#{u.user.username} (#{u.user.psn_name})", u.id]}
