@@ -119,3 +119,4 @@
             %input{:type => "text", :size => "30", :name => "league[league_cars_attributes][0][amount]", :id => "league_league_cars_attributes_0_amount", :class => "text-input amount"}
           %td
             %input{:type => "text", :size => "30", :name => "league[league_cars_attributes][0][restrictions]", :id => "league_league_cars_attributes_0_restrictions", :class => "text-input rest"}
+            = hidden_field_tag "league[league_cars_attributes][0][allowed]", true

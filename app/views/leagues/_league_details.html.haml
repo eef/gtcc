@@ -18,7 +18,7 @@
     %td
       = @league.organiser.username
       = " - PSN name: #{@league.organiser.psn_name}"
-- unless @league.league_cars.blank?
+- if @league.league_cars.where("league_cars.allowed = 1").length > 0
   %h4
     Allowed cars
   = render :partial => "show_allowed_cars"

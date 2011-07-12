@@ -9,7 +9,7 @@
       Amount
     %th
       Restrictions
-  - @league.league_cars.order("league_cars.car_class_id ASC").each do |cc|
+  - @league.league_cars.where("league_cars.allowed = 1").order("league_cars.car_class_id ASC").each do |cc|
     - unless cc.car_name.blank?
       %tr
         %td{:class => "first"}

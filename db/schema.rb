@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110125161168) do
+ActiveRecord::Schema.define(:version => 20110125161169) do
 
   create_table "car_classes", :force => true do |t|
     t.integer  "league_id"
@@ -59,6 +59,7 @@ ActiveRecord::Schema.define(:version => 20110125161168) do
     t.datetime "updated_at"
     t.string   "car_class_id"
     t.integer  "used_amount",  :default => 0
+    t.boolean  "allowed",      :default => false
   end
 
   create_table "league_entries", :force => true do |t|
