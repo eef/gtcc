@@ -47,6 +47,7 @@ function add_allowed_car_field() {
       new_tr.find('.car-name').attr("name", 'league[league_cars_attributes]['+idx+'][car_name]').val("");
       new_tr.find('.amount').attr("name", 'league[league_cars_attributes]['+idx+'][amount]').val("");
       new_tr.find('.rest').attr("name", 'league[league_cars_attributes]['+idx+'][restrictions]').val("");
+      new_tr.find('.allowed').attr("name", 'league[league_cars_attributes]['+idx+'][allowed]').val("true");
       new_tr.find('select').attr("name", 'league[league_cars_attributes]['+idx+'][car_class_id]').val("");
       new_tr.data("idx", idx);
       new_tr.addClass("hidden");
