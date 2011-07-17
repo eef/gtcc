@@ -16,7 +16,9 @@
         %tr
           %td= link_to race.name, race
           %td= link_to race.track.name, race
-          %td= link_to "#{race.start_time.strftime("%d/%m/%y %I:%M%p")} #{ActiveSupport::TimeZone.zones_map[race.timezone]}", race
+          %td
+            = current_user.timezone
+            = link_to "#{race.start_time.strftime("%d/%m/%y %I:%M%p")} #{ActiveSupport::TimeZone.zones_map[race.timezone]}", race
           %td{:style => "min-width: 26px; text-align: center;"}
             = link_to "Show", race, :class => "ui-icon ui-icon-search", :title => "View race details", :style => "float: left; margin-right: 5px;"
             - if race.organiser.eql?(current_user)
