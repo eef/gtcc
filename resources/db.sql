@@ -1,8 +1,8 @@
--- MySQL dump 10.13  Distrib 5.1.54, for debian-linux-gnu (x86_64)
+-- MySQL dump 10.13  Distrib 5.1.51, for apple-darwin10.3.2 (i386)
 --
--- Host: localhost    Database: gtcc_live
+-- Host: localhost    Database: gtcc_dev
 -- ------------------------------------------------------
--- Server version	5.1.54-1ubuntu4
+-- Server version	5.1.51
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -39,7 +39,6 @@ CREATE TABLE `car_classes` (
 
 LOCK TABLES `car_classes` WRITE;
 /*!40000 ALTER TABLE `car_classes` DISABLE KEYS */;
-INSERT INTO `car_classes` VALUES (13,29,'Fast',0,'2011-07-18 18:23:06','2011-07-18 18:23:06'),(14,29,'Slower',0,'2011-07-18 18:23:06','2011-07-18 18:23:06'),(15,30,'GT500',8,'2011-07-18 18:23:36','2011-07-18 18:23:36'),(16,30,'GT300',8,'2011-07-18 18:23:36','2011-07-18 18:23:36');
 /*!40000 ALTER TABLE `car_classes` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -126,7 +125,7 @@ CREATE TABLE `event_settings` (
 
 LOCK TABLES `event_settings` WRITE;
 /*!40000 ALTER TABLE `event_settings` DISABLE KEYS */;
-INSERT INTO `event_settings` VALUES (3,'None','Normal race','None','On','Low','Fastest','Grid start','None',0,3,'2011-07-10 22:23:06','2011-07-10 22:23:06',NULL),(11,'None','Normal race','None','Off','Low','Fastest','Grid start','None',0,NULL,'2011-07-18 13:59:33','2011-07-18 13:59:33',28),(12,'None','Normal race','None','On','Low','Fastest','Grid start','None',0,NULL,'2011-07-18 18:23:06','2011-07-18 18:23:06',29),(13,'None','Normal race','None','On','Low','Fastest','Grid start','None',0,NULL,'2011-07-18 18:23:36','2011-07-18 18:23:36',30);
+INSERT INTO `event_settings` VALUES (3,'None','Normal race','None','On','Low','Fastest','Grid start','None',0,3,'2011-07-10 22:23:06','2011-07-10 22:23:06',NULL);
 /*!40000 ALTER TABLE `event_settings` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -158,7 +157,6 @@ CREATE TABLE `league_cars` (
 
 LOCK TABLES `league_cars` WRITE;
 /*!40000 ALTER TABLE `league_cars` DISABLE KEYS */;
-INSERT INTO `league_cars` VALUES (23,28,'Jay Leno Tank Car \'03',NULL,NULL,'2011-07-18 14:03:49','2011-07-18 14:03:49','',0,0),(25,28,'Audi A2 1.4 \'02',NULL,NULL,'2011-07-18 18:21:42','2011-07-18 18:21:42','',0,0);
 /*!40000 ALTER TABLE `league_cars` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -178,7 +176,7 @@ CREATE TABLE `league_entries` (
   `updated_at` datetime DEFAULT NULL,
   `league_car_id` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=24 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -187,7 +185,6 @@ CREATE TABLE `league_entries` (
 
 LOCK TABLES `league_entries` WRITE;
 /*!40000 ALTER TABLE `league_entries` DISABLE KEYS */;
-INSERT INTO `league_entries` VALUES (2,1,NULL,20,'2011-07-10 21:52:22','2011-07-10 21:52:22',9),(3,8,NULL,20,'2011-07-10 21:58:56','2011-07-10 21:58:56',3),(4,9,7,19,'2011-07-10 22:27:20','2011-07-10 22:27:20',7),(5,1,8,19,'2011-07-10 22:27:36','2011-07-10 22:27:36',8),(7,8,7,19,'2011-07-10 22:28:53','2011-07-10 22:28:53',7),(8,1,9,21,'2011-07-10 22:35:18','2011-07-10 22:35:18',10),(9,8,10,21,'2011-07-10 22:35:37','2011-07-10 22:35:37',11),(10,9,10,21,'2011-07-10 22:36:16','2011-07-10 22:36:16',11),(12,1,11,23,'2011-07-10 23:48:47','2011-07-10 23:48:47',15),(13,10,11,23,'2011-07-11 00:34:12','2011-07-11 00:34:12',15),(14,1,NULL,24,'2011-07-11 00:55:00','2011-07-11 00:55:00',16),(15,1,NULL,25,'2011-07-14 21:41:46','2011-07-14 21:41:46',17),(19,1,NULL,27,'2011-07-18 13:55:53','2011-07-18 13:55:53',21),(21,10,NULL,28,'2011-07-18 14:03:49','2011-07-18 14:03:49',23),(23,1,NULL,28,'2011-07-18 18:21:42','2011-07-18 18:21:42',25);
 /*!40000 ALTER TABLE `league_entries` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -216,7 +213,6 @@ CREATE TABLE `league_points` (
 
 LOCK TABLES `league_points` WRITE;
 /*!40000 ALTER TABLE `league_points` DISABLE KEYS */;
-INSERT INTO `league_points` VALUES (170,1,10,28,NULL,'2011-07-18 13:59:33','2011-07-18 13:59:33'),(171,2,5,28,NULL,'2011-07-18 13:59:33','2011-07-18 13:59:33'),(172,1,NULL,29,NULL,'2011-07-18 18:23:06','2011-07-18 18:23:06'),(173,1,NULL,30,NULL,'2011-07-18 18:23:36','2011-07-18 18:23:36');
 /*!40000 ALTER TABLE `league_points` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -245,7 +241,6 @@ CREATE TABLE `leagues` (
 
 LOCK TABLES `leagues` WRITE;
 /*!40000 ALTER TABLE `leagues` DISABLE KEYS */;
-INSERT INTO `leagues` VALUES (28,'Tokyo drift',2,1,'2011-07-18 13:59:33','2011-07-18 13:59:33',1),(29,'',NULL,1,'2011-07-18 18:23:06','2011-07-18 18:23:06',1),(30,'Test league',16,1,'2011-07-18 18:23:36','2011-07-18 18:23:36',1);
 /*!40000 ALTER TABLE `leagues` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -390,7 +385,7 @@ CREATE TABLE `race_regulations` (
 
 LOCK TABLES `race_regulations` WRITE;
 /*!40000 ALTER TABLE `race_regulations` DISABLE KEYS */;
-INSERT INTO `race_regulations` VALUES (3,0,0,0,0,0,'',0,0,0,'No limit',3,NULL,'2011-07-10 22:23:06','2011-07-10 22:23:06',NULL),(11,0,0,0,0,0,'Any decent drifting car',0,0,0,'Comfort: Hard',NULL,NULL,'2011-07-18 13:59:33','2011-07-18 13:59:33',28),(12,0,0,0,0,0,'',0,0,0,'No limit',NULL,NULL,'2011-07-18 18:23:06','2011-07-18 18:23:06',29),(13,0,0,0,0,0,'',0,0,0,'No limit',NULL,NULL,'2011-07-18 18:23:36','2011-07-18 18:23:36',30);
+INSERT INTO `race_regulations` VALUES (3,0,0,0,0,0,'',0,0,0,'No limit',3,NULL,'2011-07-10 22:23:06','2011-07-10 22:23:06',NULL);
 /*!40000 ALTER TABLE `race_regulations` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -428,7 +423,7 @@ CREATE TABLE `races` (
 
 LOCK TABLES `races` WRITE;
 /*!40000 ALTER TABLE `races` DISABLE KEYS */;
-INSERT INTO `races` VALUES (3,'Race',1,2,'2011-07-10 22:23:06','2011-07-10 22:23:06',1,'2011-07-10 22:22:00',1,'UTC','','Race for real',2,1,NULL,1),(10,'Round one',1,2,'2011-07-18 18:21:57','2011-07-18 18:22:08',1,'2011-07-18 18:21:00',1,'UTC','','Race for real',2,1,28,0);
+INSERT INTO `races` VALUES (3,'Race',1,2,'2011-07-10 22:23:06','2011-07-10 22:23:06',1,'2011-07-10 22:22:00',1,'UTC','','Race for real',2,1,NULL,1);
 /*!40000 ALTER TABLE `races` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -453,7 +448,7 @@ CREATE TABLE `races_users` (
 
 LOCK TABLES `races_users` WRITE;
 /*!40000 ALTER TABLE `races_users` DISABLE KEYS */;
-INSERT INTO `races_users` VALUES (30,1,'2011-07-04 01:23:41','2011-07-04 01:23:41'),(30,8,'2011-07-04 01:27:29','2011-07-04 01:27:29'),(31,1,'2011-07-09 15:57:07','2011-07-09 15:57:07'),(3,1,'2011-07-10 22:23:06','2011-07-10 22:23:06'),(3,9,'2011-07-10 22:26:24','2011-07-10 22:26:24'),(3,10,'2011-07-11 00:35:58','2011-07-11 00:35:58'),(10,1,'2011-07-18 18:21:57','2011-07-18 18:21:57');
+INSERT INTO `races_users` VALUES (30,1,'2011-07-04 01:23:41','2011-07-04 01:23:41'),(30,8,'2011-07-04 01:27:29','2011-07-04 01:27:29'),(31,1,'2011-07-09 15:57:07','2011-07-09 15:57:07'),(3,1,'2011-07-10 22:23:06','2011-07-10 22:23:06'),(3,9,'2011-07-10 22:26:24','2011-07-10 22:26:24'),(3,10,'2011-07-11 00:35:58','2011-07-11 00:35:58');
 /*!40000 ALTER TABLE `races_users` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -474,7 +469,7 @@ CREATE TABLE `results` (
   `league_id` int(11) DEFAULT NULL,
   `car_class_id` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -483,7 +478,6 @@ CREATE TABLE `results` (
 
 LOCK TABLES `results` WRITE;
 /*!40000 ALTER TABLE `results` DISABLE KEYS */;
-INSERT INTO `results` VALUES (13,10,10,1,'2011-07-18 18:22:08','2011-07-18 18:22:08',28,NULL),(14,1,10,2,'2011-07-18 18:22:08','2011-07-18 18:22:08',28,NULL);
 /*!40000 ALTER TABLE `results` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -639,7 +633,7 @@ CREATE TABLE `standings` (
   `updated_at` datetime DEFAULT NULL,
   `car_class_id` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -648,7 +642,6 @@ CREATE TABLE `standings` (
 
 LOCK TABLES `standings` WRITE;
 /*!40000 ALTER TABLE `standings` DISABLE KEYS */;
-INSERT INTO `standings` VALUES (1,10,28,10,'2011-07-18 18:21:57','2011-07-18 18:22:08',NULL),(2,1,28,5,'2011-07-18 18:21:57','2011-07-18 18:22:08',NULL);
 /*!40000 ALTER TABLE `standings` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -861,7 +854,7 @@ CREATE TABLE `users` (
 
 LOCK TABLES `users` WRITE;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
-INSERT INTO `users` VALUES (1,'admin@local.com','$2a$10$SbX0H3TlcXfyKmBS5b6TO.nRf/5NUR12FW0BSjzKchlAyMOnnUkGW','$2a$10$SbX0H3TlcXfyKmBS5b6TO.',NULL,NULL,NULL,44,'2011-07-18 18:21:23','2011-07-18 13:53:50','86.30.224.22','87.194.185.242','2011-05-19 20:29:31','2011-07-18 18:21:23','admin','--- \n- admin\n- owner\n','Arthur','Canal','uberhaqer','uberhaqer',26,'UTC'),(10,'sarcasmman@hotmail.com','$2a$10$5SDfE4YGE881K5saEN.hre8UWJBK0V8A2wAiIFHYLeilsw9I3h5Wm','$2a$10$5SDfE4YGE881K5saEN.hre',NULL,NULL,NULL,2,'2011-07-18 14:02:55','2011-07-11 00:33:36','91.85.66.46','2.216.247.244','2011-07-11 00:33:36','2011-07-18 14:03:18','pol','--- []\n\n','pol','livy','jacquijac',NULL,NULL,'Edinburgh');
+INSERT INTO `users` VALUES (1,'admin@local.com','$2a$10$SbX0H3TlcXfyKmBS5b6TO.nRf/5NUR12FW0BSjzKchlAyMOnnUkGW','$2a$10$SbX0H3TlcXfyKmBS5b6TO.',NULL,NULL,NULL,45,'2011-07-18 19:42:56','2011-07-18 18:21:23','127.0.0.1','86.30.224.22','2011-05-19 20:29:31','2011-07-18 19:42:56','admin','--- \n- admin\n- owner\n','Arthur','Canal','uberhaqer','uberhaqer',26,'UTC'),(10,'sarcasmman@hotmail.com','$2a$10$5SDfE4YGE881K5saEN.hre8UWJBK0V8A2wAiIFHYLeilsw9I3h5Wm','$2a$10$5SDfE4YGE881K5saEN.hre',NULL,NULL,NULL,2,'2011-07-18 14:02:55','2011-07-11 00:33:36','91.85.66.46','2.216.247.244','2011-07-11 00:33:36','2011-07-18 14:03:18','pol','--- []\n\n','pol','livy','jacquijac',NULL,NULL,'Edinburgh');
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -874,4 +867,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2011-07-18 20:40:26
+-- Dump completed on 2011-07-18 20:48:16
