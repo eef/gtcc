@@ -1,8 +1,8 @@
--- MySQL dump 10.13  Distrib 5.1.51, for apple-darwin10.3.2 (i386)
+-- MySQL dump 10.13  Distrib 5.1.49, for apple-darwin10.3.0 (i386)
 --
 -- Host: localhost    Database: gtcc_dev
 -- ------------------------------------------------------
--- Server version	5.1.51
+-- Server version	5.1.49
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -116,7 +116,7 @@ CREATE TABLE `event_settings` (
   `updated_at` datetime DEFAULT NULL,
   `league_id` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -125,7 +125,7 @@ CREATE TABLE `event_settings` (
 
 LOCK TABLES `event_settings` WRITE;
 /*!40000 ALTER TABLE `event_settings` DISABLE KEYS */;
-INSERT INTO `event_settings` VALUES (3,'None','Normal race','None','On','Low','Fastest','Grid start','None',0,3,'2011-07-10 22:23:06','2011-07-10 22:23:06',NULL);
+INSERT INTO `event_settings` VALUES (3,'None','Normal race','None','On','Low','Fastest','Grid start','None',0,3,'2011-07-10 22:23:06','2011-07-10 22:23:06',NULL),(11,'None','Normal race','None','On','Low','Fastest','Grid start','None',0,NULL,'2011-07-19 15:52:23','2011-07-19 15:52:23',28);
 /*!40000 ALTER TABLE `event_settings` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -139,7 +139,7 @@ DROP TABLE IF EXISTS `league_cars`;
 CREATE TABLE `league_cars` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `league_id` int(11) DEFAULT NULL,
-  `car_name` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `car_id` int(11) DEFAULT NULL,
   `amount` int(11) DEFAULT NULL,
   `restrictions` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `created_at` datetime DEFAULT NULL,
@@ -147,8 +147,9 @@ CREATE TABLE `league_cars` (
   `car_class_id` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `used_amount` int(11) DEFAULT '0',
   `allowed` tinyint(1) DEFAULT '0',
+  `car_name` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=26 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=27 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -157,6 +158,7 @@ CREATE TABLE `league_cars` (
 
 LOCK TABLES `league_cars` WRITE;
 /*!40000 ALTER TABLE `league_cars` DISABLE KEYS */;
+INSERT INTO `league_cars` VALUES (26,28,42,NULL,NULL,'2011-07-19 16:18:58','2011-07-19 16:18:58',NULL,0,0,'Audi A2 1.4 \'02');
 /*!40000 ALTER TABLE `league_cars` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -176,7 +178,7 @@ CREATE TABLE `league_entries` (
   `updated_at` datetime DEFAULT NULL,
   `league_car_id` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -185,6 +187,7 @@ CREATE TABLE `league_entries` (
 
 LOCK TABLES `league_entries` WRITE;
 /*!40000 ALTER TABLE `league_entries` DISABLE KEYS */;
+INSERT INTO `league_entries` VALUES (6,1,NULL,28,'2011-07-19 16:18:59','2011-07-19 16:18:59',26);
 /*!40000 ALTER TABLE `league_entries` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -204,7 +207,7 @@ CREATE TABLE `league_points` (
   `created_at` datetime DEFAULT NULL,
   `updated_at` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=174 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=171 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -213,6 +216,7 @@ CREATE TABLE `league_points` (
 
 LOCK TABLES `league_points` WRITE;
 /*!40000 ALTER TABLE `league_points` DISABLE KEYS */;
+INSERT INTO `league_points` VALUES (170,1,10,28,NULL,'2011-07-19 15:52:23','2011-07-19 15:52:23');
 /*!40000 ALTER TABLE `league_points` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -232,7 +236,7 @@ CREATE TABLE `leagues` (
   `updated_at` datetime DEFAULT NULL,
   `open` tinyint(1) DEFAULT '1',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=31 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=29 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -241,6 +245,7 @@ CREATE TABLE `leagues` (
 
 LOCK TABLES `leagues` WRITE;
 /*!40000 ALTER TABLE `leagues` DISABLE KEYS */;
+INSERT INTO `leagues` VALUES (28,'Tokyo Drift',2,1,'2011-07-19 15:52:23','2011-07-19 15:52:23',1);
 /*!40000 ALTER TABLE `leagues` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -376,7 +381,7 @@ CREATE TABLE `race_regulations` (
   `updated_at` datetime DEFAULT NULL,
   `league_id` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -385,7 +390,7 @@ CREATE TABLE `race_regulations` (
 
 LOCK TABLES `race_regulations` WRITE;
 /*!40000 ALTER TABLE `race_regulations` DISABLE KEYS */;
-INSERT INTO `race_regulations` VALUES (3,0,0,0,0,0,'',0,0,0,'No limit',3,NULL,'2011-07-10 22:23:06','2011-07-10 22:23:06',NULL);
+INSERT INTO `race_regulations` VALUES (3,0,0,0,0,0,'',0,0,0,'No limit',3,NULL,'2011-07-10 22:23:06','2011-07-10 22:23:06',NULL),(11,0,0,0,0,0,'',0,0,0,'No limit',NULL,NULL,'2011-07-19 15:52:23','2011-07-19 15:52:23',28);
 /*!40000 ALTER TABLE `race_regulations` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -414,7 +419,7 @@ CREATE TABLE `races` (
   `league_id` int(11) DEFAULT NULL,
   `open` tinyint(1) DEFAULT '1',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -448,7 +453,7 @@ CREATE TABLE `races_users` (
 
 LOCK TABLES `races_users` WRITE;
 /*!40000 ALTER TABLE `races_users` DISABLE KEYS */;
-INSERT INTO `races_users` VALUES (30,1,'2011-07-04 01:23:41','2011-07-04 01:23:41'),(30,8,'2011-07-04 01:27:29','2011-07-04 01:27:29'),(31,1,'2011-07-09 15:57:07','2011-07-09 15:57:07'),(3,1,'2011-07-10 22:23:06','2011-07-10 22:23:06'),(3,9,'2011-07-10 22:26:24','2011-07-10 22:26:24'),(3,10,'2011-07-11 00:35:58','2011-07-11 00:35:58');
+INSERT INTO `races_users` VALUES (30,1,'2011-07-04 01:23:41','2011-07-04 01:23:41'),(30,8,'2011-07-04 01:27:29','2011-07-04 01:27:29'),(31,1,'2011-07-09 15:57:07','2011-07-09 15:57:07'),(3,1,'2011-07-10 22:23:06','2011-07-10 22:23:06'),(3,9,'2011-07-10 22:26:24','2011-07-10 22:26:24');
 /*!40000 ALTER TABLE `races_users` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -500,7 +505,7 @@ CREATE TABLE `schema_migrations` (
 
 LOCK TABLES `schema_migrations` WRITE;
 /*!40000 ALTER TABLE `schema_migrations` DISABLE KEYS */;
-INSERT INTO `schema_migrations` VALUES ('20110125102714'),('20110125142122'),('20110125160402'),('20110125161124'),('20110125161125'),('20110125161126'),('20110125161127'),('20110125161128'),('20110125161129'),('20110125161130'),('20110125161131'),('20110125161132'),('20110125161133'),('20110125161134'),('20110125161135'),('20110125161136'),('20110125161137'),('20110125161138'),('20110125161139'),('20110125161140'),('20110125161141'),('20110125161142'),('20110125161143'),('20110125161145'),('20110125161146'),('20110125161147'),('20110125161148'),('20110125161149'),('20110125161150'),('20110125161151'),('20110125161152'),('20110125161153'),('20110125161154'),('20110125161155'),('20110125161156'),('20110125161157'),('20110125161158'),('20110125161159'),('20110125161160'),('20110125161161'),('20110125161162'),('20110125161163'),('20110125161164'),('20110125161165'),('20110125161166'),('20110125161167'),('20110125161168'),('20110125161169');
+INSERT INTO `schema_migrations` VALUES ('20110125102714'),('20110125142122'),('20110125160402'),('20110125161124'),('20110125161125'),('20110125161126'),('20110125161127'),('20110125161128'),('20110125161129'),('20110125161130'),('20110125161131'),('20110125161132'),('20110125161133'),('20110125161134'),('20110125161135'),('20110125161136'),('20110125161137'),('20110125161138'),('20110125161139'),('20110125161140'),('20110125161141'),('20110125161142'),('20110125161143'),('20110125161145'),('20110125161146'),('20110125161147'),('20110125161148'),('20110125161149'),('20110125161150'),('20110125161151'),('20110125161152'),('20110125161153'),('20110125161154'),('20110125161155'),('20110125161156'),('20110125161157'),('20110125161158'),('20110125161159'),('20110125161160'),('20110125161161'),('20110125161162'),('20110125161163'),('20110125161164'),('20110125161165'),('20110125161166'),('20110125161167'),('20110125161168'),('20110125161169'),('20110125161170');
 /*!40000 ALTER TABLE `schema_migrations` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -845,7 +850,7 @@ CREATE TABLE `users` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `index_users_on_email` (`email`),
   UNIQUE KEY `index_users_on_reset_password_token` (`reset_password_token`)
-) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -854,7 +859,7 @@ CREATE TABLE `users` (
 
 LOCK TABLES `users` WRITE;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
-INSERT INTO `users` VALUES (1,'admin@local.com','$2a$10$SbX0H3TlcXfyKmBS5b6TO.nRf/5NUR12FW0BSjzKchlAyMOnnUkGW','$2a$10$SbX0H3TlcXfyKmBS5b6TO.',NULL,NULL,NULL,45,'2011-07-18 19:42:56','2011-07-18 18:21:23','127.0.0.1','86.30.224.22','2011-05-19 20:29:31','2011-07-18 19:42:56','admin','--- \n- admin\n- owner\n','Arthur','Canal','uberhaqer','uberhaqer',26,'UTC'),(10,'sarcasmman@hotmail.com','$2a$10$5SDfE4YGE881K5saEN.hre8UWJBK0V8A2wAiIFHYLeilsw9I3h5Wm','$2a$10$5SDfE4YGE881K5saEN.hre',NULL,NULL,NULL,2,'2011-07-18 14:02:55','2011-07-11 00:33:36','91.85.66.46','2.216.247.244','2011-07-11 00:33:36','2011-07-18 14:03:18','pol','--- []\n\n','pol','livy','jacquijac',NULL,NULL,'Edinburgh');
+INSERT INTO `users` VALUES (1,'admin@local.com','$2a$10$SbX0H3TlcXfyKmBS5b6TO.nRf/5NUR12FW0BSjzKchlAyMOnnUkGW','$2a$10$SbX0H3TlcXfyKmBS5b6TO.',NULL,NULL,NULL,38,'2011-07-19 13:13:12','2011-07-15 16:14:59','127.0.0.1','127.0.0.1','2011-05-19 20:29:31','2011-07-19 13:13:12','admin','--- \n- admin\n- owner\n','Arthur','Canal','uberhaqer','uberhaqer',26,'UTC');
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -867,4 +872,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2011-07-18 20:48:16
+-- Dump completed on 2011-07-19 17:21:11
