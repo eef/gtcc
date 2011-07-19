@@ -82,10 +82,12 @@ class LeaguesController < ApplicationController
   
   def enter_league
     @league = League.find(params[:id])
-    if params[:car_name] and params[:car_class_id]
+    if params[:car_name] and !params[:car_class_id].blank? and params[:car_id]
+      logger.info "1"
       league_car = {:car_name => params[:car_name], :car_class_id => params[:car_class_id]}
-    elsif params[:car_name]
-      league_car = params[:car_name]
+    elsif params[:car_name] and params[:car_id]
+      logger.info "2"
+      league_car = [params[:car_name], params[:car_id]]
     else
       league_car = LeagueCar.find_by_id(params[:lc_id])
     end

@@ -42,11 +42,16 @@ class League < ActiveRecord::Base
       league_car = LeagueCar.new
       league_car.car_name = car_name[:car_name]
       league_car.car_class_id = car_name[:car_class_id]
+      league_car.car_id = car_name[:car_id]
       league_entry.car_class_id = car_name[:car_class_id]
-    when String
-      car_name = league_car
+    when Array
+      car_name = league_car.first
+      car_id = league_car.last
+      puts "* CAR ID *" * 20
+      puts car_id
       league_car = LeagueCar.new
       league_car.car_name = car_name
+      league_car.car_id = car_id
       league_entry.car_class = nil
     when LeagueCar
       league_entry.car_class = league_car.car_class unless league_car.car_class.blank?

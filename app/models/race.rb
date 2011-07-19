@@ -44,16 +44,6 @@ class Race < ActiveRecord::Base
     def calculate_standings
       unless self.league.blank? or self.new_record?
         results_changed = self.results.any? {|r| r.changed? }
-        unless self.league.standings.length > 0
-          self.league.league_entries.each do |entry|
-            standing = Standing.new(:points => 0)
-            standing.league = self.league
-            standing.user = entry.user
-            standing.car_class_id = entry.car_class_id unless entry.car_class.blank?
-            standing.save
-            logger.info "Created standing for #{entry.user.username}" 
-          end
-        end
         if results_changed
           logger.info "Results have changed" 
           league_points = {}

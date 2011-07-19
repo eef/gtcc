@@ -45,9 +45,12 @@ function add_allowed_car_field() {
       var new_tr = tr.clone();
       var idx = parseInt(tr.data("idx")) + 1;
       new_tr.find('.car-name').attr("name", 'league[league_cars_attributes]['+idx+'][car_name]').val("");
+      new_tr.find('.car-name').attr("id", 'league_league_cars_attributes_'+idx+'_car_name');
       new_tr.find('.amount').attr("name", 'league[league_cars_attributes]['+idx+'][amount]').val("");
       new_tr.find('.rest').attr("name", 'league[league_cars_attributes]['+idx+'][restrictions]').val("");
-      new_tr.find('.allowed').attr("name", 'league[league_cars_attributes]['+idx+'][allowed]').val("true");
+      new_tr.find('.allowed').attr("name", 'league[league_cars_attributes]['+idx+'][allowed]').val("1");
+      new_tr.find('.car_id').attr("name", 'league[league_cars_attributes]['+idx+'][car_id]').val("");
+      new_tr.find('.car_id').attr("id", 'league_league_cars_attributes_'+idx+'_car_id');
       new_tr.find('select').attr("name", 'league[league_cars_attributes]['+idx+'][car_class_id]').val("");
       new_tr.data("idx", idx);
       new_tr.addClass("hidden");
@@ -99,11 +102,12 @@ function league_register() {
     }
     if ($("#car_name").length > 0) {
       var lc_id = $("#car_name").val();
+      var car_id = $("#car_id").val();
       var car_class_id = ""
       if ($("#car_class_id").length > 0) {
         car_class_id = $("#car_class_id option:selected").val();
       }
-      $.post("/league/enter_nocc/", {'car_name': lc_id,'id':league_id, 'car_class_id':car_class_id},
+      $.post("/league/enter_nocc/", {'car_name': lc_id,'id':league_id, 'car_class_id':car_class_id, 'car_id': car_id},
       function(data) {
         $("#register").html(data);
       });
@@ -180,6 +184,8 @@ function name_autocomplete() {
   $(".autocomplete").not(".selected").catcomplete({
     source:"/find_car",
     select: function(event, ui) {
+      var car_id_field = parse_car_id($(this).attr("id"));
+      $("#" + car_id_field).val(ui.item.id);
       $("#submit-entry").fadeIn();
       $(this).addClass("selected");
     },
@@ -208,6 +214,11 @@ function name_autocomplete() {
       });
     }
   });
+}
+
+function parse_car_id(car_name) {
+  console.log(car_name.replace(/car_name/, "car_id"));
+  return car_name.replace(/car_name/, "car_id");
 }
 
 function show_loading(title, selector) {
@@ -248,7 +259,7 @@ function slider(div_id, min, max, value) {
 
 Number.prototype.toOrdinal = function() {
   var n = this % 100;
-  var suff = ["th", "st", "nd", "rd", "th"]; // suff for suffix
+  var suff = ["th", "st", "nd", "rd", "th"];
   var ord= n<21?(n<4 ? suff[n]:suff[0]): (n%10>4 ? suff[0] : suff[n%10]);
   return this + ord;
 }

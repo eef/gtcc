@@ -1,23 +1,42 @@
-%table
-  %tr
-    %th{:style => "width: 250px;"}
-      Car
-    - unless @car_classes.blank? or (@car_classes.first.name.blank?)
+- if @classes.blank?
+  %table
+    %tr
+      %th{:style => "width: 250px;"}
+        Car
+      %th{:style => "width: 120px;"}
+        Amount
       %th
-        Class
-    %th{:style => "width: 120px;"}
-      Amount
-    %th
-      Restrictions
-  - @league.league_cars.where("league_cars.allowed = 1").order("league_cars.car_class_id ASC").each do |cc|
-    - unless cc.car_name.blank?
-      %tr
-        %td{:class => "first"}
-          = cc.car_name
-        - unless @car_classes.blank? or (@car_classes.first.name.blank?)  
+        Restrictions
+    - @league.league_cars.where("league_cars.allowed = 1").order("league_cars.car_class_id ASC").each do |cc|
+      - unless cc.car_name.blank?
+        %tr
+          %td{:class => "first"}
+            = cc.car_name
           %td
-            = cc.car_class.name
-        %td
-          = link_to "#{cc.amount - cc.used_amount} entries left", "#register"
-        %td
-          = cc.restrictions
+            = link_to "#{cc.amount - cc.used_amount} entries left", "#register"
+          %td
+            = cc.restrictions
+- elsif @classes.length > 0
+  %table
+    %tr
+      %th{:style => "width: 250px;"}
+        Car
+      %th{:style => "width: 50px;"}
+        Class
+      %th{:style => "width: 120px;"}
+        Amount
+      %th
+        Restrictions
+    - @classes.each do |cc|
+      - cc.league_cars.each do |lc|
+        %tr
+          %td{:class => "first"}
+            = lc.car_name
+          %td
+            = cc.name
+          %td
+            = link_to "#{lc.amount - lc.used_amount} entries left", "#register"
+          %td
+            = lc.restrictions
+      
+  

@@ -56,7 +56,7 @@ class CarsController < ApplicationController
   def find_car
     search_string = params[:term].concat("%")
     response = []
-    car = Car.where("name LIKE ?", search_string).each {|res| response << {:label => res.name.strip, :category => res.manufacturer.name} }
+    car = Car.where("name LIKE ?", search_string).each {|res| response << {:label => res.name.strip, :category => res.manufacturer.name, :id => res.id} }
     respond_to do |format|
       format.js  { render :text => response.to_json }
     end
