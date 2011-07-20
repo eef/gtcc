@@ -1,8 +1,12 @@
 %p{:style => "color: red;"}
   Before registering for this event read the league details, regulations, settings and you understand all of these.
-  = @show_reg
+  
 - if !@league.is_registered?(current_user)
-  = render :partial => 'league_entry'
+  - if @league.league_entries.length.eql?(@league.max_players)
+    %span{:style => "color: red;"}
+      Entries closed, maximum players entered.
+  - else
+    = render :partial => 'league_entry'
 - else
   - if @league.is_registered?(current_user)
     You are participating in this race.

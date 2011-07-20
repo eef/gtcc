@@ -26,7 +26,7 @@ class LeaguesController < ApplicationController
           @classes = @league.car_classes
         else
           @classes = @league.car_classes
-          @reg_cars = @league.league_cars.order("league_cars.car_class_id DESC").select {|cc| !cc.car_name.blank? or (!cc.amount.eql?(0) and !cc.car_name.blank?) } 
+          @reg_cars = @league.league_cars.where("league_cars.used_amount < league_cars.amount").order("league_cars.car_class_id DESC").select {|cc| !cc.car_name.blank? or (!cc.amount.eql?(0) and !cc.car_name.blank?) } 
         end
       end
     elsif @league.league_cars.where("league_cars.amount > 0 AND league_cars.used_amount < league_cars.amount AND league_cars.car_class_id IS NULL").length > 0
