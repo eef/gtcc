@@ -45,25 +45,15 @@ class Race < ActiveRecord::Base
       unless self.league.blank? or self.new_record?
         results_changed = self.results.any? {|r| r.changed? }
         if results_changed
-          logger.info "Results have changed" 
           league_points = {}
           self.league.league_points.each { |lp| league_points[lp.position] = lp.points }
-          logger.info "League points:"
-          ap league_points 
           self.league.league_entries.each do |entry|
-            logger.info "Generating standing" 
-            standing = entry.user.standings.where(:league_id => self.league.id).first
-            logger.info "Standing"
-            ap standing 
+            standing = entry.standing
             results = entry.user.results.where(:league_id => self.league.id)
-            logger.info "RESULTS" 
-            ap results
             points = 0
             results.each do |result|
-              ap result
               points += league_points[result.position]
             end
-            logger.info "Points: #{points}" 
             standing.points = points
             standing.save
           end

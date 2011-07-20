@@ -51,15 +51,14 @@ class RacesController < ApplicationController
   
   def generate_results
     @race = current_user.races.where(:id => params[:id]).first
-    unless @race.league.blank?
-      @max_players = @race.league.max_players
-      @users = @race.league.league_entries
-    else
-      @users = @race.users
-      @max_players = @race.max_players
-    end
     respond_to do |format|
-      format.html  { render :partial => "edit_result", :locals => {:race => @race, :users => @users} }
+      if @race.league.blank?
+      elsif !@race.league.blank?
+        if @race.league.car_classes.length > 0
+          logger.info "GOT HERE" 
+          format.html  { render :partial => "edit_result", :locals => {:league => @race.league} }
+        end
+      end
     end
   end
 

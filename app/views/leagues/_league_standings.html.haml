@@ -1,5 +1,27 @@
 - if @league.standings.blank? or @league.results.blank?
   No results posted yet
+- elsif !@league.car_classes.blank?
+  - @league.car_classes.each do |cc|
+    %h3
+      = cc.name
+    %table{:class => "race-table half"}
+      %tr
+        %th{:class => "first", :style => "width: 75px;"}
+          Standing
+        %th
+          User
+        %th
+          Points
+      - pos = 1
+      - cc.standings.each do |standing|
+        %tr
+          %td{:class => "first", :style => "width: 75px; text-align: center;"}
+            = pos.ordinalize
+          %td
+            = standing.user.username
+          %td
+            = standing.points
+        - pos += 1
 - else
   - standings = @league.standings.order("standings.points desc")
   %table{:class => "race-table half"}
