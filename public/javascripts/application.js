@@ -129,7 +129,7 @@ function generate_results() {
       dataType: "html",
       url: "/race/gen_results/" + race_id,
       success: function(data){
-  			$("#results").html(data);
+        $("#results").html(data);
       }
     });
     return false;
