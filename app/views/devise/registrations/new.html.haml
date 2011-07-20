@@ -12,7 +12,5 @@
   %p.form-sep
     = f.label :password_confirmation
     = f.password_field :password_confirmation, :class => "text-input"
-    - f.fields_for :profile do |es|
-      = render :partial => 'profile', :locals => {:f => es}
   %p.form-sep
     = f.submit "Sign up", :class => "submit"

@@ -152,8 +152,8 @@ function tooltips() {
     },
     position: {
       corner: {
-        target: 'leftMiddle',
-        tooltip: 'rightMiddle'
+        target: 'bottomMiddle',
+        tooltip: 'topMiddle'
       }
     }
   })

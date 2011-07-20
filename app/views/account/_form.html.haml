@@ -1,28 +1,34 @@
 = form_for(@user, :url => account_update_path,:html => { :method => :put }) do |f|
-  %p
-    = f.label :first_name
-    = f.text_field :first_name, :class => "text-input"
-  %p
-    = f.label :last_name
-    = f.text_field :last_name, :class => "text-input"
-  %p
+  %p.form-sep
+    = f.label :username
+    = f.text_field :username, :class => "text-input required"
+  %p.form-sep
+    = f.label :email
+    = f.text_field :email, :class => "text-input required"
+  %p.form-sep
     = f.label :psn_name
-    = f.text_field :psn_name, :class => "text-input"
-  %p
+    = f.text_field :psn_name, :class => "text-input required"
+  %p.form-sep
     = f.label :reddit_name
     = f.text_field :reddit_name, :class => "text-input"
-  %p
-    = f.label :email
-    = f.text_field :email, :class => "text-input"
-  %p
+  %p.form-sep
+    = f.label :first_name
+    = f.text_field :first_name, :class => "text-input"
+  %p.form-sep
+    = f.label :last_name
+    = f.text_field :last_name, :class => "text-input"
+  %p.form-sep
+    = f.label :timezone, :style => "border-left: 2px solid red; padding-left: 3px;"
+    = f.time_zone_select :timezone, nil
+  %p.form-sep
     = f.label :password
-    = f.password_field :password, :class => "text-input"
+    = f.password_field :password, :class => "text-input required"
     = note("Leave blank if you don't want to change it")
-  %p
+  %p.form-sep
     = f.label :password_confirmation
-    = f.password_field :password_confirmation, :class => "text-input"
+    = f.password_field :password_confirmation, :class => "text-input required"
     = note("Re-enter your password")
-  %p
-    = f.submit "Update", :class => "submit"
+  %p.form-sep
+    = f.submit "Save", :class => "submit"
 %p
 = link_to "Back", :back
