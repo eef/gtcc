@@ -4,7 +4,7 @@
   %table
     %tr
       %th Name
-      %th Start time
+      %th Next Race
       %th Leader
       %th Entries
       %th
@@ -12,7 +12,8 @@
     - @my_leagues.each do |league|
       %tr
         %td= link_to league.name, league
-        %td= link_to "#{!league.races.blank? ? league.races.first.start_time.strftime("%d/%m/%y %I:%M%p") : "No races scheduled"} #{ActiveSupport::TimeZone.zones_map[league.races.first.timezone] unless league.races.blank?}", league
+        %td
+          = next_race(league)
         %td
           - if !league.standings.blank?
             = link_to league.standings.order("standings.points desc").first.user.username, "/leagues/#{league.id}#league-standings", :title => "View all standings"

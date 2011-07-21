@@ -12,7 +12,8 @@
     - @open_leagues.each do |league|
       %tr
         %td= link_to league.name, league
-        %td= next_race(league)
+        %td
+          = next_race(league)
         %td
           - if !league.standings.blank?
             = link_to league.standings.order("standings.points desc").first.user.username, "/leagues/#{league.id}#league-standings", :title => "View all standings"

@@ -55,8 +55,9 @@ class RacesController < ApplicationController
       if @race.league.blank?
       elsif !@race.league.blank?
         if @race.league.car_classes.length > 0
-          logger.info "GOT HERE" 
           format.html  { render :partial => "edit_result", :locals => {:league => @race.league} }
+        else
+          format.html  { render :partial => "edit_result", :locals => {:race => @race, :users => @race.league.users, :league => nil} }
         end
       end
     end
@@ -69,10 +70,8 @@ class RacesController < ApplicationController
     @race.organiser = current_user
     @race.users << current_user
     if params[:race][:league_id]
-      logger.info "*"*100 
       redir = League.find(params[:race][:league_id])
     else
-      logger.info "&"*100
       redir = @race
     end
     respond_to do |format|

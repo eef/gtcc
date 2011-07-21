@@ -1,23 +1,34 @@
 module LeaguesHelper
   
-  def next_race(league)
+  def next_race(item)
     race_link_text = ""
-    if league.races.blank?
-      race_link_text << "No races scheduled"
-    else
-      next_race = league.races.where('races.start_time > NOW()').first
-      race_link_text << next_race.start_time.strftime("%d/%m/%y %I:%M%p ")
-      race_link_text << ActiveSupport::TimeZone.zones_map[next_race.timezone].to_s
-      race_link_text << " at #{next_race.track.name}"
+    case item
+    when Race
+      race = item
+      url = race
+    when League
+      if item.races.blank?
+        return("No races scheduled")
+      else
+        race = item.races.where('races.start_time > NOW()').first
+        url = "/leagues/#{item.id}#races"
+      end
     end
-    link_to race_link_text, "/leagues/#{league.id}#races", :class => "has-tip", :title => local_timezone(next_race)
+    race_link_text << race.start_time.strftime("%d/%m/%y %I:%M%p ")
+    race_link_text << ActiveSupport::TimeZone.zones_map[race.timezone].to_s
+    race_link_text << " at #{race.track.name}"
+    return(link_to("Info", "#", :class => "ui-icon ui-icon-transferthick-e-w has-tip convert-local race-time", :title => "Convert to local time", :style => "margin-right: 5px; float: left;", "data-time-id" => "race-time-#{race.id}", "data-local-time" => local_timezone(race), "data-race-time" => race_link_text) + link_to(race_link_text, url, :class => "has-tip", :title => "Laps: #{race.laps}", :id => "race-time-#{race.id}"))
   end
   
   def local_timezone(race)
     str = ""
-    str << current_user.timezone
-    str << ":::"
-    str << ActiveSupport::TimeZone.zones_map[race.timezone].class.to_s
+    race_timezone = ActiveSupport::TimeZone.new(race.timezone)
+    user_timezone = ActiveSupport::TimeZone.new(current_user.timezone)
+    race_utc_time = race_timezone.local_to_utc(race.start_time)
+    str << user_timezone.utc_to_local(race_utc_time).strftime("%d/%m/%y %I:%M%p ")
+    str << user_timezone.to_s
+    str << " at #{race.track.name}"
+    str
   end
   
 end

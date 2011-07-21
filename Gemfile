@@ -1,7 +1,7 @@
 source 'http://rubygems.org'
 source 'http://gemcutter.org'
 
-gem 'rails', '3.0.3'
+gem 'rails', '3.0.9'
 gem 'mysql'
 gem 'hpricot'
 gem 'ruby_parser'

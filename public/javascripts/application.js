@@ -11,7 +11,26 @@ $(document).ready(function() {
   add_car_class_field();
   add_allowed_car_field();
   add_point_field();
+  toggle_race_times();
 });
+
+function toggle_race_times() {
+  $(".convert-local").click(function(){
+    var id = $(this).data("time-id");
+    console.log(id);
+    if($(this).hasClass("race-time")) {
+      $(this).removeClass("race-time");
+      $(this).addClass("local-time");
+      var new_time = $(this).data("local-time");
+      $("#" + id).text(new_time);
+    } else if($(this).hasClass("local-time")) {
+      $(this).removeClass("local-time");
+      $(this).addClass("race-time");
+      var new_time = $(this).data("race-time");
+      $("#" + id).text(new_time);
+    }
+  });
+}
 
 function add_car_class_field() {
   $('.add-cc').click(function(){

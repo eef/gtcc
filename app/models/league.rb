@@ -7,6 +7,7 @@ class League < ActiveRecord::Base
   has_many :results
   has_many :standings
   has_many :league_entries
+  has_many :users, :through => :league_entries
   has_many :car_classes, :dependent => :destroy
   has_many :league_cars, :dependent => :destroy
   accepts_nested_attributes_for :league_cars, :allow_destroy => true, :reject_if => :all_blank

@@ -14,6 +14,7 @@ class User < ActiveRecord::Base
   has_many :leagues, :foreign_key => "organiser_id"
   has_many :league_entries
   has_many :league_cars
+  has_many :leagues, :through => :league_entries
   has_and_belongs_to_many :races
   validates_presence_of :psn_name
   
@@ -23,6 +24,10 @@ class User < ActiveRecord::Base
   
   def my_races
     self.races.where(:league_id => nil)
+  end
+  
+  def my_leagues
+    
   end
   
   protected
