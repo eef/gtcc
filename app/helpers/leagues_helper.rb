@@ -17,7 +17,7 @@ module LeaguesHelper
     race_link_text << race.start_time.strftime("%d/%m/%y %I:%M%p ")
     race_link_text << ActiveSupport::TimeZone.zones_map[race.timezone].to_s
     race_link_text << " at #{race.track.name}"
-    return(link_to("Info", "#", :class => "ui-icon ui-icon-transferthick-e-w has-tip convert-local race-time", :title => "Convert to local time", :style => "margin-right: 5px; float: left;", "data-time-id" => "race-time-#{race.id}", "data-local-time" => local_timezone(race), "data-race-time" => race_link_text) + link_to(race_link_text, url, :class => "has-tip", :title => "Laps: #{race.laps}", :id => "race-time-#{race.id}"))
+    return(link_to("Info", "#", :class => "ui-icon ui-icon-transferthick-e-w has-tip convert-local race-time", :title => "Convert to local time", :style => "margin-right: 5px; float: left;", "data-time-id" => "race-time-#{race.id}", "data-local-time" => local_timezone(race), "data-race-time" => race_link_text) + link_to(race_link_text, url, :class => "has-tip race-time-#{race.id}", :title => "Laps: #{race.laps}"))
   end
   
   def local_timezone(race)

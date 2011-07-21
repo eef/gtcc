@@ -22,12 +22,12 @@ function toggle_race_times() {
       $(this).removeClass("race-time");
       $(this).addClass("local-time");
       var new_time = $(this).data("local-time");
-      $("#" + id).text(new_time);
+      $("." + id).text(new_time);
     } else if($(this).hasClass("local-time")) {
       $(this).removeClass("local-time");
       $(this).addClass("race-time");
       var new_time = $(this).data("race-time");
-      $("#" + id).text(new_time);
+      $("." + id).text(new_time);
     }
   });
 }
