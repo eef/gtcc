@@ -107,7 +107,7 @@ div.chzn-container a.chzn-single div {
   width: 18px;
 }
 div.chzn-container a.chzn-single div b {
-  background: url('images/chosen-sprite.png') no-repeat 0 1px;
+  background: url('chosen-sprite.png') no-repeat 0 1px;
   display: block;
   width: 100%;
   height: 100%;
