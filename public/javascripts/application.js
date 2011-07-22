@@ -12,6 +12,7 @@ $(document).ready(function() {
   add_allowed_car_field();
   add_point_field();
   toggle_race_times();
+  $("select").chosen();
 });
 
 function toggle_race_times() {
