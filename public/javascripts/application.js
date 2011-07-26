@@ -126,7 +126,7 @@ function league_register() {
       if ($("#car_class_id").length > 0) {
         car_class_id = $("#car_class_id option:selected").val();
       }
-      $.post("/league/enter_nocc/", {'car_name': lc_id,'id':league_id, 'car_class_id':car_class_id, 'car_id': car_id},
+      $.post("/league/enter_nocc/", {'car_name': lc_id,'id':league_id, 'car_class_id':car_class_id, 'car_id': car_id, 'authenticity_token' : $('meta[name="csrf-token"]').attr("content")},
       function(data) {
         $("#register").html(data);
       });
