@@ -13,7 +13,7 @@
         %th
           Points
       - pos = 1
-      - cc.standings.each do |standing|
+      - cc.standings.order("standings.points DESC").each do |standing|
         %tr
           %td{:class => "first", :style => "width: 75px; text-align: center;"}
             = pos.ordinalize
