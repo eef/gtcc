@@ -10,7 +10,7 @@ module LeaguesHelper
       if item.races.blank?
         return("No races scheduled")
       else
-        race = item.races.where('races.start_time > NOW()').first
+        race = item.races.order('races.start_time DESC').first
         url = "/leagues/#{item.id}#races"
       end
     end
