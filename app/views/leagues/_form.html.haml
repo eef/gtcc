@@ -1,4 +1,4 @@
-= form_for @league do |f|
+= form_for @league, :html => {:multipart => true}  do |f|
   -if @league.errors.any?
     #error_explanation
       %h2= "#{pluralize(@league.errors.count, "error")} prohibited this league from being saved:"

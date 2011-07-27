@@ -9,7 +9,7 @@ class Race < ActiveRecord::Base
   has_many :race_regulations, :dependent => :destroy
   has_many :event_settings, :dependent => :destroy
   has_many :results
-  has_many :photos, :as => :imageable
+  has_many :photos, :as => :imageable, :dependent => :destroy
   accepts_nested_attributes_for :race_regulations, :allow_destroy => true
   accepts_nested_attributes_for :photos, :allow_destroy => true
   accepts_nested_attributes_for :event_settings, :allow_destroy => true
