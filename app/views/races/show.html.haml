@@ -15,6 +15,7 @@
       %li
         = link_to "Admin", "#admin"
   #race-details
+    = image_tag(@race.photos.first.photo_data.url(:small))
     = render :partial => "show_race_details"
   - if @race.league_id.blank?
     #race-regulations

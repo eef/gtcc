@@ -27,6 +27,7 @@ class RacesController < ApplicationController
   # GET /races/new.xml
   def new
     @race = Race.new
+    @race.photos.build
     unless params[:league_id]
       @race.race_regulations.build
       @race.event_settings.build

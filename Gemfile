@@ -20,3 +20,4 @@ gem "rspec-rails"
 gem 'awesome_nested_set', :git => 'git://github.com/galetahub/awesome_nested_set.git'
 gem 'awesome_print'
 gem 'calendar_date_select'
+gem 'paperclip'

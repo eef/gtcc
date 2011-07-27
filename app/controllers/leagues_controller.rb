@@ -46,6 +46,7 @@ class LeaguesController < ApplicationController
     @league.event_settings.build
     @league.league_points.build
     @league.car_classes.build
+    @league.photos.build
     respond_to do |format|
       format.html # new.html.erb
       format.xml  { render :xml => @league }
