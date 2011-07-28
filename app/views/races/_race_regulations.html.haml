@@ -39,6 +39,7 @@
     %td{:class => "first"}
       = f.label :performance_points
     %td
+      #pp-slider
       = f.text_field :performance_points, :id => "pp-input", :class => "text-input quarter"
       = note("Enter 0 for no limit")
   %tr
