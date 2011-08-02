@@ -26,11 +26,11 @@ body {
   -webkit-border-radius: 2px;
   -moz-border-radius: 2px;
   border-radius: 2px;
-  background: #232323;
-  background: -webkit-gradient(linear, 0 0, 0 bottom, from(#232323), to(#0C0C0C));
-  background: -moz-linear-gradient(#232323, #0C0C0C);
-  background: linear-gradient(#232323, #0C0C0C);
-  -pie-background: linear-gradient(#232323, #0C0C0C);
+  background: #2D2D2D;
+  background: -webkit-gradient(linear, 0 0, 0 bottom, from(#2D2D2D), to(#0C0C0C));
+  background: -moz-linear-gradient(#2D2D2D, #2D2D2D);
+  background: linear-gradient(#2D2D2D, #0C0C0C);
+  -pie-background: linear-gradient(#2D2D2D, #0C0C0C);
   behavior: url(/stylesheets/pie.htc);
 }
 
