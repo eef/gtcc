@@ -1,3 +1,11 @@
+dt {
+  float: left;
+  clear: left;
+  text-align: right;
+  font-weight: bold;
+  margin: 0px 5px 0px 0px;
+}
+
 #upgrade_tree {
   list-style: none;
   margin-top: 5px;

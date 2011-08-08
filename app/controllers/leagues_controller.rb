@@ -59,6 +59,7 @@ class LeaguesController < ApplicationController
     @league.league_cars.build if @league.league_cars.blank?
     @league.league_points.build if @league.league_points.blank?
     @car_classes = @league.car_classes
+    @league.photos.build
     @show_table = false
     if @league.league_cars.where("league_cars.amount > 0").length > 0
       @show_table = true

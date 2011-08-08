@@ -21,4 +21,3 @@ gem 'awesome_nested_set', :git => 'git://github.com/galetahub/awesome_nested_set
 gem 'awesome_print'
 gem 'calendar_date_select'
 gem 'paperclip'
-gem 'redis-store'

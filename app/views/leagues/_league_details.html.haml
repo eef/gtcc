@@ -1,8 +1,18 @@
+#pane
+  .small-image
+    
+  #details-pane
+    %dl
+      %dt
+        Name:
+      %dd
+        = @league.name
 %table{:class => "race-table"}
   %tr
     %td{:class => "first"}
       %label
         Name
+        
     %td
       = @league.name
   %tr
