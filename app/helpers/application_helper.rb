@@ -29,7 +29,7 @@ module ApplicationHelper
   
   def google_analytics
     s = ""
-    if Rails.env.production?
+    if !Rails.env.production?
       s = "<script type=\"text/javascript\">
 
         var _gaq = _gaq || [];

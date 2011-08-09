@@ -21,3 +21,6 @@ gem 'awesome_nested_set', :git => 'git://github.com/galetahub/awesome_nested_set
 gem 'awesome_print'
 gem 'calendar_date_select'
 gem 'paperclip'
+group :production do
+  gem 'rack-google_analytics', :require => "rack/google_analytics"
+end
