@@ -3,7 +3,6 @@
   = devise_error_messages!
   %p
     = f.label :email
-    %br/
-    = f.text_field :email
-  %p= f.submit "Resend confirmation instructions"
+    = f.text_field :email, :class => "text-input"
+  %p= f.submit "Resend confirmation instructions", :class => "submit"
 = render :partial => "devise/shared/links"

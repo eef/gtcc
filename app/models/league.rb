@@ -7,11 +7,13 @@ class League < ActiveRecord::Base
   has_many :results
   has_many :standings
   has_many :league_entries
+  has_many :discussions
   has_many :users, :through => :league_entries
   has_many :car_classes, :dependent => :destroy
   has_many :league_cars, :dependent => :destroy
   has_many :photos, :as => :imageable, :dependent => :destroy
-  accepts_nested_attributes_for :photos, :allow_destroy => true
+  accepts_nested_attributes_for :photos, :allow_destroy => true, :reject_if => :all_blank
+  accepts_nested_attributes_for :discussions, :allow_destroy => true, :reject_if => :all_blank
   accepts_nested_attributes_for :league_cars, :allow_destroy => true, :reject_if => :all_blank
   accepts_nested_attributes_for :league_entries, :allow_destroy => true, :reject_if => :all_blank
   accepts_nested_attributes_for :car_classes, :allow_destroy => true, :reject_if => :all_blank

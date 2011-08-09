@@ -13,6 +13,8 @@
           Amount
         %th
           Restrictions
+        %th
+          Delete
       - idx = 0
       - f.fields_for :league_cars do |cc|
         - unless cc.object.amount.nil?

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110125161173) do
+ActiveRecord::Schema.define(:version => 20110125161177) do
 
   create_table "car_classes", :force => true do |t|
     t.integer  "league_id"
@@ -30,6 +30,14 @@ ActiveRecord::Schema.define(:version => 20110125161173) do
   create_table "cars_leagues", :id => false, :force => true do |t|
     t.integer  "car_id"
     t.integer  "league_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "discussions", :force => true do |t|
+    t.integer  "user_id"
+    t.integer  "league_id"
+    t.text     "content"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -87,7 +95,7 @@ ActiveRecord::Schema.define(:version => 20110125161173) do
     t.integer  "organiser_id"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.boolean  "open",         :default => true
+    t.boolean  "open",         :default => false
   end
 
   create_table "leagues_users", :id => false, :force => true do |t|
@@ -301,6 +309,9 @@ ActiveRecord::Schema.define(:version => 20110125161173) do
     t.string   "reddit_name"
     t.integer  "age"
     t.string   "timezone",                            :default => "UTC"
+    t.datetime "confirmed_at"
+    t.datetime "confirmation_sent_at"
+    t.string   "confirmation_token"
   end
 
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true

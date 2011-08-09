@@ -1,4 +1,10 @@
 %tr
   %td
-    = f.file_field :photo_data, :class => "text-input"
-    = note("Upload a photo for your league")
+    - if @league.photos.blank?
+      = f.file_field :photo_data, :class => "text-input"
+      = note("Upload a photo for your league")
+    - else
+      = image_tag(@league.photos.first.photo_data.url(:small)) unless @league.photos.blank?
+      %label{:style => "display: inline;"}
+        Delete?
+      = f.check_box '_destroy', :style => "display: inline;"
