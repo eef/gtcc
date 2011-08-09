@@ -9,8 +9,9 @@
         = link_to "Event Settings", "#event-settings"
     %li
       = link_to "Results", "#results"
-    %li
-      = link_to "Register", "#register"
+    - if @race.league_id.blank?
+      %li
+        = link_to "Register", "#register"
     - if @race.organiser.eql?(current_user)
       %li
         = link_to "Admin", "#admin"
@@ -22,15 +23,15 @@
       = render :partial => "show_race_regulations"
     #event-settings
       = render :partial => "show_event_settings"
-  #register
-    - if !@race.league.blank?
-      This race is part of a league.
-      = link_to "Click here", "/leagues/#{@race.league.id}#register"
-      to register for the league.
-    - elsif !@race.results.blank?
-      Enteries for this race are closed as the results are in.
-    - elsif @race.league.blank?
-      = render :partial => "race_register"
+    #register
+      - if !@race.league.blank?
+        This race is part of a league.
+        = link_to "Click here", "/leagues/#{@race.league.id}#register"
+        to register for the league.
+      - elsif !@race.results.blank?
+        Enteries for this race are closed as the results are in.
+      - elsif @race.league.blank?
+        = render :partial => "race_register"
   #results
     = render :partial => "show_results"
   - if @race.organiser.eql?(current_user)

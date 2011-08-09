@@ -11,7 +11,10 @@
 
     - @open_leagues.each do |league|
       %tr
-        %td= link_to league.name, league
+        %td
+          = image_tag(league.photos.first.photo_data.url(:tiny)) unless league.photos.blank?
+          %br
+          = link_to league.name, league
         %td
           = next_race(league)
         %td

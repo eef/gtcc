@@ -1,18 +1,9 @@
-#pane
-  .small-image
-    
-  #details-pane
-    %dl
-      %dt
-        Name:
-      %dd
-        = @league.name
+= image_tag(@league.photos.first.photo_data.url(:small)) unless @league.photos.blank?
 %table{:class => "race-table"}
   %tr
     %td{:class => "first"}
       %label
         Name
-        
     %td
       = @league.name
   %tr

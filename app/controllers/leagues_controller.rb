@@ -3,8 +3,7 @@ class LeaguesController < ApplicationController
   # GET /leagues.xml
   def index
     @open_leagues = League.open_leagues
-    @my_leagues = []
-    @closed_leagues = League.closed_leagues
+    @my_leagues = current_user.leagues
     respond_to do |format|
       format.html # index.html.erb
       format.xml  { render :xml => @leagues }

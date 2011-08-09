@@ -39,18 +39,20 @@
     %td{:class => "first"}
       = f.label :performance_points
     %td
-      #pp-slider
+      #pp-slider{:style => "width: 237px; margin-bottom: 3px;"}
       = f.text_field :performance_points, :id => "pp-input", :class => "text-input quarter"
       = note("Enter 0 for no limit")
   %tr
     %td{:class => "first"}
       = f.label :power
     %td
+      #pow-slider{:style => "width: 237px; margin-bottom: 3px;"}
       = f.text_field :power, :id => "pow-input", :class => "text-input quarter"
       = note("Enter 0 for no limit")
   %tr
     %td{:class => "first"}
       = f.label :weight
     %td
+      #we-slider{:style => "width: 237px; margin-bottom: 3px;"}
       = f.text_field :weight, :id => "we-input", :class => "text-input quarter"
       = note("Enter 0 for no limit")

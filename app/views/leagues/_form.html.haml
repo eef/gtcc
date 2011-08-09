@@ -22,17 +22,6 @@
         = link_to "Point Settings", "#points"
       %li
         = link_to "Races", "#races"
-    #race-photos
-      %table{:class => "half"}
-        %tr
-          %th
-            Name
-          %th
-            Description
-          %th
-            File
-        - f.fields_for :photos do |photo|
-          = render :partial => 'races/photo_form', :locals => {:f => photo}
     #league-details
       = render :partial => "edit_league_details", :locals => {:f => f}
     #league-regulations
