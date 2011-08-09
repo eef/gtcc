@@ -1,9 +1,12 @@
 %tr
   %td
-    - if @league.photos.blank?
+    - if @league.new_record?
       = f.file_field :photo_data, :class => "text-input"
       = note("Upload a photo for your league")
-    - else
+    - elsif @league.photos.blank?
+      = f.file_field :photo_data, :class => "text-input"
+      = note("Upload a photo for your league")
+    - elsif !@league.photos.blank?
       = image_tag(@league.photos.first.photo_data.url(:small)) unless @league.photos.blank?
       %label{:style => "display: inline;"}
         Delete?
