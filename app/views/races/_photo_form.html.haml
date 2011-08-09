@@ -3,7 +3,7 @@
     - if @league.new_record?
       = f.file_field :photo_data, :class => "text-input"
       = note("Upload a photo for your league")
-    - elsif @league.photos.blank?
+    - elsif @league.photos.first.new_record?
       = f.file_field :photo_data, :class => "text-input"
       = note("Upload a photo for your league")
     - elsif !@league.photos.blank?
