@@ -7,5 +7,6 @@ Rcorp::Application.initialize!
 ActionMailer::Base.smtp_settings = {  
   :address              => "localhost",  
   :port                 => 25,  
-  :domain               => "gran-turismo-racing.com"
+  :domain               => "gran-turismo-racing.com",
+  :enable_starttls_auto => false
 }
