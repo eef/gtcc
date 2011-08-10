@@ -17,5 +17,5 @@ class SiteConfig
   @@shuffle_ratio = (0..10).to_a
   @@grip_reduction = ['Low', 'High']
   @@image_types = ['image/jpeg', 'image/png', 'image/x-png', 'image/pjpeg', 'image/gif', 'image/bmp']
-  @@image_styles = {:thumb => "100x100#", :small  => "200x200#", :tiny => "50x50#"}
+  @@image_styles = {:thumb => "100x100", :small  => "200x200", :tiny => "50x50"}
 end
