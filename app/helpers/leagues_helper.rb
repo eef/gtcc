@@ -4,25 +4,34 @@ module LeaguesHelper
     race_link_text = ""
     case item
     when Race
-      race = item
-      url = race
+      n_race = item
+      url = n_race
     when League
       if item.races.blank?
         return("No races scheduled")
       else
-        race = item.races.order('races.start_time DESC').first
+        item.races.order('races.start_time DESC').each do |race|
+          if race.results.blank?
+            n_race = race
+          end
+        end
         url = "/leagues/#{item.id}#races"
       end
     end
-    race_link_text << race.start_time.strftime("%d/%m/%y %I:%M%p ")
-    race_link_text << ActiveSupport::TimeZone.zones_map[race.timezone].to_s
-    race_link_text << " at #{race.track.name}"
-    if race.start_time < Time.now
+    race_link_text << n_race.start_time.strftime("%d/%m/%y %I:%M%p ")
+    race_link_text << ActiveSupport::TimeZone.zones_map[n_race.timezone].to_s
+    race_link_text << " at #{n_race.track.name}"
+    if n_race.start_time < Time.now
       title = "Click to view results"
     else
-      title = "Laps: #{race.laps}"
+      title = "Laps: #{n_race.laps}"
     end
-    return(link_to("Info", "#", :class => "ui-icon ui-icon-transferthick-e-w has-tip convert-local race-time", :title => "Convert to local time", :style => "margin-right: 5px; float: left;", "data-time-id" => "race-time-#{race.id}", "data-local-time" => local_timezone(race), "data-race-time" => race_link_text) + link_to(race_link_text, url, :class => "has-tip race-time-#{race.id}", :title => title))
+    psn = ""
+    if n_race.results.blank?
+      psn << "PSN Race ID: "
+      psn << n_race.psn_race_id.to_s unless n_race.psn_race_id.blank?
+    end
+    return(link_to("Info", "#", :class => "ui-icon ui-icon-transferthick-e-w has-tip convert-local race-time", :title => "Convert to local time", :style => "margin-right: 5px; float: left;", "data-time-id" => "race-time-#{n_race.id}", "data-local-time" => local_timezone(n_race), "data-race-time" => race_link_text) + link_to(race_link_text, url, :class => "has-tip race-time-#{n_race.id}", :title => title) + "<br />#{psn}".html_safe)
   end
   
   def local_timezone(race)
