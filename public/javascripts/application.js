@@ -12,12 +12,53 @@ $(document).ready(function() {
   add_allowed_car_field();
   add_point_field();
   toggle_race_times();
+  discussions();
+  new_post();
 });
+
+function new_post() {
+  $(".new-p").toggle(function(){
+    add_p();;
+  }, function(){
+    remove_p();
+  })
+}
+
+function add_p(argument) {
+  $("#new-post-form").slideDown();
+  $('#p-icon').toggleClass("ui-icon-plusthick");
+  $('#p-icon').toggleClass("ui-icon-minusthick");
+  $("#p-text").text("Cancel post");
+}
+
+function remove_p() {
+  $("#new-post-form").slideUp();
+  $('#p-icon').toggleClass("ui-icon-minusthick");
+  $('#p-icon').toggleClass("ui-icon-plusthick");
+  $("#p-text").text("New post");
+}
+
+function discussions() {
+  $("#submit-discussion").click(function(){
+    var content = $("#new-discussion").val();
+    var league_id = $(this).data("league-id");
+    if(!content) {
+      alert("Enter some content son");
+    } else {
+      $.post("/league/post_discussion", {'league_id': league_id, 'content': content, 'authenticity_token' : $('meta[name="csrf-token"]').attr("content")},
+      function(data) {
+        $("#no-posts").hide();
+        $("#discussions-holder").prepend(data);
+        $("#new-discussion").val("");
+        remove_p();
+      });
+    }
+  })
+}
 
 function toggle_race_times() {
   $(".convert-local").click(function(){
     var id = $(this).data("time-id");
-    console.log(id);
     if($(this).hasClass("race-time")) {
       $(this).removeClass("race-time");
       $(this).addClass("local-time");
