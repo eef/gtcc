@@ -83,6 +83,7 @@ GEM
       activesupport
     polyglot (0.3.1)
     rack (1.2.3)
+    rack-google_analytics (1.0.1)
     rack-mount (0.6.14)
       rack (>= 1.0.0)
     rack-test (0.5.7)
@@ -146,6 +147,7 @@ DEPENDENCIES
   mongo
   mysql
   paperclip
+  rack-google_analytics
   rails (= 3.0.9)
   rspec-rails
   ruby_parser

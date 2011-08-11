@@ -1,7 +1,7 @@
 - unless @league.league_entries.length >= @league.max_players
   .league-reg
     %label
-      Please choose which class you wish to race in
+      Please choose which car you wish to race in
     = reg_car_name
     = hidden_field_tag "car_id", ""
     = submit_tag "Register", :class => "submit #{"hidden" if @reg_cars.blank?}", "data-league-id" => @league.id, :id => "submit-entry"
