@@ -5,10 +5,10 @@ class Race < ActiveRecord::Base
   belongs_to :location
   belongs_to :league
   belongs_to :organiser, :class_name => "User", :foreign_key => "organiser_id", :validate => true
-  has_and_belongs_to_many :users
   has_many :race_regulations, :dependent => :destroy
   has_many :event_settings, :dependent => :destroy
   has_many :results
+  has_and_belongs_to_many :users
   has_many :photos, :as => :imageable, :dependent => :destroy
   accepts_nested_attributes_for :race_regulations, :allow_destroy => true
   accepts_nested_attributes_for :photos, :allow_destroy => true
@@ -53,8 +53,10 @@ class Race < ActiveRecord::Base
             standing = entry.standing
             results = entry.user.results.where(:league_id => self.league.id)
             points = 0
-            results.each do |result|
-              points += league_points[result.position]
+            unless league_points.empty?
+              results.each do |result|
+                points += league_points[result.position] unless league_points[result.position].nil?
+              end
             end
             standing.points = points
             standing.save

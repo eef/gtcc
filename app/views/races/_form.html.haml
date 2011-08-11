@@ -16,17 +16,6 @@
           = link_to "Event Settings", "#event-settings"
       %li
         = link_to "Results", "#results"
-    #race-photos
-      %table{:class => "half"}
-        %tr
-          %th
-            Name
-          %th
-            Description
-          %th
-            File
-        - f.fields_for :photos do |photo|
-          = render :partial => 'photo_form', :locals => {:f => photo}
     #race-details
       %table{:class => "race-table"}
         %tr

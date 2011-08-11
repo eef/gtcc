@@ -12,13 +12,12 @@
     %td
       = @race.organiser.username
       = " - PSN name: #{@race.organiser.psn_name}"
-  - unless @race.psn_race_id.blank?
-    %tr
-      %td{:class => "first"}
-        %label
-          PSN Race ID
-      %td
-        = @race.psn_race_id
+  %tr
+    %td{:class => "first"}
+      %label
+        PSN Race ID
+    %td
+      = @race.psn_race_id.blank? ? "No Race ID yet" : @race.psn_race_id
   %tr
     %td{:class => "first"}
       %label

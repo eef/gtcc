@@ -1,27 +1,33 @@
 - idx = 0
 - if !league.nil?
   - league.car_classes.each do |cc|
-    - pos = 0
-    %h3
-      = cc.name
-    %table{:class => "half"}
-      %tr
-        %th
-          Position
-        %th
-          User
-          = hidden_field_tag "race[open]", "0"
-      - cc.max_players.times do
+    - if cc.users.length > 0
+      - pos = 0
+      %h3
+        = cc.name
+      %table{:class => "half"}
         %tr
-          %td{:width => "20px", :style => "text-align: center"}
-            = hidden_field_tag "race[results_attributes][#{idx}][position]", (pos + 1)
-            = hidden_field_tag "race[results_attributes][#{idx}][league_id]", league.id
-            = (pos + 1).ordinalize
-          %td
-            = select_tag "race[results_attributes][#{idx}][user_id]", options_for_select(cc.users.map {|u| ["#{u.username} (#{u.psn_name})", u.id]})
-            = hidden_field_tag "race[results_attributes][#{idx}][car_class_id]", cc.id
-            - pos += 1
-            - idx += 1
+          %th
+            Position
+          %th
+            User
+            = hidden_field_tag "race[open]", "0"
+        - cc.users.length.times do
+          %tr
+            %td{:width => "20px", :style => "text-align: center"}
+              = hidden_field_tag "race[results_attributes][#{idx}][position]", (pos + 1)
+              = hidden_field_tag "race[results_attributes][#{idx}][league_id]", league.id
+              = (pos + 1).ordinalize
+            %td
+              = select_tag "race[results_attributes][#{idx}][user_id]", options_for_select(cc.users.map {|u| ["#{u.username} (#{u.psn_name})", u.id]})
+              = hidden_field_tag "race[results_attributes][#{idx}][car_class_id]", cc.id
+              - pos += 1
+              - idx += 1
+    - else
+      No entries for
+      = cc.name
+      %br
+      %br
 - else
   - pos = 0
   %table{:class => "half"}

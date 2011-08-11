@@ -2,6 +2,7 @@ module LeaguesHelper
   
   def next_race(item)
     race_link_text = ""
+    n_race = false
     case item
     when Race
       n_race = item
@@ -17,6 +18,9 @@ module LeaguesHelper
         end
         url = "/leagues/#{item.id}#races"
       end
+    end
+    if !n_race
+      return("No races scheduled")
     end
     race_link_text << n_race.start_time.strftime("%d/%m/%y %I:%M%p ")
     race_link_text << ActiveSupport::TimeZone.zones_map[n_race.timezone].to_s

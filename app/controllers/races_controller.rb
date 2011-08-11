@@ -42,16 +42,15 @@ class RacesController < ApplicationController
 
   # GET /races/1/edit
   def edit
-    @race = current_user.races.where(:id => params[:id]).first
-    @entries = @race.users
-    unless @race.league_id.blank?
+    @race = Race.where(:id => params[:id], :organiser_id => current_user.id).first
+    unless @race.league.blank?
       @league = League.find(@race.league_id)
       @users = @league.league_entries
     end
   end
   
   def generate_results
-    @race = current_user.races.where(:id => params[:id]).first
+    @race = Race.where(:id => params[:id], :organiser_id => current_user.id).first
     respond_to do |format|
       if @race.league.blank?
       elsif !@race.league.blank?
@@ -69,7 +68,6 @@ class RacesController < ApplicationController
   def create
     @race = Race.new(params[:race])
     @race.organiser = current_user
-    @race.users << current_user
     if params[:race][:league_id]
       redir = League.find(params[:race][:league_id])
     else
@@ -132,7 +130,7 @@ class RacesController < ApplicationController
   # PUT /races/1
   # PUT /races/1.xml
   def update
-    @race = current_user.races.where(:id => params[:id]).first
+    @race = Race.where(:id => params[:id], :organiser_id => current_user.id).first
     respond_to do |format|
       if @race.update_attributes(params[:race])
         format.html { redirect_to(@race, :notice => 'Race was successfully updated.') }
@@ -147,7 +145,7 @@ class RacesController < ApplicationController
   # DELETE /races/1
   # DELETE /races/1.xml
   def destroy
-    @race = current_user.races.where(:id => params[:id]).first
+    @race = Race.where(:id => params[:id], :organiser_id => current_user.id).first
     @race.destroy
     respond_to do |format|
       format.html { redirect_to(races_url) }
