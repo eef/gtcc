@@ -18,7 +18,7 @@
         %td
           = next_race(league)
         %td
-          - if !league.standings.blank?
+          - if !league.results.blank?
             = link_to league.standings.order("standings.points desc").first.user.username, "/leagues/#{league.id}#league-standings", :title => "View all standings"
           - else
             N/A
