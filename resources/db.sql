@@ -108,7 +108,7 @@ CREATE TABLE `discussions` (
   `created_at` datetime DEFAULT NULL,
   `updated_at` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -117,6 +117,7 @@ CREATE TABLE `discussions` (
 
 LOCK TABLES `discussions` WRITE;
 /*!40000 ALTER TABLE `discussions` DISABLE KEYS */;
+INSERT INTO `discussions` VALUES (1,51,36,'I have entered the race times to start at 8pm GMT on Sunday nights.  If you guys think it should start earlier or later then leave a reply here and we can arrange better times.','2011-08-11 01:51:51','2011-08-11 01:51:51');
 /*!40000 ALTER TABLE `discussions` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -143,7 +144,7 @@ CREATE TABLE `event_settings` (
   `updated_at` datetime DEFAULT NULL,
   `league_id` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -152,7 +153,7 @@ CREATE TABLE `event_settings` (
 
 LOCK TABLES `event_settings` WRITE;
 /*!40000 ALTER TABLE `event_settings` DISABLE KEYS */;
-INSERT INTO `event_settings` VALUES (17,'None','Normal race','None','On','Low','Fastest','Grid start','None',0,NULL,'2011-08-09 23:23:07','2011-08-09 23:23:07',34),(18,'None','Normal race','None','On','High','Fastest','Grid start','None',0,NULL,'2011-08-10 02:32:11','2011-08-10 02:32:11',35);
+INSERT INTO `event_settings` VALUES (17,'None','Normal race','None','On','Low','Fastest','Grid start','None',0,NULL,'2011-08-09 23:23:07','2011-08-09 23:23:07',34),(18,'None','Normal race','None','On','High','Fastest','Grid start','None',0,NULL,'2011-08-10 02:32:11','2011-08-10 02:32:11',35),(19,'None','Normal race','None','On','Low','Fastest','Grid start','None',0,NULL,'2011-08-11 00:09:19','2011-08-11 00:09:19',36);
 /*!40000 ALTER TABLE `event_settings` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -176,7 +177,7 @@ CREATE TABLE `league_cars` (
   `allowed` tinyint(1) DEFAULT '0',
   `car_name` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=38 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=46 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -185,6 +186,7 @@ CREATE TABLE `league_cars` (
 
 LOCK TABLES `league_cars` WRITE;
 /*!40000 ALTER TABLE `league_cars` DISABLE KEYS */;
+INSERT INTO `league_cars` VALUES (42,35,534,NULL,NULL,'2011-08-10 21:50:34','2011-08-10 21:50:34',NULL,0,0,'Mercedes-Benz CLK Touring Car \'00'),(43,35,263,NULL,NULL,'2011-08-10 22:38:44','2011-08-10 22:38:44',NULL,0,0,'Honda CIVIC TYPE R (EK) \'97'),(44,36,44,NULL,NULL,'2011-08-11 00:15:34','2011-08-11 00:15:34',NULL,0,0,'Audi A4 Touring Car \'04'),(45,36,527,NULL,NULL,'2011-08-11 11:13:27','2011-08-11 11:13:27',NULL,0,0,'Mercedes-Benz 190 E 2.5 - 16 Evolution II Touring Car \'92');
 /*!40000 ALTER TABLE `league_cars` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -204,7 +206,7 @@ CREATE TABLE `league_entries` (
   `updated_at` datetime DEFAULT NULL,
   `league_car_id` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -213,6 +215,7 @@ CREATE TABLE `league_entries` (
 
 LOCK TABLES `league_entries` WRITE;
 /*!40000 ALTER TABLE `league_entries` DISABLE KEYS */;
+INSERT INTO `league_entries` VALUES (7,28,NULL,35,'2011-08-10 21:50:34','2011-08-10 21:50:34',42),(8,25,NULL,35,'2011-08-10 22:38:44','2011-08-10 22:38:44',43),(9,51,NULL,36,'2011-08-11 00:15:34','2011-08-11 00:15:34',44),(10,36,NULL,36,'2011-08-11 11:13:27','2011-08-11 11:13:27',45);
 /*!40000 ALTER TABLE `league_entries` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -232,7 +235,7 @@ CREATE TABLE `league_points` (
   `created_at` datetime DEFAULT NULL,
   `updated_at` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=186 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=195 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -241,7 +244,7 @@ CREATE TABLE `league_points` (
 
 LOCK TABLES `league_points` WRITE;
 /*!40000 ALTER TABLE `league_points` DISABLE KEYS */;
-INSERT INTO `league_points` VALUES (184,1,NULL,34,NULL,'2011-08-09 23:23:07','2011-08-09 23:23:07'),(185,1,NULL,35,NULL,'2011-08-10 02:32:11','2011-08-10 02:32:11');
+INSERT INTO `league_points` VALUES (184,1,NULL,34,NULL,'2011-08-09 23:23:07','2011-08-09 23:23:07'),(185,1,NULL,35,NULL,'2011-08-10 02:32:11','2011-08-10 02:32:11'),(186,1,10,36,NULL,'2011-08-11 00:09:19','2011-08-11 00:09:19'),(187,2,8,36,NULL,'2011-08-11 00:09:19','2011-08-11 00:09:19'),(188,3,7,36,NULL,'2011-08-11 00:09:19','2011-08-11 00:09:19'),(189,4,6,36,NULL,'2011-08-11 00:09:19','2011-08-11 00:09:19'),(190,5,5,36,NULL,'2011-08-11 00:09:19','2011-08-11 00:09:19'),(191,6,4,36,NULL,'2011-08-11 00:09:19','2011-08-11 00:09:19'),(192,7,3,36,NULL,'2011-08-11 00:09:19','2011-08-11 00:09:19'),(193,8,2,36,NULL,'2011-08-11 00:09:19','2011-08-11 00:09:19'),(194,9,1,36,NULL,'2011-08-11 00:09:19','2011-08-11 00:09:19');
 /*!40000 ALTER TABLE `league_points` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -261,7 +264,7 @@ CREATE TABLE `leagues` (
   `updated_at` datetime DEFAULT NULL,
   `open` tinyint(1) DEFAULT '0',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=36 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=37 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -270,7 +273,7 @@ CREATE TABLE `leagues` (
 
 LOCK TABLES `leagues` WRITE;
 /*!40000 ALTER TABLE `leagues` DISABLE KEYS */;
-INSERT INTO `leagues` VALUES (34,'DTM',16,19,'2011-08-09 23:23:07','2011-08-10 11:06:24',0),(35,'Bacon',42,25,'2011-08-10 02:32:11','2011-08-10 02:32:11',1);
+INSERT INTO `leagues` VALUES (34,'DTM',16,19,'2011-08-09 23:23:07','2011-08-10 11:06:24',0),(35,'Bacon',42,25,'2011-08-10 02:32:11','2011-08-10 02:32:11',1),(36,'DTM',16,51,'2011-08-11 00:09:19','2011-08-11 00:14:43',1);
 /*!40000 ALTER TABLE `leagues` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -402,7 +405,7 @@ CREATE TABLE `photos` (
   `description` text COLLATE utf8_unicode_ci,
   `owner_id` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -411,7 +414,7 @@ CREATE TABLE `photos` (
 
 LOCK TABLES `photos` WRITE;
 /*!40000 ALTER TABLE `photos` DISABLE KEYS */;
-INSERT INTO `photos` VALUES (8,35,'League','2011-08-10 02:32:11','2011-08-10 02:32:11','gt_reddit.jpg','image/jpeg',80108,'2011-08-10 02:32:10',NULL,NULL,NULL),(9,11,'Race','2011-08-10 02:35:39','2011-08-10 02:35:39',NULL,NULL,NULL,NULL,NULL,NULL,NULL),(10,34,'League','2011-08-10 11:06:24','2011-08-10 11:06:24','dtm.gif','image/gif',11027,'2011-08-10 11:06:22',NULL,NULL,NULL);
+INSERT INTO `photos` VALUES (8,35,'League','2011-08-10 02:32:11','2011-08-10 02:32:11','gt_reddit.jpg','image/jpeg',80108,'2011-08-10 02:32:10',NULL,NULL,NULL),(9,11,'Race','2011-08-10 02:35:39','2011-08-10 02:35:39',NULL,NULL,NULL,NULL,NULL,NULL,NULL),(11,34,'League','2011-08-10 20:42:20','2011-08-10 20:42:20','DTM-logo.jpg','image/jpeg',21322,'2011-08-10 20:42:19',NULL,NULL,NULL),(12,36,'League','2011-08-11 00:09:19','2011-08-11 00:09:19','DTM-logo.jpg','image/jpeg',21322,'2011-08-11 00:09:19',NULL,NULL,NULL);
 /*!40000 ALTER TABLE `photos` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -440,7 +443,7 @@ CREATE TABLE `race_regulations` (
   `updated_at` datetime DEFAULT NULL,
   `league_id` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -449,7 +452,7 @@ CREATE TABLE `race_regulations` (
 
 LOCK TABLES `race_regulations` WRITE;
 /*!40000 ALTER TABLE `race_regulations` DISABLE KEYS */;
-INSERT INTO `race_regulations` VALUES (17,0,0,0,0,0,'',0,0,0,'No limit',NULL,NULL,'2011-08-09 23:23:07','2011-08-09 23:23:07',34),(18,0,0,0,1,1,'',606,0,0,'Sports: Soft',NULL,NULL,'2011-08-10 02:32:11','2011-08-10 02:32:11',35);
+INSERT INTO `race_regulations` VALUES (17,0,0,0,0,0,'',0,0,0,'No limit',NULL,NULL,'2011-08-09 23:23:07','2011-08-09 23:23:07',34),(18,0,0,0,1,1,'',606,0,0,'Sports: Soft',NULL,NULL,'2011-08-10 02:32:11','2011-08-10 02:32:11',35),(19,0,0,0,1,1,'DTM Cars Online',0,0,0,'No limit',NULL,NULL,'2011-08-11 00:09:19','2011-08-11 00:19:49',36);
 /*!40000 ALTER TABLE `race_regulations` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -478,7 +481,7 @@ CREATE TABLE `races` (
   `league_id` int(11) DEFAULT NULL,
   `open` tinyint(1) DEFAULT '1',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -487,7 +490,7 @@ CREATE TABLE `races` (
 
 LOCK TABLES `races` WRITE;
 /*!40000 ALTER TABLE `races` DISABLE KEYS */;
-INSERT INTO `races` VALUES (11,'First Reddit Race',9,22,'2011-08-10 02:35:39','2011-08-10 02:36:04',25,'2011-08-10 18:00:00',3,'Eastern Time (US & Canada)','','Race for fun',42,0,35,1);
+INSERT INTO `races` VALUES (11,'First Reddit Race',9,22,'2011-08-10 02:35:39','2011-08-10 22:44:58',25,'2011-08-10 18:00:00',3,'Eastern Time (US & Canada)','1472-6118-3744-3751-0036','Race for fun',42,1,35,1),(12,'Round One',6,14,'2011-08-11 00:12:48','2011-08-11 00:12:48',51,'2011-08-14 20:00:00',10,'UTC','','Race for real',16,1,36,1),(13,'Round Two',2,4,'2011-08-11 00:14:29','2011-08-11 00:14:29',51,'2011-08-21 20:00:00',10,'UTC','','Race for real',16,1,36,1);
 /*!40000 ALTER TABLE `races` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -699,7 +702,7 @@ CREATE TABLE `standings` (
   `car_class_id` int(11) DEFAULT NULL,
   `league_entry_id` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -708,6 +711,7 @@ CREATE TABLE `standings` (
 
 LOCK TABLES `standings` WRITE;
 /*!40000 ALTER TABLE `standings` DISABLE KEYS */;
+INSERT INTO `standings` VALUES (7,28,35,0,'2011-08-10 21:50:34','2011-08-10 21:50:34',NULL,7),(8,25,35,0,'2011-08-10 22:38:44','2011-08-10 22:38:44',NULL,8),(9,51,36,0,'2011-08-11 00:15:34','2011-08-11 00:15:34',NULL,9),(10,36,36,0,'2011-08-11 11:13:27','2011-08-11 11:13:27',NULL,10);
 /*!40000 ALTER TABLE `standings` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -914,7 +918,7 @@ CREATE TABLE `users` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `index_users_on_email` (`email`),
   UNIQUE KEY `index_users_on_reset_password_token` (`reset_password_token`)
-) ENGINE=InnoDB AUTO_INCREMENT=42 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=60 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -923,7 +927,7 @@ CREATE TABLE `users` (
 
 LOCK TABLES `users` WRITE;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
-INSERT INTO `users` VALUES (19,'uberhaqer@gmail.com','$2a$10$8qY94x4a3WHmCgggiW3POOkY1H6hhoh/nvp.lbAHjct5xgErbdJRy','$2a$10$8qY94x4a3WHmCgggiW3POO',NULL,NULL,NULL,6,'2011-08-10 13:05:07','2011-08-10 08:18:47','87.194.185.242','87.194.185.242','2011-08-09 22:48:12','2011-08-10 13:05:07','uberhaqer','--- \n- admin\n- owner\n','Arthur','Canal','uberhaqer',NULL,NULL,'UTC','2011-08-09 22:48:26','2011-08-09 22:48:12',NULL),(20,'blakntan@gmail.com','$2a$10$XRuyhES/TJnXQCqy3ZVyreyJ7o8ARyZ6dOr9BEvyT6LCBWiWXN/ga','$2a$10$XRuyhES/TJnXQCqy3ZVyre',NULL,NULL,NULL,1,'2011-08-09 22:51:34','2011-08-09 22:51:34','206.207.155.64','206.207.155.64','2011-08-09 22:50:52','2011-08-09 22:51:34','aTomatoFlames','--- []\n\n','Sean','C.','aTomatoFlames',NULL,NULL,'Arizona','2011-08-09 22:51:34','2011-08-09 22:50:52',NULL),(21,'duke999r@gmail.com','$2a$10$iqqqFQLflbP5.L/BKtKl1OlT8aUBj2TAD547llXWV17tlcWQh3/GS','$2a$10$iqqqFQLflbP5.L/BKtKl1O',NULL,NULL,NULL,2,'2011-08-10 04:30:25','2011-08-09 23:27:52','210.1.207.228','210.1.207.228','2011-08-09 23:27:20','2011-08-10 04:30:25','Duke999R','--- []\n\n','','','Duke999R',NULL,NULL,'Sydney','2011-08-09 23:27:52','2011-08-09 23:27:20',NULL),(22,'druid_king9884@yahoo.com','$2a$10$D9KLHmK126R45zPESSe/legTmpHWipASGhjO82qVXOMiMT8pIYxT2','$2a$10$D9KLHmK126R45zPESSe/le',NULL,NULL,NULL,1,'2011-08-09 23:45:17','2011-08-09 23:45:17','174.111.229.68','174.111.229.68','2011-08-09 23:44:25','2011-08-09 23:45:17','x_citizen_zero_x','--- []\n\n','Brian','Chandler','x_citizen_zero_x',NULL,NULL,'Eastern Time (US & Canada)','2011-08-09 23:45:16','2011-08-09 23:44:25',NULL),(23,'wilson22153@gmail.com','$2a$10$y4rhqbAwHacH6uuyJ7.lJ.EzZfrbL.HCmtC2XOA/dYqmZOuzIplRy','$2a$10$y4rhqbAwHacH6uuyJ7.lJ.',NULL,NULL,NULL,1,'2011-08-10 01:09:15','2011-08-10 01:09:15','71.178.223.245','71.178.223.245','2011-08-10 01:09:06','2011-08-10 01:09:15','Logicproof','--- []\n\n','Wilson','','Logicproof',NULL,NULL,'Eastern Time (US & Canada)','2011-08-10 01:09:15','2011-08-10 01:09:06',NULL),(24,'ch33zer@gmail.com','$2a$10$zYf6XR2RqBscYplQUBDcieLNnnfftrOC5YWlwzo71U5V8Y3Hbbklq','$2a$10$zYf6XR2RqBscYplQUBDcie',NULL,NULL,NULL,1,'2011-08-10 02:02:04','2011-08-10 02:02:04','76.176.209.127','76.176.209.127','2011-08-10 02:01:38','2011-08-10 02:02:04','ch33zer','--- []\n\n','David','Watson','ch33zewh1z',NULL,NULL,'Pacific Time (US & Canada)','2011-08-10 02:02:04','2011-08-10 02:01:38',NULL),(25,'vtec97civic@yahoo.com','$2a$10$VNGDPlhnyk4CsgI8wO2Ox.PCwzP106eapE45TidLgeKnyKJSTG5l2','$2a$10$VNGDPlhnyk4CsgI8wO2Ox.',NULL,NULL,NULL,1,'2011-08-10 02:16:49','2011-08-10 02:16:49','71.62.87.76','71.62.87.76','2011-08-10 02:16:30','2011-08-10 02:16:49','k24civic','--- []\n\n','','','madscientist305',NULL,NULL,'Eastern Time (US & Canada)','2011-08-10 02:16:49','2011-08-10 02:16:30',NULL),(26,'wayoffreedom@gmail.com','$2a$10$59EQcDkbeWaHj40XRwkqauK2o4KhripD.R5n6NSeKu.dci3WsZuA2','$2a$10$59EQcDkbeWaHj40XRwkqau',NULL,NULL,NULL,1,'2011-08-10 02:23:44','2011-08-10 02:23:44','71.14.115.155','71.14.115.155','2011-08-10 02:23:33','2011-08-10 02:23:44','lincoln','--- []\n\n','ethan','','lordbaalzamon',NULL,NULL,'Eastern Time (US & Canada)','2011-08-10 02:23:44','2011-08-10 02:23:33',NULL),(27,'Larry13x@gmail.com','$2a$10$kZIjpNEIecs.IqXXrtttNuHGexSXTwzZoXtwrpN8nqfbsEjhkKElC','$2a$10$kZIjpNEIecs.IqXXrtttNu',NULL,NULL,NULL,1,'2011-08-10 03:46:03','2011-08-10 03:46:03','76.18.190.90','76.18.190.90','2011-08-10 03:45:19','2011-08-10 03:46:03','Larry13','--- []\n\n','Nicholas','','Larry13',NULL,NULL,'Eastern Time (US & Canada)','2011-08-10 03:46:03','2011-08-10 03:45:19',NULL),(28,'dmidyett@gmail.com','$2a$10$QpZkXzk.4L/awiqd9LJcMu/NhKnIuIBfuL8r.XRcDshs/J0QlTYhi','$2a$10$QpZkXzk.4L/awiqd9LJcMu',NULL,NULL,NULL,0,NULL,NULL,NULL,NULL,'2011-08-10 03:55:00','2011-08-10 03:58:14','onefunkynote','--- []\n\n','','','phrantiklol',NULL,NULL,'Central Time (US & Canada)',NULL,'2011-08-10 03:55:00','0xs7Lw9vS38OLDOQM4bJ'),(29,'sukha54@gmail.com','$2a$10$FgwMFWxF1HG/zEYZoBi27OvVrgR5lKRAnEy7LrwVjFlzB7c2Lrxzq','$2a$10$FgwMFWxF1HG/zEYZoBi27O',NULL,NULL,NULL,1,'2011-08-10 04:09:46','2011-08-10 04:09:46','199.119.234.2','199.119.234.2','2011-08-10 04:08:05','2011-08-10 04:09:46','sukha54','--- []\n\n','','','sukha54',NULL,NULL,'Pacific Time (US & Canada)','2011-08-10 04:09:46','2011-08-10 04:08:05',NULL),(30,'edurodenasjr@gmail.com','$2a$10$HzEdFuZpYpn9dehTC4G.g.zgl2MRtJZgnZmoinHAiBXFtRgVslb3W','$2a$10$HzEdFuZpYpn9dehTC4G.g.',NULL,NULL,NULL,1,'2011-08-10 04:53:52','2011-08-10 04:53:52','200.153.180.182','200.153.180.182','2011-08-10 04:53:14','2011-08-10 04:53:52','Edninhs','--- []\n\n','Eduardo','Junior','Ninhs',NULL,NULL,'Brasilia','2011-08-10 04:53:52','2011-08-10 04:53:14',NULL),(31,'sudharsh.ps3@gmail.com','$2a$10$02J.OxVt5NvS58KCi7lBL.hqXLXNN2OkOm0wqEHt2FlAriKkmGiFa','$2a$10$02J.OxVt5NvS58KCi7lBL.',NULL,NULL,NULL,1,'2011-08-10 05:15:24','2011-08-10 05:15:24','182.71.224.162','182.71.224.162','2011-08-10 05:14:38','2011-08-10 05:15:24','zphd','--- []\n\n','','','zphd88',NULL,NULL,'Chennai','2011-08-10 05:15:24','2011-08-10 05:14:38',NULL),(32,'liamjones100@gmail.com','$2a$10$opytBW9aPaOXI0Jb8w/IYeLdmCGTURgEd1E/Wu/UprKC5VhGRH13u','$2a$10$opytBW9aPaOXI0Jb8w/IYe',NULL,NULL,NULL,1,'2011-08-10 07:16:00','2011-08-10 07:16:00','87.254.74.38','87.254.74.38','2011-08-10 07:15:40','2011-08-10 07:16:00','ljones123','--- []\n\n','Liam','Jones','liam_Jones100',NULL,NULL,'Lisbon','2011-08-10 07:16:00','2011-08-10 07:15:40',NULL),(33,'demomanca@gmail.com','$2a$10$YV7DwKvlgSso61MNcD47gemzeeAv6AIfWhEPNx1/1HDhpymxv31yi','$2a$10$YV7DwKvlgSso61MNcD47ge',NULL,NULL,NULL,1,'2011-08-10 08:40:27','2011-08-10 08:40:27','123.211.159.20','123.211.159.20','2011-08-10 08:40:09','2011-08-10 08:40:27','demomanca','--- []\n\n','Damian','Kidd','demomanca_ca',NULL,NULL,'Brisbane','2011-08-10 08:40:27','2011-08-10 08:40:09',NULL),(34,'chris@stormid.com','$2a$10$soa8vB2kHFhGQcUOXJxzau0ksGnIPbCdVarn/VpW40ByCjVrA395y','$2a$10$soa8vB2kHFhGQcUOXJxzau',NULL,NULL,NULL,1,'2011-08-10 09:01:46','2011-08-10 09:01:46','84.19.234.238','84.19.234.238','2011-08-10 09:01:35','2011-08-10 09:01:46','chriscanal','--- []\n\n','','','carcer',NULL,NULL,'UTC','2011-08-10 09:01:46','2011-08-10 09:01:35',NULL),(35,'stephen@rivasone.com','$2a$10$LQ3aDNHEy0dqdoAJKs.BNOVSv.MrhM0gkDcnpFwclstU5HMLoE30e','$2a$10$LQ3aDNHEy0dqdoAJKs.BNO',NULL,NULL,NULL,2,'2011-08-10 09:12:30','2011-08-10 09:12:04','134.71.143.47','166.205.142.28','2011-08-10 09:11:31','2011-08-10 09:12:30','steverivasone','--- []\n\n','','','steverivasone',NULL,NULL,'Pacific Time (US & Canada)','2011-08-10 09:12:04','2011-08-10 09:11:31',NULL),(36,'c.m.magan@gmail.com','$2a$10$.1MAU/hCqk7VWC0xKCVJlehLzuDCr8D.3bxlPaCBGAsuX.e9q90CG','$2a$10$.1MAU/hCqk7VWC0xKCVJle',NULL,NULL,NULL,5,'2011-08-10 10:38:09','2011-08-10 10:37:40','24.132.148.209','24.132.148.209','2011-08-10 10:36:01','2011-08-10 10:38:09','Possibilitron','--- []\n\n','Chris','','Possibilitron',NULL,NULL,'Amsterdam','2011-08-10 10:36:35','2011-08-10 10:36:01',NULL),(37,'fiano.irl@gmail.com','$2a$10$k8qNgfEvEidfCDKj9My4BeF9W32lDW2PJP4y8dnFjpGlSmWKdyqeu','$2a$10$k8qNgfEvEidfCDKj9My4Be',NULL,NULL,NULL,0,NULL,NULL,NULL,NULL,'2011-08-10 11:52:09','2011-08-10 11:52:09','nuetrino','--- []\n\n','','','fiannoglach',NULL,NULL,'Dublin',NULL,'2011-08-10 11:52:09','GsjSVKjR0kAQdiR8gKA-'),(38,'Mikey_Jim@hotmail.co.uk','$2a$10$JHs1ZXr8yQ./6FTN4VPxF.6/eemZ8xba8naI3e2ffxkbQbpr5GSse','$2a$10$JHs1ZXr8yQ./6FTN4VPxF.',NULL,NULL,NULL,1,'2011-08-10 12:02:49','2011-08-10 12:02:49','86.24.151.169','86.24.151.169','2011-08-10 12:01:49','2011-08-10 12:02:49','Mikey_Jim','--- []\n\n','Mike','Townley','Mikey_Jim',NULL,NULL,'London','2011-08-10 12:02:49','2011-08-10 12:01:49',NULL),(39,'andrew.mccafferty@gmail.com','$2a$10$PgxEz6LM817EEWWMbD9fjOlvKNPKtCd4WEofnMGwBUR7v6SFS/b8m','$2a$10$PgxEz6LM817EEWWMbD9fjO',NULL,NULL,NULL,1,'2011-08-10 13:53:48','2011-08-10 13:53:48','87.194.88.219','87.194.88.219','2011-08-10 13:53:13','2011-08-10 13:53:48','mcc','--- []\n\n','Andrew','McCafferty','yermaw',NULL,NULL,'UTC','2011-08-10 13:53:48','2011-08-10 13:53:13',NULL),(40,'sui@siffin.co.nz','$2a$10$azr1T6jjuCE5gJpYUYCyp.M5RtShUPrOxzXllcKNUOCS04gImIKEq','$2a$10$azr1T6jjuCE5gJpYUYCyp.',NULL,NULL,NULL,1,'2011-08-10 13:57:49','2011-08-10 13:57:49','121.98.243.13','121.98.243.13','2011-08-10 13:57:16','2011-08-10 13:57:49','siffin','--- []\n\n','H','B','siffin',NULL,NULL,'Auckland','2011-08-10 13:57:49','2011-08-10 13:57:16',NULL),(41,'lopez.alexander@gmail.com','$2a$10$AWWj5.u1kLk9uX546jCTFOyL0vMhVV.MBAc0qkZH.l81sv2aTmY0i','$2a$10$AWWj5.u1kLk9uX546jCTFO',NULL,NULL,NULL,1,'2011-08-10 14:05:41','2011-08-10 14:05:41','209.217.81.98','209.217.81.98','2011-08-10 14:04:48','2011-08-10 14:05:41','TheCubanSpy','--- []\n\n','Alex','Lopez','TheCubanSpy',NULL,NULL,'Eastern Time (US & Canada)','2011-08-10 14:05:41','2011-08-10 14:04:48',NULL);
+INSERT INTO `users` VALUES (19,'uberhaqer@gmail.com','$2a$10$8qY94x4a3WHmCgggiW3POOkY1H6hhoh/nvp.lbAHjct5xgErbdJRy','$2a$10$8qY94x4a3WHmCgggiW3POO',NULL,NULL,NULL,10,'2011-08-10 22:51:32','2011-08-10 21:18:42','86.30.224.22','86.30.224.22','2011-08-09 22:48:12','2011-08-10 22:51:32','uberhaqer','--- \n- admin\n- owner\n','Arthur','Canal','uberhaqer',NULL,NULL,'UTC','2011-08-09 22:48:26','2011-08-09 22:48:12',NULL),(20,'blakntan@gmail.com','$2a$10$XRuyhES/TJnXQCqy3ZVyreyJ7o8ARyZ6dOr9BEvyT6LCBWiWXN/ga','$2a$10$XRuyhES/TJnXQCqy3ZVyre',NULL,NULL,NULL,1,'2011-08-09 22:51:34','2011-08-09 22:51:34','206.207.155.64','206.207.155.64','2011-08-09 22:50:52','2011-08-09 22:51:34','aTomatoFlames','--- []\n\n','Sean','C.','aTomatoFlames',NULL,NULL,'Arizona','2011-08-09 22:51:34','2011-08-09 22:50:52',NULL),(21,'duke999r@gmail.com','$2a$10$iqqqFQLflbP5.L/BKtKl1OlT8aUBj2TAD547llXWV17tlcWQh3/GS','$2a$10$iqqqFQLflbP5.L/BKtKl1O',NULL,'oz97OWr5OhJre4W08VmF','2011-08-11 14:24:16',4,'2011-08-11 14:24:16','2011-08-10 23:19:14','210.1.207.228','210.1.207.228','2011-08-09 23:27:20','2011-08-11 14:24:16','Duke999R','--- []\n\n','','','Duke999R',NULL,NULL,'Sydney','2011-08-09 23:27:52','2011-08-09 23:27:20',NULL),(22,'druid_king9884@yahoo.com','$2a$10$D9KLHmK126R45zPESSe/legTmpHWipASGhjO82qVXOMiMT8pIYxT2','$2a$10$D9KLHmK126R45zPESSe/le',NULL,NULL,NULL,1,'2011-08-09 23:45:17','2011-08-09 23:45:17','174.111.229.68','174.111.229.68','2011-08-09 23:44:25','2011-08-09 23:45:17','x_citizen_zero_x','--- []\n\n','Brian','Chandler','x_citizen_zero_x',NULL,NULL,'Eastern Time (US & Canada)','2011-08-09 23:45:16','2011-08-09 23:44:25',NULL),(23,'wilson22153@gmail.com','$2a$10$y4rhqbAwHacH6uuyJ7.lJ.EzZfrbL.HCmtC2XOA/dYqmZOuzIplRy','$2a$10$y4rhqbAwHacH6uuyJ7.lJ.',NULL,'ZnTpMVHjDxmMT4ME19cl','2011-08-10 16:15:17',2,'2011-08-10 16:15:17','2011-08-10 01:09:15','71.178.223.245','71.178.223.245','2011-08-10 01:09:06','2011-08-10 16:15:17','Logicproof','--- []\n\n','Wilson','','Logicproof',NULL,NULL,'Eastern Time (US & Canada)','2011-08-10 01:09:15','2011-08-10 01:09:06',NULL),(24,'ch33zer@gmail.com','$2a$10$zYf6XR2RqBscYplQUBDcieLNnnfftrOC5YWlwzo71U5V8Y3Hbbklq','$2a$10$zYf6XR2RqBscYplQUBDcie',NULL,NULL,NULL,1,'2011-08-10 02:02:04','2011-08-10 02:02:04','76.176.209.127','76.176.209.127','2011-08-10 02:01:38','2011-08-10 02:02:04','ch33zer','--- []\n\n','David','Watson','ch33zewh1z',NULL,NULL,'Pacific Time (US & Canada)','2011-08-10 02:02:04','2011-08-10 02:01:38',NULL),(25,'vtec97civic@yahoo.com','$2a$10$VNGDPlhnyk4CsgI8wO2Ox.PCwzP106eapE45TidLgeKnyKJSTG5l2','$2a$10$VNGDPlhnyk4CsgI8wO2Ox.',NULL,'1VfJeaRhzWKkkG2zP1G_','2011-08-10 22:36:01',3,'2011-08-10 22:36:01','2011-08-10 22:27:15','71.62.87.76','71.62.87.76','2011-08-10 02:16:30','2011-08-10 22:36:01','k24civic','--- []\n\n','','','madscientist305',NULL,NULL,'Eastern Time (US & Canada)','2011-08-10 02:16:49','2011-08-10 02:16:30',NULL),(26,'wayoffreedom@gmail.com','$2a$10$59EQcDkbeWaHj40XRwkqauK2o4KhripD.R5n6NSeKu.dci3WsZuA2','$2a$10$59EQcDkbeWaHj40XRwkqau',NULL,NULL,NULL,1,'2011-08-10 02:23:44','2011-08-10 02:23:44','71.14.115.155','71.14.115.155','2011-08-10 02:23:33','2011-08-10 02:23:44','lincoln','--- []\n\n','ethan','','lordbaalzamon',NULL,NULL,'Eastern Time (US & Canada)','2011-08-10 02:23:44','2011-08-10 02:23:33',NULL),(27,'Larry13x@gmail.com','$2a$10$kZIjpNEIecs.IqXXrtttNuHGexSXTwzZoXtwrpN8nqfbsEjhkKElC','$2a$10$kZIjpNEIecs.IqXXrtttNu',NULL,NULL,NULL,1,'2011-08-10 03:46:03','2011-08-10 03:46:03','76.18.190.90','76.18.190.90','2011-08-10 03:45:19','2011-08-10 03:46:03','Larry13','--- []\n\n','Nicholas','','Larry13',NULL,NULL,'Eastern Time (US & Canada)','2011-08-10 03:46:03','2011-08-10 03:45:19',NULL),(28,'dmidyett@gmail.com','$2a$10$QpZkXzk.4L/awiqd9LJcMu/NhKnIuIBfuL8r.XRcDshs/J0QlTYhi','$2a$10$QpZkXzk.4L/awiqd9LJcMu',NULL,'BMfyiuj4ubEN6wQuYRNx','2011-08-10 16:50:40',1,'2011-08-10 16:50:40','2011-08-10 16:50:40','76.214.50.177','76.214.50.177','2011-08-10 03:55:00','2011-08-10 16:50:40','onefunkynote','--- []\n\n','','','phrantiklol',NULL,NULL,'Central Time (US & Canada)','2011-08-10 03:57:00','2011-08-10 03:55:00',NULL),(29,'sukha54@gmail.com','$2a$10$FgwMFWxF1HG/zEYZoBi27OvVrgR5lKRAnEy7LrwVjFlzB7c2Lrxzq','$2a$10$FgwMFWxF1HG/zEYZoBi27O',NULL,NULL,NULL,1,'2011-08-10 04:09:46','2011-08-10 04:09:46','199.119.234.2','199.119.234.2','2011-08-10 04:08:05','2011-08-10 04:09:46','sukha54','--- []\n\n','','','sukha54',NULL,NULL,'Pacific Time (US & Canada)','2011-08-10 04:09:46','2011-08-10 04:08:05',NULL),(30,'edurodenasjr@gmail.com','$2a$10$HzEdFuZpYpn9dehTC4G.g.zgl2MRtJZgnZmoinHAiBXFtRgVslb3W','$2a$10$HzEdFuZpYpn9dehTC4G.g.',NULL,NULL,NULL,1,'2011-08-10 04:53:52','2011-08-10 04:53:52','200.153.180.182','200.153.180.182','2011-08-10 04:53:14','2011-08-10 04:53:52','Edninhs','--- []\n\n','Eduardo','Junior','Ninhs',NULL,NULL,'Brasilia','2011-08-10 04:53:52','2011-08-10 04:53:14',NULL),(31,'sudharsh.ps3@gmail.com','$2a$10$02J.OxVt5NvS58KCi7lBL.hqXLXNN2OkOm0wqEHt2FlAriKkmGiFa','$2a$10$02J.OxVt5NvS58KCi7lBL.',NULL,NULL,NULL,1,'2011-08-10 05:15:24','2011-08-10 05:15:24','182.71.224.162','182.71.224.162','2011-08-10 05:14:38','2011-08-10 05:15:24','zphd','--- []\n\n','','','zphd88',NULL,NULL,'Chennai','2011-08-10 05:15:24','2011-08-10 05:14:38',NULL),(32,'liamjones100@gmail.com','$2a$10$opytBW9aPaOXI0Jb8w/IYeLdmCGTURgEd1E/Wu/UprKC5VhGRH13u','$2a$10$opytBW9aPaOXI0Jb8w/IYe',NULL,NULL,NULL,1,'2011-08-10 07:16:00','2011-08-10 07:16:00','87.254.74.38','87.254.74.38','2011-08-10 07:15:40','2011-08-10 07:16:00','ljones123','--- []\n\n','Liam','Jones','liam_Jones100',NULL,NULL,'Lisbon','2011-08-10 07:16:00','2011-08-10 07:15:40',NULL),(33,'demomanca@gmail.com','$2a$10$YV7DwKvlgSso61MNcD47gemzeeAv6AIfWhEPNx1/1HDhpymxv31yi','$2a$10$YV7DwKvlgSso61MNcD47ge',NULL,NULL,NULL,1,'2011-08-10 08:40:27','2011-08-10 08:40:27','123.211.159.20','123.211.159.20','2011-08-10 08:40:09','2011-08-10 08:40:27','demomanca','--- []\n\n','Damian','Kidd','demomanca_ca',NULL,NULL,'Brisbane','2011-08-10 08:40:27','2011-08-10 08:40:09',NULL),(34,'chris@stormid.com','$2a$10$soa8vB2kHFhGQcUOXJxzau0ksGnIPbCdVarn/VpW40ByCjVrA395y','$2a$10$soa8vB2kHFhGQcUOXJxzau',NULL,NULL,NULL,1,'2011-08-10 09:01:46','2011-08-10 09:01:46','84.19.234.238','84.19.234.238','2011-08-10 09:01:35','2011-08-10 09:01:46','chriscanal','--- []\n\n','','','carcer',NULL,NULL,'UTC','2011-08-10 09:01:46','2011-08-10 09:01:35',NULL),(35,'stephen@rivasone.com','$2a$10$LQ3aDNHEy0dqdoAJKs.BNOVSv.MrhM0gkDcnpFwclstU5HMLoE30e','$2a$10$LQ3aDNHEy0dqdoAJKs.BNO',NULL,NULL,NULL,2,'2011-08-10 09:12:30','2011-08-10 09:12:04','134.71.143.47','166.205.142.28','2011-08-10 09:11:31','2011-08-10 09:12:30','steverivasone','--- []\n\n','','','steverivasone',NULL,NULL,'Pacific Time (US & Canada)','2011-08-10 09:12:04','2011-08-10 09:11:31',NULL),(36,'c.m.magan@gmail.com','$2a$10$.1MAU/hCqk7VWC0xKCVJlehLzuDCr8D.3bxlPaCBGAsuX.e9q90CG','$2a$10$.1MAU/hCqk7VWC0xKCVJle',NULL,NULL,NULL,7,'2011-08-11 11:14:13','2011-08-11 11:04:01','24.132.148.209','24.132.148.209','2011-08-10 10:36:01','2011-08-11 11:14:13','Fruit_is_Blind','--- []\n\n','Chris','','Possibilitron',NULL,NULL,'Amsterdam','2011-08-10 10:36:35','2011-08-10 10:36:01',NULL),(37,'fiano.irl@gmail.com','$2a$10$k8qNgfEvEidfCDKj9My4BeF9W32lDW2PJP4y8dnFjpGlSmWKdyqeu','$2a$10$k8qNgfEvEidfCDKj9My4Be',NULL,'J7gmltYhXrpwfod6Nzk3','2011-08-11 14:47:21',1,'2011-08-11 14:47:21','2011-08-11 14:47:21','86.40.110.174','86.40.110.174','2011-08-10 11:52:09','2011-08-11 14:47:21','nuetrino','--- []\n\n','','','fiannoglach',NULL,NULL,'Dublin','2011-08-10 11:54:09','2011-08-10 11:52:09',NULL),(38,'Mikey_Jim@hotmail.co.uk','$2a$10$JHs1ZXr8yQ./6FTN4VPxF.6/eemZ8xba8naI3e2ffxkbQbpr5GSse','$2a$10$JHs1ZXr8yQ./6FTN4VPxF.',NULL,'TKQ2Jx3BiALL3cWcLmBD','2011-08-11 11:51:42',2,'2011-08-11 11:51:42','2011-08-10 12:02:49','86.24.151.169','86.24.151.169','2011-08-10 12:01:49','2011-08-11 11:51:42','Mikey_Jim','--- []\n\n','Mike','Townley','Mikey_Jim',NULL,NULL,'London','2011-08-10 12:02:49','2011-08-10 12:01:49',NULL),(39,'andrew.mccafferty@gmail.com','$2a$10$PgxEz6LM817EEWWMbD9fjOlvKNPKtCd4WEofnMGwBUR7v6SFS/b8m','$2a$10$PgxEz6LM817EEWWMbD9fjO',NULL,NULL,NULL,1,'2011-08-10 13:53:48','2011-08-10 13:53:48','87.194.88.219','87.194.88.219','2011-08-10 13:53:13','2011-08-10 13:53:48','mcc','--- []\n\n','Andrew','McCafferty','yermaw',NULL,NULL,'UTC','2011-08-10 13:53:48','2011-08-10 13:53:13',NULL),(40,'sui@siffin.co.nz','$2a$10$azr1T6jjuCE5gJpYUYCyp.M5RtShUPrOxzXllcKNUOCS04gImIKEq','$2a$10$azr1T6jjuCE5gJpYUYCyp.',NULL,NULL,NULL,2,'2011-08-11 11:05:32','2011-08-10 13:57:49','121.98.243.13','121.98.243.13','2011-08-10 13:57:16','2011-08-11 11:05:32','siffin','--- []\n\n','H','B','siffin',NULL,NULL,'Auckland','2011-08-10 13:57:49','2011-08-10 13:57:16',NULL),(41,'lopez.alexander@gmail.com','$2a$10$AWWj5.u1kLk9uX546jCTFOyL0vMhVV.MBAc0qkZH.l81sv2aTmY0i','$2a$10$AWWj5.u1kLk9uX546jCTFO',NULL,NULL,NULL,1,'2011-08-10 14:05:41','2011-08-10 14:05:41','209.217.81.98','209.217.81.98','2011-08-10 14:04:48','2011-08-10 14:05:41','TheCubanSpy','--- []\n\n','Alex','Lopez','TheCubanSpy',NULL,NULL,'Eastern Time (US & Canada)','2011-08-10 14:05:41','2011-08-10 14:04:48',NULL),(42,'bertmacleod@yahoo.co.uk','$2a$10$s07TGvxK7SzayGYZ4q7RfOso0Bkrx0ixz/QUJn9zXPt/zLjJxvDqW','$2a$10$s07TGvxK7SzayGYZ4q7RfO',NULL,NULL,NULL,2,'2011-08-10 16:15:23','2011-08-10 15:46:10','213.120.90.59','199.19.249.196','2011-08-10 15:45:49','2011-08-10 16:15:23','bertmacleod','--- []\n\n','Robert ','MacLeod','bertmacleod',NULL,NULL,'Edinburgh','2011-08-10 15:46:10','2011-08-10 15:45:49',NULL),(43,'sweeneyjacqueline@hotmail.com','$2a$10$ua6N5GabI9g/cpoQqxUhfu2/c10cE0hbcstrF7CueP4wWrpeKLlB6','$2a$10$ua6N5GabI9g/cpoQqxUhfu',NULL,NULL,NULL,1,'2011-08-10 16:05:55','2011-08-10 16:05:55','139.153.163.153','139.153.163.153','2011-08-10 16:05:31','2011-08-10 16:05:55','JacDeNiro','--- []\n\n','Jacqueline','Sweeney','JacDeNiro',NULL,NULL,'UTC','2011-08-10 16:05:55','2011-08-10 16:05:31',NULL),(44,'arthur.canal@googlemail.com','$2a$10$8Op0njSyRQVXLvD4.9oOpOsGbQEhOfX1J/xJQiuMRKuDl8tIwfSoW','$2a$10$8Op0njSyRQVXLvD4.9oOpO',NULL,NULL,NULL,1,'2011-08-10 16:15:06','2011-08-10 16:15:06','87.194.185.242','87.194.185.242','2011-08-10 16:14:23','2011-08-11 13:17:01','eef','--- []\n\n','Arthur','Canal','eef',NULL,NULL,'Brasilia','2011-08-10 16:15:06','2011-08-10 16:14:23',NULL),(45,'dorri732@gmail.com','$2a$10$7BjuGtrn3TCyqwUODHja4eeZnv3w01t2W29HQWpTIgqYWP7u8vPjy','$2a$10$7BjuGtrn3TCyqwUODHja4e',NULL,'7caAPtAxzRdhREUvxXBa','2011-08-10 16:47:33',2,'2011-08-10 16:47:33','2011-08-10 16:45:59','148.134.37.3','174.252.183.51','2011-08-10 16:44:34','2011-08-10 16:47:33','dorri732','--- []\n\n','Dorri','Williams','dorri732',NULL,NULL,'Eastern Time (US & Canada)','2011-08-10 16:45:59','2011-08-10 16:44:34',NULL),(46,'jacobinnian@gmail.com','$2a$10$rgVCGWNbsBuK66brnQChnOmmBQnw5OG1TmOal6gJOInG.6uwYzFw6','$2a$10$rgVCGWNbsBuK66brnQChnO',NULL,NULL,NULL,4,'2011-08-11 09:01:02','2011-08-10 20:58:49','195.11.198.1','2.216.247.244','2011-08-10 16:53:47','2011-08-11 09:01:02','Jacobinnian','--- []\n\n','','','jacquijaco',NULL,NULL,'UTC','2011-08-10 16:57:50','2011-08-10 16:53:47',NULL),(47,'alexzadorojnyi@gmail.com','$2a$10$XRXE5EOgNgyQ55IWqnWzh.JXhOPUFuCSSR8O3h/IFM1SDZHEqVFaC','$2a$10$XRXE5EOgNgyQ55IWqnWzh.',NULL,'5paPaCdoZYJK-yi0CuvA','2011-08-11 00:50:03',3,'2011-08-11 21:24:41','2011-08-11 00:50:03','76.10.173.6','76.10.173.6','2011-08-10 16:59:20','2011-08-11 21:24:41','ZonalAxJoyride','--- []\n\n','Alex','Zadorojnyi','zonalaxjoyride',NULL,NULL,'Eastern Time (US & Canada)','2011-08-10 17:00:07','2011-08-10 16:59:20',NULL),(48,'jan.lakot@gmail.com','$2a$10$/YoIx/HK2HUxjF/hAlS.ROKB3S5rahbVDRR7Bmv979XAYUDxURR.6','$2a$10$/YoIx/HK2HUxjF/hAlS.RO',NULL,NULL,NULL,2,'2011-08-10 21:11:57','2011-08-10 17:04:30','83.208.166.162','83.208.166.162','2011-08-10 17:04:08','2011-08-10 21:11:57','Laqos','--- []\n\n','Jan','Lakota','Laqos',NULL,NULL,'Prague','2011-08-10 17:04:30','2011-08-10 17:04:08',NULL),(49,'octa@octalog.net','$2a$10$LGrixRpVa5sLKB5Jxft/q.Ij2Tvn69lxlH.0lKlSIhGUeqosSYTlS','$2a$10$LGrixRpVa5sLKB5Jxft/q.',NULL,'Avxog2Ahzu5GOWRjMP61','2011-08-10 17:45:07',2,'2011-08-10 17:45:07','2011-08-10 17:44:54','201.141.221.144','201.141.221.144','2011-08-10 17:44:28','2011-08-10 17:45:07','GBOcta','--- []\n\n','','','GBOcta',NULL,NULL,'Central Time (US & Canada)','2011-08-10 17:44:54','2011-08-10 17:44:28',NULL),(50,'deters@gmail.com','$2a$10$aWGjl0jX3.E2ticAa2wkU.hfpmK1cj3UO4HygJ06l9t8g9Wg5SXW6','$2a$10$aWGjl0jX3.E2ticAa2wkU.',NULL,NULL,NULL,2,'2011-08-10 20:24:40','2011-08-10 20:24:23','216.251.160.24','216.251.160.24','2011-08-10 20:06:30','2011-08-10 20:24:40','cptcorn','--- []\n\n','Alex','','Obesepete',NULL,NULL,'Central Time (US & Canada)','2011-08-10 20:24:23','2011-08-10 20:06:30',NULL),(51,'arthur.canal@gmail.com','$2a$10$cO7i12/mPeCEz9evy7YgaOCY5xpHUFTCA1OpFEcxVevoNEkRlU8l6','$2a$10$cO7i12/mPeCEz9evy7YgaO',NULL,NULL,NULL,4,'2011-08-11 22:02:34','2011-08-11 21:11:41','86.30.224.22','86.30.224.22','2011-08-10 20:46:54','2011-08-11 22:02:34','GTR','--- \n- admin\n- owner\n','Arthur','Canal','uberhaqer',NULL,NULL,'UTC','2011-08-10 20:47:39','2011-08-10 20:46:54',NULL),(52,'outferno@gmail.com','$2a$10$KmGKb19JrmvjXJzHRoUbduje1OMyKcmbvMVwx.bvoMBjbPzENkAWK','$2a$10$KmGKb19JrmvjXJzHRoUbdu',NULL,NULL,NULL,1,'2011-08-10 22:37:08','2011-08-10 22:37:08','69.181.116.186','69.181.116.186','2011-08-10 22:36:49','2011-08-10 22:37:08','chinatbag','--- []\n\n','','','SuperiorDrift',NULL,NULL,'Pacific Time (US & Canada)','2011-08-10 22:37:08','2011-08-10 22:36:49',NULL),(53,'julian.tith@gmail.com','$2a$10$D3BFIpNkjuxXxt646bJjieQ4wkLJ/OFA/H9Al0VvhnMQbuuF9nZdC','$2a$10$D3BFIpNkjuxXxt646bJjie',NULL,NULL,NULL,1,'2011-08-10 22:42:01','2011-08-10 22:42:01','66.215.212.240','66.215.212.240','2011-08-10 22:41:45','2011-08-10 22:42:01','AvonGenesis','--- []\n\n','Julian','Tith','AxonGenesis',NULL,NULL,'Pacific Time (US & Canada)','2011-08-10 22:42:01','2011-08-10 22:41:45',NULL),(54,'tigaz47@gmail.com','$2a$10$6U0G/tZZs.Lzx1NrDZwSzuidkyixE849ypw39fuHD4Hxc70XMMN3q','$2a$10$6U0G/tZZs.Lzx1NrDZwSzu',NULL,NULL,NULL,1,'2011-08-11 00:37:36','2011-08-11 00:37:36','216.121.183.6','216.121.183.6','2011-08-11 00:37:00','2011-08-11 00:37:36','Tigaz','--- []\n\n','Brent','Monych','Tigaz',NULL,NULL,'Central Time (US & Canada)','2011-08-11 00:37:36','2011-08-11 00:37:00',NULL),(55,'baubry@ku.edu','$2a$10$JYumzROGh1fRoBoRvisVCe5EwKiGRR9NCt9bgW7CD0Q4tnpLqN1ZS','$2a$10$JYumzROGh1fRoBoRvisVCe',NULL,NULL,NULL,1,'2011-08-11 00:40:39','2011-08-11 00:40:39','24.124.49.66','24.124.49.66','2011-08-11 00:40:00','2011-08-11 00:40:56','baubry','--- []\n\n','Brian','Aubry','baubry',NULL,NULL,'Central Time (US & Canada)','2011-08-11 00:40:39','2011-08-11 00:40:00',NULL),(56,'option51@gmail.com','$2a$10$vC0D775.CLq6vyWXhgL7ruwp08XFz17dOnWzFFRMR66eP2QfQAwSm','$2a$10$vC0D775.CLq6vyWXhgL7ru',NULL,NULL,NULL,1,'2011-08-11 06:14:17','2011-08-11 06:14:17','75.140.83.236','75.140.83.236','2011-08-11 06:13:55','2011-08-11 06:14:17','bluberrynugz','--- []\n\n','chris','','bluberrynugz',NULL,NULL,'Pacific Time (US & Canada)','2011-08-11 06:14:17','2011-08-11 06:13:55',NULL),(57,'johnathanwilliamson@gmail.com','$2a$10$QOgldmAeF5qzXAYVkB9InONhdCa5iKg2TS6MtdqQXXi6QKYpOICF6','$2a$10$QOgldmAeF5qzXAYVkB9InO',NULL,NULL,NULL,1,'2011-08-11 10:32:08','2011-08-11 10:32:08','213.120.84.3','213.120.84.3','2011-08-11 10:31:01','2011-08-11 10:32:08','mithadriel','--- []\n\n','','','foxed007',NULL,NULL,'Edinburgh','2011-08-11 10:32:08','2011-08-11 10:31:01',NULL),(58,'william.mcgregor@gmail.com','$2a$10$5ceNySqBvwKthHZ.0McjD.NL7wq20/FS3NPMH9aOB8ZHM2.9Z96q6','$2a$10$5ceNySqBvwKthHZ.0McjD.',NULL,NULL,NULL,1,'2011-08-11 11:50:08','2011-08-11 11:50:08','92.18.2.37','92.18.2.37','2011-08-11 11:49:47','2011-08-11 11:50:08','billy','--- []\n\n','Will','McGregor','kingbilly',NULL,NULL,'UTC','2011-08-11 11:50:08','2011-08-11 11:49:47',NULL);
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -936,4 +940,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2011-08-10 16:15:28
+-- Dump completed on 2011-08-12  0:36:49
