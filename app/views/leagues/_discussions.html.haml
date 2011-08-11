@@ -1,0 +1,15 @@
+#new-post-button
+  = link_to "New Post", "#", :class => "ui-icon ui-icon-plusthick new-p", :id => "p-icon", :title => "New Post", :style => "float: left; margin-right: 5px;"
+  = link_to "New Post", "#", :class => "new-p", :id => "p-text"
+.hidden#new-post-form
+  = render :partial => "discussion_form"
+  %br
+%br
+- if @league.discussions.blank?
+  #discussions-holder{"data-no-posts" => "1"}
+    #no-posts
+      No posts yet
+- else
+  #discussions-holder{"data-no-posts" => "1"}
+    - @league.discussions.order("created_at DESC").each do |discussion|
+      = render :partial => "discussion_item", :locals => {:discussion => discussion}

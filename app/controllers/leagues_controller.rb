@@ -9,6 +9,19 @@ class LeaguesController < ApplicationController
       format.xml  { render :xml => @leagues }
     end
   end
+  
+  def post_discussion
+    discussion = Discussion.new(:content => params[:content])
+    discussion.user = current_user
+    discussion.league_id = params[:league_id]
+    respond_to do |format|
+      if discussion.save
+        format.html  { render :partial => "discussion_item", :locals => {:discussion => discussion}}
+      else
+        format.html  { render :text => "Unable to post discussion"}
+      end
+    end
+  end
 
   # GET /leagues/1
   # GET /leagues/1.xml
@@ -17,6 +30,7 @@ class LeaguesController < ApplicationController
     @regulations = @league.race_regulations.first
     @event_settings = @league.event_settings.first
     @show_reg = false
+    @discussion = Discussion.new
     generate_entries
     if !@league.car_classes.blank?
       unless @league.league_entries.where(:user_id => current_user.id).length > 0

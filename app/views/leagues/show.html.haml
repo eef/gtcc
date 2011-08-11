@@ -13,6 +13,8 @@
     %li
       = link_to "Register/Entries", "#register"
     %li
+      = link_to "Discussion", "#discussion"
+    %li
       = link_to "Admin", "#admin" if @league.organiser.eql?(current_user)
   #league-standings
     = render :partial => "league_standings"
@@ -26,6 +28,8 @@
     = render :partial => "league_races"
   #register
     = render :partial => "league_register"
+  #discussion
+    = render :partial => "discussions"
   - if @league.organiser.eql?(current_user)
     #admin
       = link_to 'Delete', @league, :confirm => 'Are you sure?', :method => :delete, :title => "Delete league", :class => "ui-icon ui-icon-trash", :style => "float: left; margin-right: 5px;"

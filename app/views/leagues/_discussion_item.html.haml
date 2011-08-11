@@ -1,0 +1,8 @@
+.discussion-item
+  %span{:style => "color: #ADDFFF;"}
+    Posted by
+    = discussion.user.username
+    at
+    = discussion.created_at.strftime("%a %d %b %I:%M%p")
+  %br
+  = discussion.content
