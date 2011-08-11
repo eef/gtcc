@@ -19,7 +19,7 @@ class League < ActiveRecord::Base
   accepts_nested_attributes_for :car_classes, :allow_destroy => true, :reject_if => :all_blank
   accepts_nested_attributes_for :race_regulations, :allow_destroy => true
   accepts_nested_attributes_for :event_settings, :allow_destroy => true
-  accepts_nested_attributes_for :league_points, :allow_destroy => true, :reject_if => :all_blank
+  accepts_nested_attributes_for :league_points, :allow_destroy => true, :reject_if => proc { |attributes| attributes['points'].blank? }
   
   validates_presence_of :name, :max_players
   
