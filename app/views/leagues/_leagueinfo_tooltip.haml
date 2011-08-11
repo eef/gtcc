@@ -27,7 +27,7 @@
     Power limit:
   = "#{league.race_regulations.first.power}BHP"
   %br
-- if league.standings.length > 0
+- if league.results.length > 0
   %label{:style => "display: inline;"}
     Current leader:
   = league.standings.order("standings.points desc").first.user.username
