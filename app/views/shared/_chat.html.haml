@@ -1,0 +1,30 @@
+#app
+  #connect
+    %form{:action=>"#"}
+      %fieldset
+        %p
+          This is a chat room is experimental at the moment.
+
+        %label{:for => "nick"}
+          Username:
+        %input{:id => "nickInput", :class => "text", :type => "hidden", :name => "nick", :value => current_user.username}
+        %input{:id => "connectButton", :class => "button", :type => "submit", :name => "", :value => "Join"}
+  #loading
+    %p
+      loading
+  #log
+  #toolbar
+    %ul#status
+      %li
+        %a{:id => "usersLink", :href => "#"}
+          5 users
+      %li
+        uptime:
+        %span#uptime
+          ?
+      %li
+        memory:
+        %span{:id=>"rss"}
+          ?
+        mb RSS
+    %input{:tabindex =>"1", :type =>"text", :id => "entry"}

@@ -4,7 +4,7 @@
     %title
       Gran Turismo Racing - GTR
     = stylesheet_link_tag :all
-    = javascript_include_tag "jquery", "jquery-ui", "jquery-qtip", "chosen.jquery","tokeninput", "rails", "application"
+    = javascript_include_tag "jquery", "jquery-ui", "jquery-qtip", "chosen.jquery","tokeninput", "rails", "client", "application"
     = csrf_meta_tag
     %meta{:name => "keywords", :content => "gran turismo racing, gt racing, gt5, gran turismo 5, gt5 racing, gran turismo 5 race organiser, gt race organiser"}
     %meta{:name => "description", :content => "Gran Turismo Racing is a place to organise online races in Gran Turismo 5"}
@@ -14,3 +14,6 @@
       = render :partial => "shared/flash"
       #content
         = yield
+      - if user_signed_in?
+        #chat
+          = render :partial => "shared/chat"
