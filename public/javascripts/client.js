@@ -391,7 +391,8 @@ function onConnect (session) {
     showConnect();
     return;
   }
-
+  $("#log").slideDown();
+  $("#log").scrollTop($("#log").scrollTop() + 50000)
   CONFIG.nick = session.nick;
   CONFIG.id   = session.id;
   starttime   = new Date(session.starttime);

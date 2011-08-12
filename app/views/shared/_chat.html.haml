@@ -4,7 +4,8 @@
       %fieldset
         %p
           This is a chat room is experimental at the moment.
-
+          %a{:id => "usersLink", :href => "#"}
+          are online at the moment.
         %label{:for => "nick"}
           Username:
         %input{:id => "nickInput", :class => "text", :type => "hidden", :name => "nick", :value => current_user.username}
@@ -12,19 +13,7 @@
   #loading
     %p
       loading
-  #log
+  #log.hidden
+    
   #toolbar
-    %ul#status
-      %li
-        %a{:id => "usersLink", :href => "#"}
-          5 users
-      %li
-        uptime:
-        %span#uptime
-          ?
-      %li
-        memory:
-        %span{:id=>"rss"}
-          ?
-        mb RSS
-    %input{:tabindex =>"1", :type =>"text", :id => "entry"}
+    %input{:tabindex =>"1", :type =>"text", :id => "entry", :class => "text-input"}
