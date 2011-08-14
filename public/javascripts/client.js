@@ -277,9 +277,9 @@ function showChat (username) {
 
 function updateTitle(){
   if (CONFIG.unread) {
-    document.title = "(" + CONFIG.unread.toString() + ") node chat";
+    document.title = "(" + CONFIG.unread.toString() + ") Gran Turismo Racing - GTR ";
   } else {
-    document.title = "node chat";
+    document.title = "Gran Turismo Racing - GTR";
   }
 }
 
@@ -321,7 +321,7 @@ function onConnect (session) {
 
 function outputUsers () {
   var username_string = usernames.length > 0 ? usernames.join(", ") : "(none)";
-  addMessage("users", username_string, (new Date()).getTime(), "notice");
+  addMessage("Users online", username_string, (new Date()).getTime(), "notice");
   return false;
 }
 
