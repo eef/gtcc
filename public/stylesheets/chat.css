@@ -2,3 +2,43 @@
   height: 300px;
   overflow: auto;
 }
+
+#app {
+  width: 97%;
+  padding: 10px;
+  border: 1px solid #232323;
+  -webkit-border-radius: 2px;
+  -moz-border-radius: 2px;
+  border-radius: 2px;
+  background: #232323;
+  padding: 10px;
+  margin-bottom: 10px;
+  background: -webkit-gradient(linear, 0 0, 0 bottom, from(#232323), to(#0C0C0C));
+  background: -moz-linear-gradient(#232323, #0C0C0C);
+  background: linear-gradient(#232323, #0C0C0C);
+  -pie-background: linear-gradient(#232323, #0C0C0C);
+  behavior: url(/stylesheets/pie.htc);
+}
+
+.message {
+  border: 1px solid #232323;
+  -webkit-border-radius: 2px;
+  -moz-border-radius: 2px;
+  border-radius: 2px;
+  background: #0C0C0C;
+  padding: 5px;
+  margin-bottom: 10px;
+  behavior: url(/stylesheets/pie.htc);
+}
+
+#entry {
+ width: 97.5%;
+}
+
+.message-date {
+  float: right;
+}
+
+#toolbar {
+  margin-top: 5px;
+}

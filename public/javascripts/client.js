@@ -1,12 +1,13 @@
 var CONFIG = { debug: false
-             , nick: "#"   // set in onConnect
+             , username: "#"   // set in onConnect
+             , change_page: false
              , id: null    // set in onConnect
              , last_message_time: 1
              , focus: true //event listeners bound in onConnect
              , unread: 0 //updated in the message-processing loop
              };
 
-var nicks = [];
+var usernames = [];
 
 //  CUT  ///////////////////////////////////////////////////////////////////
 /* This license and copyright apply to all code until the next "CUT"
@@ -109,32 +110,32 @@ Date.fromString = function(str) {
 
 //updates the users link to reflect the number of active users
 function updateUsersLink ( ) {
-  var t = nicks.length.toString() + " user";
-  if (nicks.length != 1) t += "s";
+  var t = usernames.length.toString() + " user";
+  if (usernames.length != 1) t += "s";
   $("#usersLink").text(t);
 }
 
 //handles another person joining chat
-function userJoin(nick, timestamp) {
+function userJoin(username, timestamp) {
   //put it in the stream
-  addMessage(nick, "joined", timestamp, "join");
+  addMessage(username, "joined", timestamp, "join");
   //if we already know about this user, ignore it
-  for (var i = 0; i < nicks.length; i++)
-    if (nicks[i] == nick) return;
+  for (var i = 0; i < usernames.length; i++)
+    if (usernames[i] == username) return;
   //otherwise, add the user to the list
-  nicks.push(nick);
+  usernames.push(username);
   //update the UI
   updateUsersLink();
 }
 
 //handles someone leaving
-function userPart(nick, timestamp) {
+function userPart(username, timestamp) {
   //put it in the stream
-  addMessage(nick, "left", timestamp, "part");
+  addMessage(username, "left", timestamp, "part");
   //remove the user from the list
-  for (var i = 0; i < nicks.length; i++) {
-    if (nicks[i] == nick) {
-      nicks.splice(i,1)
+  for (var i = 0; i < usernames.length; i++) {
+    if (usernames[i] == username) {
+      usernames.splice(i,1)
       break;
     }
   }
@@ -173,62 +174,82 @@ util = {
     var hours = date.getHours().toString();
     return this.zeroPad(2, hours) + ":" + this.zeroPad(2, minutes);
   },
+  
+  formatTime: function(unixTimestamp) {
+      var dt = new Date(unixTimestamp);
+
+      var hours = dt.getHours();
+      var minutes = dt.getMinutes();
+      var seconds = dt.getSeconds();
+
+      // the above dt.get...() functions return a single digit
+      // so I prepend the zero here when needed
+      if (hours < 10) 
+       hours = '0' + hours;
+
+      if (minutes < 10) 
+       minutes = '0' + minutes;
+
+      if (seconds < 10) 
+       seconds = '0' + seconds;
+
+      return hours + ":" + minutes;
+  },
 
   //does the argument only contain whitespace?
-  isBlank: function(text) {
+  isBlank: function(body_content) {
     var blank = /^\s*$/;
-    return (text.match(blank) !== null);
+    return (body_content.match(blank) !== null);
   }
 };
 
 //used to keep the most recent messages visible
 function scrollDown () {
-  window.scrollBy(0, 100000000000000000);
-  $("#entry").focus();
+  $("#log").scrollTop($("#log").scrollTop() + 50000);
 }
 
 //inserts an event into the stream for display
 //the event may be a msg, join or part type
 //from is the user, text is the body and time is the timestamp, defaulting to now
 //_class is a css class to apply to the message, usefull for system events
-function addMessage (from, text, time, _class) {
-  if (text === null)
+function addMessage (from, body_content, time, _class) {
+  if (typeof(time) == "string") {
+    time = parseInt(time);
+  };
+  if (body_content === null)
     return;
 
   if (time == null) {
     // if the time is null or undefined, use the current time.
-    time = new Date();
-  } else if ((time instanceof Date) === false) {
-    // if it's a timestamp, interpret it
-    time = new Date(time);
+    time = (new Date()).getTime();
   }
+  
 
   //every message you see is actually a table with 3 cols:
   //  the time,
   //  the person who caused the event,
   //  and the content
-  var messageElement = $(document.createElement("table"));
+  var messageElement = $(document.createElement("div"));
 
   messageElement.addClass("message");
   if (_class)
     messageElement.addClass(_class);
 
   // sanitize
-  text = util.toStaticHTML(text);
+  body_content = util.toStaticHTML(body_content);
 
   // If the current user said this, add a special css class
-  var nick_re = new RegExp(CONFIG.nick);
-  if (nick_re.exec(text))
+  var username_re = new RegExp(CONFIG.username);
+  if (username_re.exec(body_content))
     messageElement.addClass("personal");
 
   // replace URLs with links
-  text = text.replace(util.urlRE, '<a target="_blank" href="$&">$&</a>');
+  body_content = body_content.replace(util.urlRE, '<a target="_blank" href="$&">$&</a>');
 
-  var content = '<tr>'
-              + '  <td class="date">' + util.timeString(time) + '</td>'
-              + '  <td class="nick">' + util.toStaticHTML(from) + '</td>'
-              + '  <td class="msg-text">' + text  + '</td>'
-              + '</tr>'
+  var content = '  <div class="message-holder">'
+              + '    <div class="message-date">' + util.formatTime(time) + "</div>"
+              + '    <div class="message-content">'+ util.toStaticHTML(from) +': ' + body_content + "</div>"
+              + '  </div>'
               ;
   messageElement.html(content);
 
@@ -289,15 +310,15 @@ function longPoll (data) {
           if(!CONFIG.focus){
             CONFIG.unread++;
           }
-          addMessage(message.nick, message.text, message.timestamp);
+          addMessage(message.username, message.body_content, message.timestamp);
           break;
 
         case "join":
-          userJoin(message.nick, message.timestamp);
+          userJoin(message.username, message.timestamp);
           break;
 
         case "part":
-          userPart(message.nick, message.timestamp);
+          userPart(message.username, message.timestamp);
           break;
       }
     }
@@ -310,15 +331,20 @@ function longPoll (data) {
       who();
     }
   }
+  changed = "no";
+  if(CONFIG.page_change) {
+    CONFIG.page_change = false;
+    changed = "yes";
+  }
 
   //make another request
   $.ajax({ cache: false
          , type: "GET"
          , url: "/recv"
          , dataType: "json"
-         , data: { since: CONFIG.last_message_time, id: CONFIG.id }
+         , data: { since: CONFIG.last_message_time, id: CONFIG.id, changed: changed }
          , error: function () {
-             addMessage("", "long poll error. trying again...", new Date(), "error");
+             addMessage("", "long poll error. trying again...", (new Date()).getTime(), "error");
              transmission_errors += 1;
              //don't flood the servers on error, wait 10 seconds before retrying
              setTimeout(longPoll, 10*1000);
@@ -340,13 +366,13 @@ function send(msg) {
   if (CONFIG.debug === false) {
     // XXX should be POST
     // XXX should add to messages immediately
-    jQuery.get("/send", {id: CONFIG.id, text: msg}, function (data) { }, "json");
+    jQuery.get("/send", {id: CONFIG.id, body_content: msg}, function (data) { }, "json");
   }
 }
 
 //Transition the page to the state that prompts the user for a nickname
 function showConnect () {
-  $("#connect").show();
+  $("#connect").removeClass("hidden").show();
   $("#loading").hide();
   $("#toolbar").hide();
   $("#nickInput").focus();
@@ -360,8 +386,10 @@ function showLoad () {
 }
 
 //transition the page to the main chat view, putting the cursor in the textfield
-function showChat (nick) {
-  $("#toolbar").show();
+function showChat (username) {
+  console.log("ShowChat");
+  $("#toolbar").removeClass("hidden").show();
+  $("#entry").removeClass("hidden").show();
   $("#entry").focus();
 
   $("#connect").hide();
@@ -391,17 +419,19 @@ function onConnect (session) {
     showConnect();
     return;
   }
-  $("#log").slideDown();
-  $("#log").scrollTop($("#log").scrollTop() + 50000)
-  CONFIG.nick = session.nick;
+  $("#log").removeClass("hidden").slideDown();
+  $("#log").scrollTop($("#log").scrollTop() + 50000);
+  CONFIG.username = session.username;
   CONFIG.id   = session.id;
+  $.cookie('chat_id', session.id);
+  $.cookie('chat_username', session.username);
   starttime   = new Date(session.starttime);
   rss         = session.rss;
   updateRSS();
   updateUptime();
 
   //update the UI to show the chat
-  showChat(CONFIG.nick);
+  showChat(CONFIG.username);
 
   //listen for browser events so we know to update the document title
   $(window).bind("blur", function() {
@@ -418,8 +448,8 @@ function onConnect (session) {
 
 //add a list of present chat members to the stream
 function outputUsers () {
-  var nick_string = nicks.length > 0 ? nicks.join(", ") : "(none)";
-  addMessage("users:", nick_string, new Date(), "notice");
+  var username_string = usernames.length > 0 ? usernames.join(", ") : "(none)";
+  addMessage("users", username_string, (new Date()).getTime(), "notice");
   return false;
 }
 
@@ -427,7 +457,7 @@ function outputUsers () {
 function who () {
   jQuery.get("/who", {}, function (data, status) {
     if (status != "success") return;
-    nicks = data.nicks;
+    usernames = data.usernames;
     outputUsers();
   }, "json");
 }
@@ -443,23 +473,46 @@ $(document).ready(function() {
   });
 
   $("#usersLink").click(outputUsers);
+  if($.cookie('chat_id').length > 0) {
+    console.log("Got here");
+    CONFIG.id = $.cookie('chat_id');
+    CONFIG.username = $.cookie('chat_username');
+    CONFIG.change_path = true;
+    $.cookie('chat_id', null);
+    $.cookie('chat_username', null);
+    $("#log").removeClass("hidden").slideDown();
+    $("#connect").hide();
+    $("#toolbar").removeClass("hidden").show();
+    $("#entry").focus();
+    showChat(CONFIG.username);
+  } else {
+    console.log("sads");
+    showConnect();
+  }
+  console.log("going");
+  $("a").click(function(){
+    if(CONFIG.id != null) {
+     $.cookie('chat_id', CONFIG.id);
+     $.cookie('chat_username', CONFIG.username);
+    }
+  });
 
   //try joining the chat when the user clicks the connect button
   $("#connectButton").click(function () {
     //lock the UI while waiting for a response
     showLoad();
-    var nick = $("#nickInput").attr("value");
+    var username = $("#nickInput").attr("value");
 
     //dont bother the backend if we fail easy validations
-    if (nick.length > 50) {
-      alert("Nick too long. 50 character max.");
+    if (username.length > 50) {
+      alert("username too long. 50 character max.");
       showConnect();
       return false;
     }
 
     //more validations
-    if (/[^\w_\-^!]/.exec(nick)) {
-      alert("Bad character in nick. Can only have letters, numbers, and '_', '-', '^', '!'");
+    if (/[^\w_\-^!]/.exec(username)) {
+      alert("Bad character in username. Can only have letters, numbers, and '_', '-', '^', '!'");
       showConnect();
       return false;
     }
@@ -469,7 +522,7 @@ $(document).ready(function() {
            , type: "GET" // XXX should be POST
            , dataType: "json"
            , url: "/join"
-           , data: { nick: nick }
+           , data: { username: username }
            , error: function () {
                alert("error connecting to server");
                showConnect();
@@ -498,11 +551,13 @@ $(document).ready(function() {
   //interestingly, we don't need to join a room to get its updates
   //we just don't show the chat stream to the user until we create a session
   longPoll();
-
-  showConnect();
+  
 });
 
 //if we can, notify the server that we're going away.
 $(window).unload(function () {
-  jQuery.get("/part", {id: CONFIG.id}, function (data) { }, "json");
+  if(!$.cookie("chat_id").length > 0) {
+    alert("parting");
+   jQuery.get("/part", {id: CONFIG.id}, function (data) { }, "json");
+  }
 });

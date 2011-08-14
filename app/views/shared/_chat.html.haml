@@ -1,13 +1,11 @@
 #app
-  #connect
+  .stats
+    This is a chat room is experimental at the moment.
+    %a{:id => "usersLink", :href => "#"}
+    are online at the moment.
+  #connect.hidden
     %form{:action=>"#"}
       %fieldset
-        %p
-          This is a chat room is experimental at the moment.
-          %a{:id => "usersLink", :href => "#"}
-          are online at the moment.
-        %label{:for => "nick"}
-          Username:
         %input{:id => "nickInput", :class => "text", :type => "hidden", :name => "nick", :value => current_user.username}
         %input{:id => "connectButton", :class => "button", :type => "submit", :name => "", :value => "Join"}
   #loading
