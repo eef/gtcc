@@ -13,7 +13,10 @@
           %td{:class => "first"}
             = cc.car_name
           %td
-            = link_to "#{cc.amount - cc.used_amount} entries left", "#register"
+            - if cc.amount.nil?
+              Unlimited
+            - else
+              = link_to "#{cc.amount - cc.used_amount} entries left", "#register"
           %td
             = cc.restrictions
 - elsif @classes.length > 0
