@@ -414,7 +414,6 @@ $(document).ready(function() {
 
 $(window).unload(function () {
   if(!$.cookie("chat_id").length > 0) {
-    alert("parting");
    jQuery.get("/part", {id: CONFIG.id}, function (data) { }, "json");
   }
 });
