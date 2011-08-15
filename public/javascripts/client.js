@@ -298,8 +298,6 @@ function onConnect (session) {
   $("#log").scrollTop($("#log").scrollTop() + 50000);
   CONFIG.username = session.username;
   CONFIG.id   = session.id;
-  $.cookie('chat_id', session.id);
-  $.cookie('chat_username', session.username);
   starttime   = new Date(session.starttime);
   rss         = session.rss;
   updateRSS();
@@ -416,6 +414,7 @@ $(document).ready(function() {
 
 $(window).unload(function () {
   if(!$.cookie("chat_id").length > 0) {
+    alert("parting");
    jQuery.get("/part", {id: CONFIG.id}, function (data) { }, "json");
   }
 });
