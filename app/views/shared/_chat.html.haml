@@ -5,9 +5,8 @@
     are online at the moment.
   #connect.hidden
     %form{:action=>"#"}
-      %fieldset
-        %input{:id => "nickInput", :class => "text", :type => "hidden", :name => "nick", :value => current_user.username}
-        %input{:id => "connectButton", :class => "button", :type => "submit", :name => "", :value => "Join"}
+      %input{:id => "nickInput", :class => "text", :type => "hidden", :name => "nick", :value => current_user.username}
+      %input{:id => "connectButton", :class => "submit", :type => "submit", :name => "", :value => "Join Chat"}
   #loading
     %p
       loading
