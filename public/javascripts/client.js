@@ -449,7 +449,7 @@ $(document).ready(function() {
   }
 
   $("#log table").remove();
-  setTimeout("longPoll()", 10);
+  setTimeout("longPoll()", 100);
   
 });
 
