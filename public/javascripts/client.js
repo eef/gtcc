@@ -247,6 +247,7 @@ function longPoll (data) {
 
   $.ajax({ cache: false
          , type: "GET"
+         , async: true
          , url: "/recv"
          , dataType: "json"
          , data: { since: CONFIG.last_message_time, id: CONFIG.id, changed: changed }
@@ -448,7 +449,7 @@ $(document).ready(function() {
   }
 
   $("#log table").remove();
-  longPoll();
+  setTimeout("longPoll()", 10);
   
 });
 
