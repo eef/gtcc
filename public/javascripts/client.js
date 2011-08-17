@@ -382,8 +382,8 @@ $(document).ready(function() {
     showChat(CONFIG.username);
   } else {
     showConnect();
-  }
-  $("a").click(function(){
+  } 
+  $("a").not("#new-msg, #close-chat").click(function(){
     if(CONFIG.id != null) {
      $.cookie('chat_id', CONFIG.id);
      $.cookie('chat_username', CONFIG.username);
