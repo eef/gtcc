@@ -1,16 +1,30 @@
+#show-chat.hidden
+  %a#new-msg{:href => "#"}
+    Open chat
 #app
   .stats
-    This is a chat room is experimental at the moment.
-    %a{:id => "usersLink", :href => "#"}
-    are online at the moment.
+    This chat room is experimental at the moment.
+    %span{:id => "usersLink"}
+    online
   #connect.hidden
-    %form{:action=>"#"}
-      %input{:id => "nickInput", :class => "text", :type => "hidden", :name => "nick", :value => current_user.username}
-      %input{:id => "connectButton", :class => "submit", :type => "submit", :name => "", :value => "Join Chat"}
+    %input{:id => "nickInput", :class => "text", :type => "hidden", :name => "nick", :value => current_user.username}
+    %input{:id => "connectButton", :class => "submit", :type => "submit", :name => "", :value => "Join Chat"}
   #loading
     %p
       loading
-  #log.hidden
-    
-  #toolbar
-    %input{:tabindex =>"1", :type =>"text", :id => "entry", :class => "text-input"}
+  #chat-panel.hidden
+    %table
+      %tr
+        %td#log-holder
+          #log
+        %td#user-list-holder
+          %ul#user-list
+              
+    #toolbar
+      %table
+        %tr
+          %td#entry-holder
+            %input{:tabindex =>"1", :type =>"text", :id => "entry", :class => "text-input"}
+          %td#actions-holder
+            %a#close-chat{:href => "#"}
+              Close chat

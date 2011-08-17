@@ -26,7 +26,7 @@ var MESSAGE_BACKLOG = 200,
 var channel = new function () {
   var messages = [],
       callbacks = [];
-  Message.find({"type":"msg"}, function (err, docs) {
+  Message.find({"type":"msg"}, [], {limit:100}, function (err, docs) {
     docs.forEach(function(doc){
       messages.push(doc);
     });
@@ -95,7 +95,6 @@ function createSession (username) {
     },
 
     destroy: function () {
-      sys.puts("Start destroy session");
       channel.append_message(session.username, "part", 'left');
       delete sessions[session.id];
     }
@@ -162,10 +161,8 @@ fu.get("/join", function (req, res) {
 
 fu.get("/part", function (req, res) {
   var id = qs.parse(url.parse(req.url).query).id;
-  sys.puts("ID: " + id);
   var session;
   if (id && sessions[id]) {
-    sys.puts("ID && sessions[id] exists")
     session = sessions[id];
     session.destroy();
   }

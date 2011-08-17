@@ -1,4 +1,4 @@
-var CONFIG = { debug: false, username: "#", change_page: false, id: null, last_message_time: 1, focus: true , unread: 0};
+var CONFIG = { debug: false, username: "#", change_page: false, id: null, last_message_time: 1, focus: true , unread: 0, unread_p: 0};
 
 var usernames = [];
 
@@ -50,23 +50,32 @@ function updateUsersLink ( ) {
   $("#usersLink").text(t);
 }
 
+function update_user_list() {
+  var usrs = "";
+  $.each(usernames, function(idx, username){
+    usrs += "<li>" + username + "</li>";
+  });
+  $("#user-list").html(usrs);
+}
+
 function userJoin(username, timestamp) {
-  addMessage(username, "joined", timestamp, "join");
+  addMessage(username, "joined the chat", timestamp, "join");
   for (var i = 0; i < usernames.length; i++)
     if (usernames[i] == username) return;
   usernames.push(username);
   updateUsersLink();
+  update_user_list();
 }
 
 function userPart(username, timestamp) {
-  addMessage(username, "left", timestamp, "part");
-  
+  addMessage(username, "left the chat", timestamp, "part");
   for (var i = 0; i < usernames.length; i++) {
     if (usernames[i] == username) {
       usernames.splice(i,1)
       break;
     }
   }
+  update_user_list();
   updateUsersLink();
 }
 
@@ -134,6 +143,10 @@ function addMessage (from, body_content, time, _class) {
     time = (new Date()).getTime();
   }
   
+  if(_class == null) {
+    from += ":";
+  }
+  
   var messageElement = $(document.createElement("div"));
 
   messageElement.addClass("message");
@@ -142,7 +155,7 @@ function addMessage (from, body_content, time, _class) {
 
   body_content = util.toStaticHTML(body_content);
 
-  var username_re = new RegExp(CONFIG.username);
+  var username_re = new RegExp(CONFIG.username, "i");
   if (username_re.exec(body_content))
     messageElement.addClass("personal");
 
@@ -151,7 +164,7 @@ function addMessage (from, body_content, time, _class) {
 
   var content = '  <div class="message-holder">'
               + '    <div class="message-date">' + util.formatTime(time) + "</div>"
-              + '    <div class="message-content">'+ util.toStaticHTML(from) +': ' + body_content + "</div>"
+              + '    <div class="message-content"><span class="username-lab">'+ util.toStaticHTML(from) +'</span> ' + body_content + "</div>"
               + '  </div>'
               ;
   messageElement.html(content);
@@ -202,6 +215,11 @@ function longPoll (data) {
           if(!CONFIG.focus){
             CONFIG.unread++;
           }
+          if(!first_poll) {
+            if($.cookie("chat") == "closed") {
+              CONFIG.unread_p++;
+            }
+          }
           addMessage(message.username, message.body_content, message.timestamp);
           break;
 
@@ -233,7 +251,9 @@ function longPoll (data) {
          , dataType: "json"
          , data: { since: CONFIG.last_message_time, id: CONFIG.id, changed: changed }
          , error: function () {
-             addMessage("", "long poll error. trying again...", (new Date()).getTime(), "error");
+            if($.cookie("switch") == "0") {
+              addMessage("", "long poll error. trying again...", (new Date()).getTime(), "error"); 
+            }
              transmission_errors += 1;
              setTimeout(longPoll, 10*1000);
            }
@@ -264,12 +284,12 @@ function showLoad () {
 }
 
 function showChat (username) {
-  console.log("ShowChat");
   $("#toolbar").removeClass("hidden").show();
   $("#entry").removeClass("hidden").show();
   $("#entry").focus();
 
   $("#connect").hide();
+  $(".stats").hide();
   $("#loading").hide();
 
   scrollDown();
@@ -280,6 +300,11 @@ function updateTitle(){
     document.title = "(" + CONFIG.unread.toString() + ") Gran Turismo Racing - GTR ";
   } else {
     document.title = "Gran Turismo Racing - GTR";
+  }
+  if (CONFIG.unread_p > 0) {
+    $("#new-msg").text("(" + CONFIG.unread_p.toString() + ") Open chat ");
+  } else {
+    $("#new-msg").text("Open chat");
   }
 }
 
@@ -294,7 +319,7 @@ function onConnect (session) {
     showConnect();
     return;
   }
-  $("#log").removeClass("hidden").slideDown();
+  $("#chat-panel").removeClass("hidden").slideDown();
   $("#log").scrollTop($("#log").scrollTop() + 50000);
   CONFIG.username = session.username;
   CONFIG.id   = session.id;
@@ -302,32 +327,16 @@ function onConnect (session) {
   rss         = session.rss;
   updateRSS();
   updateUptime();
-
+  update_user_list();
   showChat(CONFIG.username);
-
-  $(window).bind("blur", function() {
-    CONFIG.focus = false;
-    updateTitle();
-  });
-
-  $(window).bind("focus", function() {
-    CONFIG.focus = true;
-    CONFIG.unread = 0;
-    updateTitle();
-  });
-}
-
-function outputUsers () {
-  var username_string = usernames.length > 0 ? usernames.join(", ") : "(none)";
-  addMessage("Users online", username_string, (new Date()).getTime(), "notice");
-  return false;
+  $.cookie('chat', "open");
 }
 
 function who () {
   jQuery.get("/who", {}, function (data, status) {
     if (status != "success") return;
     usernames = data.usernames;
-    outputUsers();
+    update_user_list();
   }, "json");
 }
 
@@ -339,30 +348,61 @@ $(document).ready(function() {
     if (!util.isBlank(msg)) send(msg);
     $("#entry").attr("value", "");
   });
-
-  $("#usersLink").click(outputUsers);
+  
   if($.cookie('chat_id').length > 0) {
-    console.log("Got here");
     CONFIG.id = $.cookie('chat_id');
     CONFIG.username = $.cookie('chat_username');
     CONFIG.change_path = true;
     $.cookie('chat_id', null);
     $.cookie('chat_username', null);
-    $("#log").removeClass("hidden").slideDown();
+    $.cookie('switch', "0");
+    if($.cookie('chat').length > 0) {
+      if($.cookie('chat') == "open") {
+        $("#chat-panel").removeClass("hidden").slideDown();
+      }
+      if($.cookie('chat') == "closed") {
+        $("#app").hide();
+        $("#show-chat").removeClass("hidden").show("fast");
+      }
+    }
     $("#connect").hide();
+    $(".stats").hide();
     $("#toolbar").removeClass("hidden").show();
     $("#entry").focus();
+    $(window).bind("blur", function() {
+      CONFIG.focus = false;
+      updateTitle();
+    });
+
+    $(window).bind("focus", function() {
+      CONFIG.focus = true;
+      CONFIG.unread = 0;
+      updateTitle();
+    });
     showChat(CONFIG.username);
   } else {
-    console.log("sads");
     showConnect();
   }
-  console.log("going");
   $("a").click(function(){
     if(CONFIG.id != null) {
      $.cookie('chat_id', CONFIG.id);
      $.cookie('chat_username', CONFIG.username);
+     $.cookie('switch', "1");
     }
+  });
+  
+  $("#close-chat").click(function(){
+    $.cookie('chat', "closed");
+    $("#app").hide();
+    $("#show-chat").removeClass("hidden").show();
+  });
+  $("#new-msg").click(function(){
+    $.cookie('chat', "open");
+    $("#chat-panel").removeClass("hidden").show();
+    $("#app").show();
+    $("#show-chat").hide();
+    $(this).text("Open chat");
+    scrollDown();
   });
 
   $("#connectButton").click(function () {
