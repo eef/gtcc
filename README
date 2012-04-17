@@ -3,3 +3,5 @@ GTCC is a online league creator for Gran Turimo 5.
 http://www.gran-turismo-racing.com/
 
 Also featured on http://www.reddit.com/r/gt5
+
+Last thing I was implementing was a Node JS chat for people to use on the site.  In branch node_chat
